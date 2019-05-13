@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Pages',
+    'Templates'
     'django_user_agents',
 ]
 
@@ -59,7 +60,7 @@ APPLICATION_ROOT = os.path.realpath(os.path.dirname(__file__))
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'Pages/Templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'Pages')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
