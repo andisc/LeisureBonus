@@ -1,0 +1,253 @@
+{% extends 'Base.html' %}
+{% load static %}
+
+{% block content %}
+
+  	<div style="background-image: url({% static 'images/image4.jpg' %}); background-size: cover; width: 100%; height: 80%;">
+      <!--
+  		<div class="containernavhiw">
+     		<a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/leisurebonusgrey.png' %}" class="logolink" ></a>
+     		<div class="containernavhiwright">
+	     		{% if is_mobile == True %}
+                <div class="btn-group dropleft">
+                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    ...
+                  </a>
+
+                  <div class="dropdown-menu dropdown-menu-lg-right">
+                    {% if user.is_authenticated %}
+                      <a class="dropdown-item" ref="{% url 'howitworks' %}"> How it works </a>
+                      <a class="dropdown-item" href="{% url 'about' %}" >About</a>
+                      <a class="dropdown-item" href="#">......</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'MyAccount' %}"> My Account </a>
+                      <a class="dropdown-item" href="{% url 'logout' %}"> LOGOUT </a>
+                    {% else %}
+                      <a class="dropdown-item" href="{% url 'howitworks' %}"> How it works </a>
+                      <a class="dropdown-item" href="{% url 'about' %}"> About </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'register' %}">REGISTER</a>
+                      <a class="dropdown-item" id="loginBtn" >LOGIN</a>
+                    {% endif %}
+                  </div>
+                </div>
+            {% else %}
+                
+            
+              {% if user.is_authenticated %}
+              {{ user.username }}
+                <a class="LogoutButton" href="{% url 'logout' %}" style="text-decoration: none;"> LOGOUT <img src="{% static 'images/logout.png' %}" width="20px" height="20px"></a>
+              {% else %}
+                <a href="{% url 'register' %}" class="RegisterButton" style="text-decoration: none;">REGISTER</a>
+                <a class="LoginButton"type="button" data-toggle="modal" data-target="#exampleModalCenter"> LOGIN </a>
+              {% endif %}
+            {% endif %}
+	     	</div>
+     	</div>
+     -->
+     	<div class="hiwcenter">
+     		<div class="hiwcentertitle">Leisure Bonus</div>
+     		<br>
+        <div class="hiwcentertext">Ready for your next holidays?</div>
+     		<div class="hiwcentertext">Your platform that will allow you to travel through your company.</div>
+     	</div>
+     	<div>
+     	</div>
+	</div>
+
+  <br><br>
+
+<div class="container">
+  <div class="row">
+          <div class="col-md-10 mx-auto">
+            <div class="row">
+              <div class="col-md-4 ml-auto">
+                <h2>Your company choose one of our plans</h2>
+              </div>
+              <div class="col-md-6 mr-auto">
+                <p class="lead text-dark">
+                  We have a variety of plans that can be chosen by the company.
+                  All these plans are made thinking in all companies and their budgets in order to increase their benefit packages.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  <br>
+  <section>
+      <div class="container">
+        <div class="row mt-3">
+          <div class="col-lg-4 mb-lg-1 text-center">
+            <div class="px-0 px-lg-3">
+              <div class="icon-rounded bg-primary-light mb-3">
+                <img src="{% static 'images/companypay.png' %}" class="images-h30">
+              </div>
+              <h3 class="h5">Company pay for each employee</h3>
+              <p class="text-muted">Company will pay for each of their employee signed up in LeisureBonus every month.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-lg-1 text-center">
+            <div class="px-0 px-lg-3">
+              <div class="icon-rounded bg-primary-light mb-3">
+                  <img src="{% static 'images/payhalf.png' %}" class="images-h30">
+              </div>
+              <h3 class="h5">Company and employee pay half</h3>
+              <p class="text-muted">To help companies offer travel to their employees, each one pay half.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-lg-1 text-center">
+            <div class="px-0 px-lg-3">
+              <div class="icon-rounded bg-primary-light mb-3">
+                  <img src="{% static 'images/customizedplan.png' %}" class="images-h30">
+              </div>
+              <h3 class="h5">Customized</h3>
+              <p class="text-muted">Companies have a possibility to add some extra vouchers in order to offer them to their partners or clients.</p>
+            </div>
+          </div>
+
+        </div>
+        <div class="row justify-content-center mb-5 mt-3">
+           <a class="btn btn-brand" href="{% url 'plansdetails_view' %}">Explore our plans</a>
+        </div>
+      </div>
+    </section>
+
+
+  <div class="bg-light pt-6">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5 mr-auto align-self-center mb-5">
+            <div class="my-4">
+              <h3>All vouchers will be raffle off</h3>
+              <p class="text-dark">
+                Every month we will raffle off all vouchers that we are going to buy and will give them to your employees randomly.
+              </p>
+            </div>
+            <div class="my-4">
+              <h3>We will book flight vouchers</h3>
+              <p class="text-dark">
+                After we raffle off all the vouchers, we will book them to the winners thinking in their preferences of travel.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-5 ml-auto mt-4">
+            <img src="{% static 'images/ipad.png' %}" class="img-fluid" alt="iPad">
+          </div>
+        </div>
+      </div>
+    </div>
+  <br>
+
+
+
+  <section>
+      <div class="container">
+        <div class="text-center pb-lg-4">
+          <h2 class="mb-5">What employees need to do?</h2>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 mb-3 mb-lg-0 text-center">
+            <div class="px-0 px-lg-3">
+              <div class="icon-rounded bg-primary-light mb-3">
+                <img src="{% static 'images/perfectplace.png' %}" class="images-h40">
+              </div>
+              <h3 class="h5">Find the perfect place</h3>
+              <p class="text-muted">Choose the airline they want to travel to and pick a dream destination to rest on their vacation</p>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-3 mb-lg-0 text-center">
+            <div class="px-0 px-lg-3">
+              <div class="icon-rounded bg-primary-light mb-3">
+                  <img src="{% static 'images/bookflights.png' %}" class="images-h40">
+              </div>
+              <h3 class="h5">Book with confidence</h3>
+              <p class="text-muted">Book their fly using the voucher offered by their company</p>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-3 mb-lg-0 text-center">
+            <div class="px-0 px-lg-3">
+              <div class="icon-rounded bg-primary-light mb-3">
+                  <img src="{% static 'images/enjoy.png' %}" class="images-h40">
+              </div>
+              <h3 class="h5">Enjoy your vacation</h3>
+              <p class="text-muted">Benefit from their holidays with their friends or family </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<br>
+    <section>
+      <div class="container">
+        <h2 class="h3 mt-5 mb-4 text-center">Where we are…</h2>
+        <div class="row justify-content-center">
+          <div class="col-11 col-md-9 mb-5">
+            Right now we operate in Portugal, but we are expanding our plataform to the rest of the world. If you want to know more about us, please contact us and we will explain you with more details how we work.
+          </div>
+          <div class="col-12 col-md-9 mb-3">
+            <img src="{% static 'images/expandingmap.png' %}" style="width: 100%">
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!--
+    <!- Testimonials ->
+    <div class="container">
+        <h2 class="h3 mt-5 mb-4 text-center">What people are saying…</h2>
+        <div class="row py-5">
+            <div class="col-md">
+                <blockquote class="bg-white rounded shadow mb-4 p-4 p-lg-5 text-center">
+                    <img class="avatar avatar-md mb-4" src="img/leo-gill.jpg" alt="Leo Gill">
+                    <p class="text-secondary">Boost theme is awesome! We've seen amazing results already.</p>
+                    <cite class="small text-uppercase">Leo Gill</cite>
+                </blockquote>
+            </div>
+            <div class="col-md">
+                <blockquote class="bg-white rounded shadow mb-4 p-4 p-lg-5 text-center">
+                    <img class="avatar avatar-md mb-4" src="img/renee-sims.jpg" alt="Renee Sims">
+                    <p class="text-secondary">It really saves me time and effort. Boost theme is exactly what our business has been lacking.</p>
+                    <cite class="small text-uppercase">Renee Sims</cite>
+                </blockquote>
+            </div>
+            <div class="col-md">
+                <blockquote class="bg-white rounded shadow mb-4 p-4 p-lg-5 text-center">
+                    <img class="avatar avatar-md mb-4" src="img/dallas-kwok.jpg" alt="Dallas Kwok">
+                    <p class="text-secondary">Boost theme impressed me on multiple levels.</p>
+                    <cite class="small text-uppercase">Dallas Kwok</cite>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+  -->
+
+  <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">SIGN IN</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" action="{% url 'MyAccount' %}">
+              {% csrf_token %}
+              <div >
+                  <input type='text' name='username' class="textBoxSignIn" id='username' placeholder="Username" autofocus> <br>
+                  <input type='password' name='password' class="textBoxSignIn" id='password' placeholder="Password"><br><br>
+                  <input type='submit' value='Login' class="buttonSignin" style="width: 300px">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+{% endblock %}

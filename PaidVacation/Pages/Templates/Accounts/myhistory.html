@@ -1,0 +1,85 @@
+{% extends 'Accounts/myaccount.html' %}
+{% load static %}
+
+{% block contentMyAccount %}
+
+	<h3>Vouchers history</h3>
+  	{% if employee_vouchers.count == 0 %}
+      	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		  <strong>Note:</strong> You haven't won any voucher yet. You will be the next winner!
+		</div>
+	{% else %}
+	
+		<div class="row">
+		{% for voucher in employee_vouchers %}
+			{% with y=forloop.counter|stringformat:"s" %}
+			{% with template="images/voucher"|add:y|add:".jpeg" %}
+		
+		  	<div class="col-md-4 py-2">
+                <!-- Card -->
+				<div class="cardVoucher h-100">
+					<div class="new-floating">New</div>
+				  <!-- Card image -->
+				  <div class="view ">
+				    <img class="cardVoucher-img-top" src="{% static template %}" alt="{% static template  %}">
+				  </div>
+
+				    <!-- Button action -->
+				    <div class="btn-floating ml-auto mr-4 float-right">
+				    	<img class="voucherAirCompany-img" src="{% static voucher.airlinecompany %}" alt="{% static voucher.airlinecompany  %}">
+				    </div>
+
+
+				  <!-- Card content -->
+				  <div class="card-body">
+
+				    <!-- Title -->
+				    <h4 class="cardVoucher-title">{{ voucher.title }}</h4>
+				    <!-- Text -->
+				    <div class="card-description"> {% now "Y-m-d" %} {{ voucher.createddate }}
+                      {{ voucher.description }}
+                      <br>
+                    </div>
+                    <hr>
+				    <div class="card-footer2">
+                        <div class="price">
+                          {{ voucher.currency }}{{ voucher.mntvoucher }}
+                        </div>
+                        <div class="stats">
+                          <a href="{% url 'downloadvoucher_view' %}"><button class="btn btn-outline-warning mr-3">Download</button></a>
+                        </div>
+                    </div>
+
+				  </div>
+				</div>
+				<!-- Card -->
+				<br>
+            </div>
+		
+		  <!--
+		<td style="background-color: yellow;"> 
+      	<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+		    <tr>
+		        <th>idcodecompany</th>
+		        <th>idemployee</th>
+		        <th>mntvoucher</th>
+		        <th>description</th>
+		    </tr>
+	      	<tr> 
+		        <td>{{ voucher.idcodecompany }}</td>
+		        <td>{{ voucher.idemployee }}</td>
+		        <td>{{ voucher.mntvoucher }}</td>
+		        <td>{{ voucher.description }}</td>
+		    </tr>
+		</table>
+		</td> -->
+
+			{% endwith %}
+			{% endwith %}
+
+		{% endfor %}
+		</div>
+	{% endif %}
+
+
+{% endblock %}

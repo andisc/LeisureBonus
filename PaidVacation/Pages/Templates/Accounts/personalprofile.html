@@ -1,0 +1,197 @@
+{% extends 'Accounts/myaccount.html' %}
+{% load static %}
+
+{% block contentMyAccount %}
+
+<section>
+	<div class="row justify-content-center">
+		<h3>Personal Information</h3>
+		<p> Basic information, like name and personal contacts, this will help us to personalize your account.</p>
+	</div>
+</section>
+
+<section>
+	<div class="container-perfil">
+	<h4>Perfil</h4>
+		<div class="accordion" id="accordionExample">
+		  <div class="card">
+		    <div class="card-header" id="headingOne">
+		      <h2 class="mb-0">
+		        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="width: 100%;">
+		          <div class="row justify-content-start" style="text-align: left">
+				    <div class="col-3 col-md-3 perfil-text-title">FOTO</div>
+				    <div class="col-9 col-md-9 perfil-text-description">Add a picture to personalize your account</div>
+		          </div>
+		        </button>
+		      </h2>
+		    </div>
+
+		    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+		      <div class="card-body">
+		        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+		      </div>
+		    </div>
+		  </div>
+		  <div class="card">
+		    <div class="card-header" id="headingTwo">
+		      <h2 class="mb-0">
+		        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="width: 100%;">
+		          <div class="row" style="text-align: left">
+				    <div class="col-5 col-md-3 perfil-text-title">NAME</div>
+				    <div class="col-7 col-md-9 perfil-text">{{ first_name }} {{ last_name }}</div>
+		          </div>
+		        </button>
+		      </h2>
+		    </div>
+		    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+		      <div class="card-body">
+		        <div class="row mt-2 justify-content-start">
+		              <div class="col-6 col-md-4">
+		                  {{ form.firstname }}
+		                  <div class="text-danger">{{ form.firstname.errors.as_text }}</div>
+		              </div>
+		              <div class="col-6 col-md-4">
+		                  {{ form.lastname }}
+		                  <div class="text-danger">{{ form.lastname.errors.as_text }}</div>
+		              </div>
+		          </div>
+		      </div>
+		    </div>
+		  </div>
+		  <div class="card">
+		    <div class="card-header" id="headingThree">
+		      <h2 class="mb-0">
+		        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%;">
+		          <div class="row" style="text-align: left">
+				    <div class="col-5 col-md-3 perfil-text-title">BIRTHDAY</div>
+				    <div class="col-7 col-md-9 perfil-text">{{ birthday }} {{ birthdaymonth }} {{ birthdayyear }}</div>
+		          </div>
+		        </button>
+		      </h2>
+		    </div>
+		    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+		      <div class="card-body">
+		        <div class="row mt-2 justify-content-start">
+		              <div class="col-5 col-md-5 pr-0">
+		                  {{ form.birthdaymonth.errors }}
+		                  {{ form.birthdaymonth }}
+		              </div>
+		              <div class="col-3 col-md-3 pr-0">
+		                  {{ form.birthday.errors }}
+		                  {{ form.birthday }}
+		              </div>
+		              <div class="col-4 col-md-4">
+		                  {{ form.birthdayyear.errors }}
+		                  {{ form.birthdayyear }}
+		              </div>
+		      </div>
+		    </div>
+		  </div>
+		  <div class="card">
+		    <div class="card-header" id="headingFour">
+		      <h2 class="mb-0">
+		        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="width: 100%;">
+		          <div class="row" style="text-align: left">
+				    <div class="col-5 col-md-3 perfil-text-title">GENDER</div>
+				    <div class="col-7 col-md-9"> </div>
+		          </div>
+		        </button>
+		      </h2>
+		    </div>
+		    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+		      <div class="card-body">
+		        <div class="row mt-2 justify-content-start">
+		              <div class="col-8 col-md-4">
+		                  {{ form.sexgender }}
+		                  <div class="text-danger">{{ form.sexgender.errors.as_text }}</div>
+		              </div>
+		          </div>
+		      </div>
+		      </div>
+		    </div>
+		    <div class="card">
+		    <div class="card-header" id="headingFive">
+		      <h2 class="mb-0">
+		        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="width: 100%;">
+		          <div class="row" style="text-align: left">
+				    <div class="col-5 col-md-3 perfil-text-title">PASSWORD</div>
+				    <div class="col-7 col-md-9 perfil-text-description">Change your password</div>
+		          </div>
+		        </button>
+		      </h2>
+		    </div>
+		    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+		      <div class="card-body">
+		        <div class="row mt-2 justify-content-start">
+		              <div class="col-8 col-md-4">
+		                  {{ form.password }}
+		                  <div class="text-danger">{{ form.password.errors.as_text }}</div>
+		              </div>
+		          </div>
+		      </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+</div>
+</section>
+<br>
+<br>
+<section>
+	<div class="container-perfil">
+	<h4>Contact Information</h4>
+		<div class="accordion" id="accordionExample">
+		  <div class="card">
+		    <div class="card-header" id="headingOne">
+		      <h2 class="mb-0">
+		        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="width: 100%;">
+		          <div class="row justify-content-start" style="text-align: left">
+				    <div class="col-5 col-md-3 perfil-text-title">EMAIL</div>
+				    <div class="col-7 col-md-9 perfil-text-description">We contact you through this email</div>
+		          </div>
+		        </button>
+		      </h2>
+		    </div>
+
+		    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+		      <div class="card-body">
+		        <div class="row mt-2 justify-content-start">
+		              <div class="col-12 col-md-4">
+		                  {{ form.email }}
+		                  <div class="text-danger">{{ form.email.errors.as_text }}</div>
+		              </div>
+		          </div>
+		      </div>
+		    </div>
+		  </div>
+		  <div class="card">
+		    <div class="card-header" id="headingTwo">
+		      <h2 class="mb-0">
+		        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="width: 100%;">
+		          <div class="row" style="text-align: left">
+				    <div class="col-5 col-md-3 perfil-text-title">PHONE</div>
+				    <div class="col-7 col-md-9 perfil-text-description">Add a phone number to help you mantaining your account secure</div>
+		          </div>
+		        </button>
+		      </h2>
+		    </div>
+		    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+		      <div class="card-body">
+		        <div class="row mt-2 justify-content-start">
+		              <div class="col-12 col-md-4">
+		                  {{ form.phone }}
+		                  <div class="text-danger">{{ form.phone.errors.as_text }}</div>
+		              </div>
+		          </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+</div>
+</section>
+
+
+
+
+
+{% endblock %}

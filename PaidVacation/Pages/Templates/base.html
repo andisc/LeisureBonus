@@ -1,0 +1,324 @@
+{% load static %}
+{% load user_agents %}
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+
+    <link rel="stylesheet" href="{% static 'css/mainmobile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' type='image/x-icon' %}">
+    <script src="{% static 'js/ModalPopUp.js' %}"></script>
+    <script src="{% static 'js/jquery-3.js' %}" ></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/generaterandomcode.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="{% static 'js/wow.min.js' %}"></script>
+     
+    <!-- Javascript for map -->
+    <link rel="stylesheet" media="all" href="{% static 'map/jquery-jvectormap.css' %}"/> 
+  <script src="{% static 'map/jquery-1.8.2.js' %}"></script> 
+  <script src="{% static 'map/jquery-jvectormap.js' %}"></script> 
+  <script src="{% static 'map/jquery-mousewheel.js' %}"></script> 
+
+  <script src="{% static 'map/jvectormap.js' %}"></script>
+
+  <script src="{% static 'map/abstract-element.js' %}"></script>
+  <script src="{% static 'map/abstract-canvas-element.js' %}"></script>
+  <script src="{% static 'map/abstract-shape-element.js' %}"></script>
+
+  <script src="{% static 'map/svg-element.js' %}"></script>
+  <script src="{% static 'map/svg-group-element.js' %}"></script>
+  <script src="{% static 'map/svg-canvas-element.js' %}"></script>
+  <script src="{% static 'map/svg-shape-element.js' %}"></script>
+  <script src="{% static 'map/svg-path-element.js' %}"></script>
+  <script src="{% static 'map/svg-circle-element.js' %}"></script>
+  <script src="{% static 'map/svg-image-element.js' %}"></script>
+  <script src="{% static 'map/svg-text-element.js' %}"></script>
+
+  <script src="{% static 'map/vml-element.js' %}"></script>
+  <script src="{% static 'map/vml-group-element.js' %}"></script>
+  <script src="{% static 'map/vml-canvas-element.js' %}"></script>
+  <script src="{% static 'map/vml-shape-element.js' %}"></script>
+  <script src="{% static 'map/vml-path-element.js' %}"></script>
+  <script src="{% static 'map/vml-circle-element.js' %}"></script>
+  <script src="{% static 'map/vml-image-element.js' %}"></script>
+
+  <script src="{% static 'map/map-object.js' %}"></script>
+  <script src="{% static 'map/region.js' %}"></script>
+  <script src="{% static 'map/marker.js' %}"></script>
+
+  <script src="{% static 'map/vector-canvas.js' %}"></script>
+  <script src="{% static 'map/simple-scale.js' %}"></script>
+  <script src="{% static 'map/ordinal-scale.js' %}"></script>
+  <script src="{% static 'map/numeric-scale.js' %}"></script>
+  <script src="{% static 'map/color-scale.js' %}"></script>
+  <script src="{% static 'map/legend.js' %}"></script>
+  <script src="{% static 'map/data-series.js' %}"></script>
+  <script src="{% static 'map/proj.js' %}"></script>
+  <script src="{% static 'map/map.js' %}"></script>
+
+  <script src="{% static 'map/jquery-jvectormap-world-mill-en.js' %}"></script>
+  <script src="{% static 'map/jquery-country.js' %}"></script> 
+
+
+    <title>{% block title %}Hello, world! {% endblock %}</title>
+
+    <script>
+function clickmenu() {
+  var x = document.getElementById("navbarCollapse");
+  if (x.className === "collapse navbar-collapse") {
+    x.className = "navbar-collapse";
+  } else {
+    x.className = "collapse navbar-collapse";
+  }
+
+  var imgbackground = document.getElementById("homeimgbackground");
+    if (imgbackground.className === "bg-image opacity-40") {
+      imgbackground.className = "bg-image-phone opacity-40";
+    } else {
+      imgbackground.className = "bg-image opacity-40";
+    }
+}
+
+function clickmenulogin() {
+  // Get the modal
+  var modallogin = document.getElementById('exampleModalCenter');
+    modallogin.style.display = "block";
+
+    
+}
+</script>
+
+    
+  </head>
+  <body>
+    <header>
+      
+      <nav class="navbar navbar-expand-md navbar-light bg-white">
+        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/leisurebonus.png' %}" class="logolink" ></a>
+
+
+         {% if is_mobile == True %}
+        <a onclick="clickmenu()">
+          <span class="navbar-toggler-icon"></span>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'MyAccount' %}" > My Account </a>
+              </li>
+            {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'howitworks' %}" > How it works </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'about' %}" > About </a>
+              </li>
+            <div class="dropdown-divider"></div>
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}" > LOGOUT </a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}" > REGISTER </a>
+              </li>
+              <li class="nav-item">
+                <a ID="loginlink" class="nav-link" data-toggle="modal" data-target="#exampleModalCenter""> LOGIN </a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+        {% else %}
+        <div class="navbar-collapse">
+          {% if user.is_authenticated %}
+            <a href="{% url 'MyAccount' %}" class="LinkProperties"> My Account </a>
+          {% endif %}
+          <a href="{% url 'howitworks' %}" class="LinkProperties"> How it works </a>
+          <a href="{% url 'about' %}" class="LinkProperties"> About </a>
+
+          
+              <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <div class="usernamelabel">{{ user.get_full_name }}</div>
+                  <a class="LogoutButton" href="{% url 'logout' %}" style="text-decoration: none;"> LOGOUT <img src="{% static 'images/logout.png' %}" width="20px" height="20px"></a>
+                {% else %}
+                  <a href="{% url 'register' %}" class="RegisterButton" style="text-decoration: none;">REGISTER</a>
+                  <a class="LoginButton" data-toggle="modal" data-target="#exampleModalCenter"> LOGIN </a>
+                {% endif %}
+              </ul>
+          </div>
+        {% endif %}
+      </nav>
+    </header>
+
+
+<!--
+    <nav>
+        <div class="navbar-header">
+          <div class="navbarheaderpullleft">
+            <a href="{% url 'home' %}" class="LinkProperties">
+            <img src="{% static 'images/leisurebonus.png' %}" class="logolink" >
+              </a>
+            {% if is_mobile == False %}
+              {% if user.is_authenticated %}
+                <a href="{% url 'MyAccount' %}" class="LinkProperties"> My Account </a>
+                <a href="{% url 'howitworks' %}" class="LinkProperties"> How it works </a>
+                <a href="{% url 'about' %}" class="LinkProperties"> About </a>
+              {% else %}
+                <a href="{% url 'howitworks' %}" class="LinkProperties"> How it works </a>
+                <a href="{% url 'about' %}" class="LinkProperties"> About </a>
+              {% endif %}
+            {% endif %}
+          </div>
+          <div class="navbarheaderpullright">
+            {% if is_mobile == True %}
+                <div class="btn-group dropleft">
+                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    ...
+                  </a>
+
+                  <div class="dropdown-menu dropdown-menu-lg-right">
+                    {% if user.is_authenticated %}
+                      <a class="dropdown-item" ref="{% url 'howitworks' %}"> How it works </a>
+                      <a class="dropdown-item" href="{% url 'about' %}" >About</a>
+                      <a class="dropdown-item" href="#">......</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'MyAccount' %}"> My Account </a>
+                      <a class="dropdown-item" href="{% url 'logout' %}"> LOGOUT </a>
+                    {% else %}
+                      <a class="dropdown-item" href="{% url 'howitworks' %}"> How it works </a>
+                      <a class="dropdown-item" href="{% url 'about' %}"> About </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'register' %}">REGISTER</a>
+                      <a class="dropdown-item" id="loginBtn" >LOGIN</a>
+                    {% endif %}
+                  </div>
+                </div>
+            {% else %}
+                
+            
+              {% if user.is_authenticated %}
+              {{ user.username }}
+                <a class="LogoutButton" href="{% url 'logout' %}"> LOGOUT <img src="{% static 'images/logout.png' %}" width="20px" height="20px"></a>
+              {% else %}
+                <a href="{% url 'register' %}" class="RegisterButton">REGISTER</a>
+                <a id="loginBtn"  class="LoginButton">LOGIN</a>
+              {% endif %}
+            {% endif %}
+          
+          </div> 
+        </div>
+    </nav>
+       -->
+
+    {% block content %}
+    {% endblock   %}
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">SIGN IN</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" action="{% url 'MyAccount' %}">
+              {% csrf_token %}
+              <div >
+                  <input type='text' name='username' class="textBoxSignIn" id='username' placeholder="Username" autofocus> <br>
+                  <input type='password' name='password' class="textBoxSignIn" id='password' placeholder="Password"><br>
+                  <input type="checkbox" name="rememberme"> Remember me
+                  <br><br>
+                  <input type='submit' value='Login' class="buttonSignin" style="width: 300px">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+
+    <footer class="bg-gray text-light pt-5 pb-5"  >
+        <div class="container" >
+          <div class="row">
+            <div class="col-12 col-md-3">
+              <img src="{% static 'images/leisurebonusgrey.png' %}" class="mb-4 logolinkfooter">
+              <p class="text-muted">
+                © 2019 Leisure Bonus
+              </p>
+            </div>
+            <!--end of col-->
+            <div class="col-12 col-md-9">
+              <div class="row no-gutters">
+                <div class="col-6 col-lg-3">
+                  <h6>General</h6>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a class="FooterLink" href="{% url 'howitworks' %}">How it works</a>
+                    </li>
+                    <li>
+                      <a class="FooterLink" href="{% url 'about' %}">About us</a>
+                    </li>
+                  </ul>
+                </div>
+                <!--end of col-->
+                <div class="col-6 col-lg-3">
+                  <h6>Resources</h6>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a class="FooterLink" href="{% url 'faq' %}">FAQ</a>
+                    </li>
+                    <li>
+                      <a class="FooterLink" href="{% url 'contactus' %}">Contact us</a>
+                    </li>
+                  </ul>
+                </div>
+                <!--end of col-->
+                <div class="col-6 col-lg-3">
+                  <h6>Legal</h6>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a class="FooterLink" href="{% url 'termsconditions' %}">Terms & Conditions</a>
+                    </li>
+                    <li>
+                      <a class="FooterLink" href="{% url 'privacypolicy' %}">Privacy Policy</a>
+                    </li>
+                    <li>
+                      <a class="FooterLink" href="{% url 'cookiespolicy' %}">Cookies Policy</a>
+                    </li>
+                  </ul>
+                </div>
+                <!--end of col-->
+              </div>
+              <!--end of row-->
+            </div>
+            <!--end of col-->
+          </div>
+          <!--end of row-->
+        </div>
+        <!--end of container-->
+      </footer>
+</body>
+   
+  
+</html>

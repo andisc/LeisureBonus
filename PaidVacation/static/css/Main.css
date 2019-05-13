@@ -1,0 +1,1280 @@
+
+:root {
+  --grey: #737373;
+  --blue: #00b3ff;
+  --blueBackground: #4dc9ff;
+  --fullwidth: 100%;
+  --footerbackgoundcolor: #787d81;
+  --footerlinkcolor: #6c757d;
+}
+
+
+
+body {
+    background-color: #EAEAEA;
+    font-family: Arial;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+/* Button styles  */
+ 
+.RegisterButton {
+    display: inline-block;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    background: var(--blue);
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.RegisterButton:hover,
+.RegisterButton:focus {
+    background: var(--blueBackground);
+    text-decoration: none;
+}
+
+.RegisterButton:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+.RegisterButton:active {
+    transform: scale(0.99);
+}
+
+.LoginButton {
+    display: inline-block;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    background: #e6e6e6;
+    color: #737373;
+    font-family: sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.LoginButton:hover,
+.LoginButton:focus {
+    background: #f2f2f2;
+}
+
+.LoginButton:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+.LoginButton:active {
+    transform: scale(0.99);
+}
+
+.LogoutButton {
+    display: inline-block;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    background: #e6e6e6;
+    color: #737373;
+    font-family: sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.LogoutButton:hover,
+.LogoutButton:focus {
+    background: #f2f2f2;
+}
+
+.LogoutButton:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+.LogoutButton:active {
+    transform: scale(0.99);
+}
+
+.buttonSuggestion{
+    display: inline-block;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    background: var(--blue);
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.buttonSuggestion:hover,
+.buttonSuggestion:focus {
+    background: var(--blueBackground);
+}
+
+.buttonSuggestion:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+.buttonSuggestion:active {
+    transform: scale(0.99);
+}
+
+
+.buttonBecomePartner{
+    display: inline-block;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    background: var(--blue);
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.buttonBecomePartner:hover,
+.buttonBecomePartner:focus {
+    background: var(--blueBackground);
+}
+
+.buttonBecomePartner:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+.buttonBecomePartner:active {
+    transform: scale(0.99);
+}
+
+.buttonSignin{
+    display: inline-block;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    background: var(--blue);
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.buttonSignin:hover,
+.buttonSignin:focus {
+    background: var(--blueBackground);
+}
+
+.buttonSignin:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+.buttonSignin:active {
+    transform: scale(0.99);
+}
+
+/* --------   Div styles ----------- */
+
+
+.navbar-header {
+    display: inline-block;
+    width: 100%;
+    height: 10%;
+    background-color: #ffffff;
+    box-shadow: 0px 3px 5px grey;
+    z-index: 1;
+    position: relative;
+}
+
+.navbarheaderpullleft {
+    
+    position: absolute;
+    width: 50%;
+    float: left;
+    top: 30%;
+    left: 0%;
+}
+
+.navbarheaderpullright {
+    position: absolute;
+    display: inline-block;
+    float: right;
+    width: 40%;
+    text-align: right;
+    top: 0%;
+    left : 55%;
+}
+
+
+/* ---------  <a> styles  ----------  */
+
+.usernamelabel{
+    margin: 10px;
+    font-size: 17px;
+    padding: 5px;
+    vertical-align: middle;
+    display: table-cell;
+    height: inherit;
+}
+
+a.LinkProperties:link {
+    text-decoration: none;
+    margin: 5px;
+    color: var(--grey);
+    font-size: 18px;
+    
+    vertical-align: middle;
+    display: table-cell;
+    padding: 5px;
+    height: inherit;
+
+}
+
+a.LinkProperties:visited {
+    text-decoration: none;
+    color: var(--grey);
+}
+
+a.LinkProperties:hover {
+    color: var(--blue);
+  text-decoration: none;
+}
+
+a.LinkProperties:active {
+  text-decoration: none;
+}
+
+
+a.FooterLink:link {
+    text-decoration: none;
+    margin: 5px;
+    color: var(--footerlinkcolor);
+    font-size: 15px;
+    
+    vertical-align: middle;
+    display: table-cell;
+    padding: 5px;
+    height: inherit;
+
+}
+
+a.FooterLink:visited {
+    text-decoration: none;
+    color: var(--footerlinkcolor);
+}
+
+a.FooterLink:hover {
+    color: white;
+    text-decoration: none;
+}
+
+a.FooterLink:active {
+  text-decoration: none;
+}
+
+.logolink{
+    width: 250px;
+}
+
+.logolinkfooter{
+    width: 200px;
+}
+
+/*  -------  Different classes --------*/
+/*.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}*/
+
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.centeredTitle {
+  font-size: 50px;
+}
+
+.centeredSubTitle {
+  font-size: 25px;
+}
+
+.centerSuggest {
+  font-size: 25px;
+}
+
+.TitleChosseLeisureBonus{
+    text-align: center;
+    color: var(--grey);
+    font-size: 25px;
+}
+
+.TextChosseLeisureBonus{
+    color: var(--grey);
+    margin-left: 20%;
+    width: 60%;
+    font-size: 16px;
+}
+
+.SubTitleChosseLeisureBonus{
+    text-align: center;
+    color: var(--grey);
+    font-size: 18px;
+}
+
+.LeisureBonusBenefits {
+   display: table;
+    table-layout: fixed;
+    width:80%;
+    height:100px;
+    text-align: center;
+    padding-left: 10%;
+}
+
+.BenefitsColumn {
+  display: table-cell;
+    padding: 3%;
+    height:100px;
+    width: 30%;
+}
+
+.BenefitsTitles{
+    color: #484c4b; 
+    font-weight: bold;
+}
+
+.BenefitsTexts{
+    color: #484c4b;
+    font-weight: normal;
+}
+
+.textBoxSuggestion{
+    height: 40px;
+    width: 250px;
+    border-radius: 2px;
+    border-style: none;
+    font-size: 20px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.containerBecomePartner{
+    text-align: center;
+
+}
+
+
+.containerGraphic{
+}
+
+hr.style-two { 
+  border: 0; 
+  height: 1px; 
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
+}
+
+
+
+/*  -------  classes used in footer --------
+footer {
+    display: table;
+    table-layout: fixed;
+    width:100%;
+    height:100px;
+    background-color: var(--footerbackgoundcolor);
+    margin-top: 10px;
+}
+
+
+.footerColumn {
+    padding-top: 10px;
+    display: table-cell;
+    height:100px;
+    text-align: left;
+}
+
+.titleFooter{
+    color: #ffffff;
+}
+
+.FooterLinks{
+    color: #e6e6e6;
+    text-decoration: none;
+}
+
+*/
+/*  ---- refer company page -----*/
+
+.containerReferCompany {
+    position: relative;
+    display: inline-grid;
+    width: 100%;
+    height: 100%;
+}
+
+.containerReferCompanyleft {
+    position: absolute;
+    width: 50%;
+    float: left;
+    height: 50%;
+    top: 0%;
+    left: 0%;
+}
+
+.containerReferCompanyleft_text{
+    top:10%;
+    height: 30%;
+    padding-left: 5%
+}
+
+.TitleReferCompanyPage{
+    text-align: left;
+    color: white;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.SubTitleReferCompanyPage{
+    text-align: left;
+    color: white;
+    font-size: 18px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.containerReferCompanyright {
+    
+    background-color: #e2e3e4;
+    text-align: center;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-right: 2%;
+    padding-left: 2%;
+    top: 10%;
+    
+    border-radius: 2px;
+    box-shadow: 0px 3px 5px grey;
+    z-index: 1;
+
+} 
+
+.textBoxRefer{
+    height: 30px;
+    width: 200px;
+    border-radius: 2px;
+    border-style: none;
+    font-size: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 5px;
+}
+
+.dropboxRefer{
+    height: 30px;
+    width: 200px;
+    border-radius: 2px;
+    border-style: none;
+    font-size: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 5px;
+}
+
+
+.textBoxStyleBorder{
+    height: 30px;
+    width: 200px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 2px;
+    border-color: grey;
+    font-size: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 5px;
+}
+
+.dropboxStyleBorder{
+    height: 30px;
+    width: 200px;
+    border-radius: 2px;
+    border-style: none;
+    font-size: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 5px;
+}
+
+
+
+/*  ---- Register  page -----*/
+
+.containerRegister {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.containerRegisterleft {
+    position: absolute;
+    width: 10%;
+    float: left;
+    top: 0%;
+    left: 0%;
+    background-color: yellow;
+  
+}
+.containerRegisterright {
+    position: absolute;
+    display: inline-block;
+    float: right;
+    width: 35%;
+    background-color: #e2e3e4;
+    text-align: center;
+    top: 20%;
+    left : 30%;
+    border-radius: 2px;
+    box-shadow: 0px 3px 5px grey;
+    z-index: 1;
+} 
+
+.RegisterTitle{
+    background-color: #b3b3b3;
+    margin-top:  0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+}
+
+.textBoxRegister{
+    height: 30px;
+    width: 300px;
+    border-radius: 2px;
+    border-style: none;
+    font-size: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 5px;
+}
+
+.textBoxSignIn{
+    height: 30px;
+    width: 300px;
+    border-radius: 2px;
+    border-style: solid;
+    border-color: grey;
+    border-width: 1px;
+    font-size: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 5px;
+}
+
+
+/*  ---- About  page -----*/
+
+.contentAboutCenter{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+
+}
+
+.TitleAboutPage{
+    text-align: left;
+    color: var(--grey);
+    font-size: 25px;
+}
+
+/*  ---- end About  page -----*/
+
+/*  ---- MyAccount  page -----*/
+
+
+.containerMyAccount {
+    position: relative;
+    display: inline-block;
+    width: 90%;
+    height: 100%;
+    margin-left: 5%;
+    margin-right:5%;
+    background-color: white;
+}
+
+.containerMyAccountLeft {
+    width: 20%;
+    height: 97%;
+    float: left;
+    top: 0%;
+    left: 0%;
+    background-color: #8c8c8c;
+    padding-left: 1%;
+    padding-top: 2%;
+    padding-right: 1%;
+}
+
+.containerMyAccountRight {
+    position: absolute;
+    display: inline-block;
+    float: right;
+    margin: 2%;
+    width: 74%;
+    height: 94%;
+    /*width: 35%;
+    background-color: #e2e3e4;
+    text-align: center;
+    top: 20%;
+    left : 30%;
+    border-radius: 2px;
+    box-shadow: 0px 3px 5px grey;*/
+    z-index: 1;
+} 
+
+
+
+.buttonMyAccount{
+    width: 100%;
+    height: 10%;
+    margin-bottom: 1%;
+    background-color: var(--blue);
+}
+
+.titleMyAccount{
+    text-align: left;
+    color: var(--grey);
+    font-size: 25px;
+}
+
+.textMyAccount{
+    text-align: left;
+    color: var(--grey);
+    font-size: 15px;
+}
+
+/*  ---- end MyAccount  page -----*/
+
+/*  ----  How It Works  page -----*/
+.containernavhiw {
+    height: 10%;
+    position: relative;
+    padding-left: 2%;
+    padding-right: 1%;
+    padding-top: 1%;
+
+}
+
+.containernavhiwright{
+    text-align: right;
+    position: absolute;
+    display: inline-block;
+    float: right;
+    right: 2%;
+}
+
+.hiwtitle{
+    color: white;
+    font-size: 20px;
+}
+
+.hiwcenter{
+    width: 100%;
+    padding-top: 10%;
+    padding-bottom: 20%;
+    padding-left: 5%;
+}
+
+.hiwcentertitle{
+    font-size: 55px;
+    color: #ffffff;
+}
+
+.hiwcentertext{
+    font-size: 28px;
+    color: #ffffff;
+}
+
+
+/*  ---- end How It Works  page -----*/
+
+
+/* Tooltip container */
+.tooltipp {
+  position: relative;
+  display: inline-block;
+  color: #8c8c8c;
+}
+
+/* Tooltip text */
+.tooltipp .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltipp .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltipp:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+.errorField{
+    color: red;
+    font-size: 10px;
+    text-transform: none;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%; /* Could be more or less, depending on screen size */
+  border-radius: 2px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* radioButton choices */
+.transition{
+  transition: all .3s ease-out;
+}
+
+.heading{
+  text-align: center;
+  font-size:0.8em;
+  
+}
+.center-align{
+  width: 100%;
+  height: 150px;
+  position: absolute;
+  display: table;
+}
+
+.rowChoices {
+    display: table-row;
+}
+
+
+input[type="radio"]{
+  visibility: hidden;
+  height: 0;
+  width: 0;
+}
+
+label {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  background-color: #d8dad9;
+  color: white;
+  border-radius: 3px;
+  width: 100px;
+  height: 100px;
+  .transition;
+  margin-bottom: 10px;
+}
+
+input[type="radio"]:checked + label{
+  background-color: #58ba83;
+  box-shadow: 0px 3px 5px grey;
+
+}
+
+
+.container-cards{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.RegisterBox{
+    background-color: #e6e6e6;
+    text-align: center;
+    padding-left: 5%;
+    margin-right: 5%;
+}
+
+
+.images-h40{
+  height: 150px;
+}
+
+.images-h30{
+  height: 100px;
+}
+
+.check
+{
+    opacity:0.5;
+  color:#996;
+  
+}
+
+
+.container-15p{
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+.text-block {
+  position: absolute;
+  top: 10%;
+  width: 100%;
+  color: white;
+}
+
+.container-relative {
+  position: relative;
+  align-content: center;
+  width: 100%;
+}
+
+
+.u-sidebar[aria-labelledby].u-unfold--css-animation, .u-sidebar[aria-labelledby].u-unfold--jquery-slide {
+    opacity: 1;
+}
+
+.u-sidebar[aria-labelledby] {
+    opacity: 0;
+}
+.u-sidebar {
+    position: fixed;
+    float:left;
+    overflow: hidden;
+    display:none;
+    top: 0;
+    left: 0;
+    z-index: 102;
+    width: 80%;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0.5rem 0 1.125rem rgba(21, 27, 38, 0.07);
+}
+
+.u-sidebarpc {
+    position: relative;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+
+.u-sidebar__scroller {
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.u-sidebar__container {
+    position: relative;
+    height: 100%;
+    min-height: 100%;
+}
+
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+.u-sidebar--panel__link {
+    color: #646f79;
+}
+
+.max-width-4 {
+    max-width: 1.5rem;
+}
+
+.cardVoucher {
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    border: 0;
+    font-weight: 400;
+}
+
+.view {
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+}
+
+.view img, .view video {
+    position: relative;
+    display: block;
+}
+
+.cardVoucher-img-top {
+    width: 90%;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px -8px rgba(0,0,0,.24), 0 8px 10px -5px rgba(0,0,0,.2);
+    margin-left: 5%;
+    margin-bottom: 5%;
+}
+
+.cardVoucher-title {
+    text-align: center;
+    color: #3c4858;
+    text-decoration: none;
+    font-size: 1.125rem;
+    font-weight: 300;
+}
+
+.price {
+    font-size: 18px;
+    color: #9a9a9a;
+    display: inline-block;
+}
+
+.stats {
+    font-size: 18px;
+    color: #9a9a9a;
+    text-align: right;
+    float: right;
+}
+
+
+
+.btn-floating {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    height: 50px;
+    width: 50px;
+    position: relative;
+    z-index: 1;
+    vertical-align: middle;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    margin: 10px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+    margin-top: -15%;
+    background-color: white;
+    text-align: center;
+}
+
+.new-floating {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    border-radius: 10%;
+    padding:2%;
+    margin-left: 1%;
+    margin-top: 1%;
+    position: absolute;
+    z-index: 1;
+    background-color: green;
+    color: #fff;
+}
+
+.voucherAirCompany-img {
+    width: 100%;
+    margin-left: 5%;
+
+}
+
+.card-description{
+    color: #999;
+    text-align: center;
+}
+
+.btn-rounded {
+    -webkit-border-radius: 10em;
+    border-radius: 10em;
+}
+
+.btn-indigo {
+    background-color: #3f51b5!important;
+    color: #fff;
+}
+
+.btn.btn-md {
+    padding: .7rem 1.6rem;
+    font-size: .7rem;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity:0.3;
+  background-color: black;
+  z-index:0;
+}
+
+
+.title-404 {
+    padding: 0 0 19px;
+    overflow: hidden;
+    font-size: 80px;
+}
+
+.title-404 .text-404 {
+    overflow: hidden;
+    color: #002F42;
+    padding: 0px!important;
+    width: 100%;
+}
+
+
+.content-404 {
+    color: #48515A;
+    font-size: 15px;
+    line-height: 19px;
+}
+
+.image-circle{
+    border-radius: 50%;
+    border: 4px solid #FFF;
+    margin: 10px;
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .1);
+}
+
+.font-size-13 {
+    font-size: .8125rem;
+}
+
+.fa, .fas {
+    font-weight: 900;
+}
+.text-purple {
+    color: #796eff !important;
+}
+
+.fa-check:before {
+    content: "\2713";
+}
+
+.u-label--light {
+    color: #f5f8fb;
+    background-color: rgba(245, 248, 251, 0.1);
+}
+.u-label--sm {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+}
+.u-label {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 0.625rem 1.125rem;
+    border-radius: 6.1875rem;
+    transition: 0.2s ease-in-out;
+}
+
+.bg-primary-card {
+    background-color: #21c87a !important;
+}
+
+
+.fa-bulk:before {
+    content: "\2713";
+}
+
+.icon-container:hover .icon span {
+    background-color: white;
+    color: #696767;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #696767;
+    width: 25px;
+
+}
+
+.icon-container .icon:hover span {
+    background-color: white;
+    color: #696767;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #696767;
+    width: 25px;
+}
+
+.icon-container .icon span {
+    font-size: 18px;
+    text-align: center;
+    color: white;
+    background-color: #696767;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #696767;
+    width: 25px;
+    border-radius: 50%;
+    transition: color 0.3s ease-in-out 0s;
+}
+
+.mdi {
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font: normal normal normal normal normal normal normal 1 "Material Icons";
+}
+
+
+.mdi-info-outline::before {
+    content: "i";
+}
+
+
+ .panel-heading {
+    cursor: pointer;
+}
+/* CSS Method for adding Font Awesome Chevron Icons */
+ .accordion-toggle:after {
+    /* symbol for "opening" panels */
+    font-family:'FontAwesome';
+    content:">";
+    float: right;
+    color: inherit;
+}
+.panel-heading.collapsed .accordion-toggle:after {
+    /* symbol for "collapsed" panels */
+    content:">>";
+}
+
+
+.container-perfil{
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    padding: 3%;
+}
+
+.perfil-text-title{
+  color: #5f6368;
+  font-size: 14px;
+}
+
+.perfil-text-description{
+  color: #5f6368;
+  font-size: 14px;
+}
+
+.perfil-text{
+  font-weight: 600;
+  font-size: 14px;
+}
+
+

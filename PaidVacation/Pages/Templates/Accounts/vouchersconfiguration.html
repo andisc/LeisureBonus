@@ -1,0 +1,88 @@
+{% extends 'Accounts/myaccount.html' %}
+{% load static %}
+
+{% block contentMyAccount %}
+
+	{% if request.user.is_superuser %}
+		{% if text_error|length > 0 %}
+	      	<div class="alert alert-danger" role="alert">
+			  <b>Alert:</b> {{ text_error }}
+			</div>
+		{% elif saveresult == True %}
+	      	<div class="alert alert-success" role="alert">
+			  <b>Success:</b> A new voucher was submited with success.
+			</div>
+		{% endif %}
+	  	<h3>Configurate new voucher</h3>
+	  	<br>
+	      	<form method="post" action="{% url 'uploadvoucher_view' %}" enctype="multipart/form-data">
+	        {% csrf_token %}
+	          <div class="form-row">
+	          	<div class="form-group col-md-6">
+	              {{ formVoucher.idcodewinner }}
+	                <div class="errorField">{{ formVoucher.idcodewinner.errors.as_text }}</div>
+	            </div>
+	          </div>
+	          <div class="form-row">
+	            <div class="form-group col-md-6">
+	              {{ formVoucher.idcodecompany }}
+	                <div class="errorField">{{ formVoucher.idcodecompany.errors.as_text }}</div>
+	            </div>
+	            <div class="form-group col-md-6">
+	              {{ formVoucher.idemployee }}
+	                <div class="errorField">{{ formVoucher.idemployee.errors.as_text }}</div>
+	            </div>
+	          </div>
+	          <div class="form-row">
+	            <div class="form-group col-md-6">
+	              {{ formVoucher.voucherlocation }}
+	                <div class="errorField">{{ formVoucher.voucherlocation.errors.as_text }}</div>
+	            </div>
+	          </div>
+	          <div class="form-row">
+	            <div class="form-group col-md-6">
+	              {{ formVoucher.mntvoucher }}
+	                <div class="errorField">{{ formVoucher.mntvoucher.errors.as_text }}</div>
+	            </div>
+	            <div class="form-group col-md-6">
+	              {{ formVoucher.currency }}
+	                <div class="errorField">{{ formVoucher.currency.errors.as_text }}</div>
+	            </div>
+	          </div>
+	          <div class="form-row">
+	            <div class="form-group col-md-6">
+	              {{ formVoucher.state }}
+	                <div class="errorField">{{ formVoucher.state.errors.as_text }}</div>
+	            </div>
+	            <div class="form-group col-md-6">
+	              {{ formVoucher.airlinecompany }}
+	                <div class="errorField">{{ formVoucher.airlinecompany.errors.as_text }}</div>
+	            </div>
+	          </div>
+	          <div class="form-row">
+	            <div class="form-group col-md-6">
+	              {{ formVoucher.title }}
+	                <div class="errorField">{{ formVoucher.title.errors.as_text }}</div>
+	            </div>
+	          </div>
+	          <div class="form-row">
+	            <div class="form-group col-md-6">
+	              {{ formVoucher.description }}
+	                <div class="errorField">{{ formVoucher.description.errors.as_text }}</div>
+	            </div>
+	          </div>
+	          <div class="form-row">
+	            <div class="form-group col-md-6">
+	              {{ formVoucher.active }} {{ formVoucher.active.label }}
+	                <div class="errorField">{{ formVoucher.active.errors.as_text }}</div>
+	            </div>
+	          </div>
+	          
+
+	          <br>
+
+	          <button type="submit" class="buttonBecomePartner" >Add new voucher</button>
+	      </form>
+    {% endif %}
+
+{% endblock %}

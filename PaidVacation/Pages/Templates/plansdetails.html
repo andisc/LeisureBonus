@@ -1,0 +1,227 @@
+{% extends 'Base.html' %}
+{% load static %}
+
+{% block content %}
+  	<div style="background-image: url({% static 'images/image4.jpg' %}); background-size: cover; width: 100%; height: 80%;">
+      <!--
+  		<div class="containernavhiw">
+     		<a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/leisurebonusgrey.png' %}" class="logolink" ></a>
+     		<div class="containernavhiwright">
+	     		{% if is_mobile == True %}
+                <div class="btn-group dropleft">
+                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    ...
+                  </a>
+
+                  <div class="dropdown-menu dropdown-menu-lg-right">
+                    {% if user.is_authenticated %}
+                      <a class="dropdown-item" ref="{% url 'howitworks' %}"> How it works </a>
+                      <a class="dropdown-item" href="{% url 'about' %}" >About</a>
+                      <a class="dropdown-item" href="#">......</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'MyAccount' %}"> My Account </a>
+                      <a class="dropdown-item" href="{% url 'logout' %}"> LOGOUT </a>
+                    {% else %}
+                      <a class="dropdown-item" href="{% url 'howitworks' %}"> How it works </a>
+                      <a class="dropdown-item" href="{% url 'about' %}"> About </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'register' %}">REGISTER</a>
+                      <a class="dropdown-item" id="loginBtn" >LOGIN</a>
+                    {% endif %}
+                  </div>
+                </div>
+            {% else %}
+                
+            
+              {% if user.is_authenticated %}
+              {{ user.username }}
+                <a class="LogoutButton" href="{% url 'logout' %}" style="text-decoration: none;"> LOGOUT <img src="{% static 'images/logout.png' %}" width="20px" height="20px"></a>
+              {% else %}
+                <a href="{% url 'register' %}" class="RegisterButton" style="text-decoration: none;">REGISTER</a>
+                <a class="LoginButton"type="button" data-toggle="modal" data-target="#exampleModalCenter"> LOGIN </a>
+              {% endif %}
+            {% endif %}
+	     	</div>
+     	</div> -->
+     	<div class="hiwcenter">
+     		<div class="hiwcentertitle">Leisure Bonus</div>
+     		<br>
+        <div class="hiwcentertext">Ready for your next holidays?</div>
+     		<div class="hiwcentertext">Your platform that will allow you to travel through your company.</div>
+     	</div>
+     	<div>
+     	</div>
+	</div>
+
+  <br><br>
+
+
+<section>
+    <div class="bg-white mt-n9">
+      <div class="container space-3-top space-2-bottom space-4-top--lg space-3-bottom--lg">
+        <!-- Title -->
+        <div class="w-md-80 w-lg-60 text-center mx-md-auto mb-9">
+          <h2>Business</h2>
+          <div class="row justify-content-center">
+            <div class="col-10 col-md-8">
+            <p>Looking for the perfect gift to surprise your employees, partners ou clients? Travelling becomes more than part of your job, it becomes your lifestyle and our mission is to make it easier to explore new cities outside your layovers. That's just one of the incredible rewards we offer you. Here's what you can look forward to:</p>
+            </div>
+          </div>
+        </div>
+        <!-- End Title -->
+        <br>
+        <div class="row align-items-lg-center">
+          <div class="col-md-6 col-lg-4 order-lg-2 offset-md-3 offset-lg-0 mb-5 mb-md-0">
+            <!-- Pricing -->
+            <div class="bg-primary-card border rounded py-9 p-5">
+              <div class="mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="h6 text-white mb-0">Automatic</h4>
+                  <span class="u-label u-label--light u-label--sm">Recommended</span>
+                </div>
+                <ul class="list-unstyled text-white mb-4">
+                  <li class="d-flex align-items-center py-2">
+                    <span class="fa fa-check font-size-13 mr-3"></span>
+                    Choose how many employees you want to give vouchers each month
+                  </li>
+                  <li class="d-flex align-items-center py-2">
+                    <span class="fa fa-check font-size-13 mr-3"></span>
+                    Choose how much you will pay for each employee registered
+                  </li>
+                  <li class="d-flex align-items-center py-2">
+                    <span class="fa fa-check font-size-13 mr-3"></span>
+                    Automatically we choose the winners of the vouchers
+                  </li>
+                  <li class="d-flex align-items-center py-2">
+                    <span class="fa fa-check font-size-13 mr-3"></span>
+                    We put the voucher directly into employee account
+                  </li>
+                  <li class="d-flex align-items-center py-2">
+                    <span class="fa fa-check font-size-13 mr-3"></span>
+                    We will send you an invoice with all details
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- End Pricing -->
+          </div>
+
+          <div class="col-md-6 col-lg-4 order-lg-1 mb-5 mb-md-0">
+            <!-- Pricing -->
+            <div class="bg-white border rounded py-7 p-5">
+              <div class="mb-4">
+                <div class="mb-2">
+                  <span class="h1 text-dark">Customized</span>
+                </div>
+                <ul class="list-unstyled mb-4">
+                  <li class="d-flex align-items-center py-2">
+                    <span class="fa fa-check text-purple font-size-13 mr-3"></span>
+                    Send us a message with who you want to give a flight voucher
+                  </li>
+                  <li class="d-flex align-items-center py-2">
+                    <span class="fa fa-check text-purple font-size-13 mr-3"></span>
+                    We book a voucher
+                  </li>
+                  <li class="d-flex align-items-center py-2">
+                    <span class="fa fa-check text-purple font-size-13 mr-3"></span>
+                    We put it directly into employee account
+                  </li>
+                  <li class="d-flex align-items-center py-2">
+                    <span class="fa fa-check text-purple font-size-13 mr-3"></span>
+                    We will send you an invoince with all details at the beginning of each month
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- End Pricing -->
+          </div>
+
+          <div class="col-md-6 col-lg-4 order-lg-3">
+            <!-- Pricing -->
+            <div class="bg-white border rounded py-7 p-5">
+              <div class="mb-4">
+                <div class="mb-2">
+                  <div class="row"
+                  <div><span class="h1 text-dark">Fifty-Fifty </span>
+                  <div class="icon-container">
+                        <div class="icon"><span class="mdi mdi-info-outline" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."></span></div>
+                      </div>
+                    </div>
+                </div>
+                </div>
+
+                <ul class="list-unstyled mb-4">
+                  <li class="d-flex align-items-center py-2">
+                    <span class="fa fa-check text-purple font-size-13 mr-3"></span>
+                    Choose how many employees you want to give vouchers each month
+                  </li>
+                  <li class="d-flex align-items-center py-2">
+                    <span class="fa fa-check text-purple font-size-13 mr-3"></span>
+                    Choose how much you will pay for each employee registered each month
+                  </li>
+                  <li class="d-flex align-items-center py-2">
+                    <span class="fa fa-check text-purple font-size-13 mr-3"></span>
+                    Choose how much each employee will pay each month
+                  </li>
+                  <li class="d-flex align-items-center py-2">
+                    <span class="fa fa-check text-purple font-size-13 mr-3"></span>
+                    The rest of the process is like our automatic plan
+                  </li>
+                </ul>
+
+              </div>
+            </div>
+            <!-- End Pricing -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+</section>
+<br>
+<br>
+<br>
+
+
+
+<section>
+  <div class="bg-light pt-6">
+      <div class="container">
+        <div class="row justify-content-center pt-4 mb-5 pl-3 pr-3">
+            <h2>Practice example of our plans</h2>
+        </div>
+        <div class="row">
+          <div class="col-md-5 mr-auto align-self-center mb-5">
+            <h4>Automatic Plan</h4>
+
+            <p>The following example is a real case of how the plan can be set up for a company.</p>
+
+            <p><span class="fa fa-bulk text-purple font-size-13 mr-3"></span>
+            800 employees registered in LeisureBonus</p>
+            <p><span class="fa fa-bulk text-purple font-size-13 mr-3"></span>
+            1€ for each employee every month</p>
+            <p><span class="fa fa-bulk text-purple font-size-13 mr-3"></span>
+            4 employees get one voucher every month</p>
+            <br>
+            <p>
+              After a year the company can give holidays to 48 of their employees. That's the best benefit you can have to your employees too.
+            </p>
+          </div>
+          <div class="col-md-5 ml-auto mt-4">
+            <h4>Costumized Plan</h4>
+            <p>Companies normally use costumized plan to buy gifts to their clients or partners for some especial occasion.</p>
+            <br>
+            <p>Whenever is the occasion the company has just to send us a message with the information we need and you will book the voucher</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <br>
+</section>
+
+
+
+
+
+
+{% endblock %}

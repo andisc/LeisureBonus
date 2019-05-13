@@ -1,0 +1,87 @@
+{% extends 'Accounts/myaccount.html' %}
+{% load static %}
+
+{% block contentMyAccount %}
+
+
+<script>
+	function choose() {
+    swal({
+    	type: "success",
+    	title: 'Your answer has been saved',
+	    text: '',
+	    imageWidth: 350,
+	    imageHeight: 300,
+	    timer: 1500,
+        showConfirmButton: !1
+    });
+
+};
+</script>
+
+<script src="{% static 'js/sweetalert2.min.js' %}"></script> 
+<link rel="stylesheet" href="{% static 'css/sweetalert2.min.css' %}">
+<script src="{% static 'js/appsweetalert.js' %}"></script> 
+
+
+<div class="modal fade" id="change_password" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body change_password">
+                Modal body
+            </div>
+        </div>
+    </div>
+</div>
+
+
+	<div class="titleMyAccount">Choose my bonus</div>
+	<br>
+	<div class="textMyAccount">We help you to choose the best airline company to fly with. Please select the country where you would like to travel</div>
+	<br>	
+	
+	<div class="container">
+		<div class="row" style="height: 300px">
+			<div id="map1" style="width: 100%; height: 100%"></div>
+		</div>
+	</div>
+	<br>
+	<div class="textMyAccount">Please choose one of the choices bellow</div>
+	<br>
+  	<div class="container">
+	  <div class="row">
+		    <div class="col">
+		    	<input type="radio" name="size" id="size_1" onClick="choose()" value="small" checked />
+		    	<label for="size_1" ><img src="{% static 'images/TAPLogo.png' %}" width="100%" height="100%"></label>
+		    </div>
+		    <div class="col">
+		    	<input type="radio" name="size" id="size_2" onClick="choose()" value="small" />
+				 <label for="size_2"><img src="{% static 'images/EasyJetLogo.png' %}" width="100px" height="100px"></label>
+		    </div>
+		    <div class="col">
+		    	<input type="radio" name="size" id="size_3" onClick="choose()" value="small" />
+				 <label for="size_3"><img src="{% static 'images/RyanairLogo.png' %}" width="100px" height="100px"></label>
+		    </div>
+		    <div class="col">
+		    	<input type="radio" name="size" id="size_4" value="small" />
+				 <label for="size_4"><img src="{% static 'images/EmiratesLogo.png' %}" width="100px" height="100px"></label>
+		    </div>
+		    <div class="col">
+		    	<input type="radio" name="size" id="size_5" value="small" />
+				 <label for="size_5"><img src="{% static 'images/BritishAirwaysLogo.png' %}" width="100px" height="100px"></label>
+		    </div>
+		    <div class="col">
+		    	<input type="radio" name="size" id="size_6" value="small" />
+				 <label for="size_6"><img src="{% static 'images/LufthansaLogo.png' %}" width="100px" height="100px"></label>
+		    </div>
+		    <div class="col">col</div>
+		    <div class="col">col</div>
+		</div>
+	</div>
+
+
+
+{% endblock %}

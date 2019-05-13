@@ -1,0 +1,305 @@
+{% extends 'Base.html' %}
+{% load static %}
+
+{% block title %} Home Page {% endblock %}
+
+
+{% block content %}
+
+
+<section class="hero py-6 py-lg-7 text-white dark-overlay">
+	<img src="https://d19m59y37dris4.cloudfront.net/directory/1-1/img/photo/photo-1522143049013-2519756a52d4.jpg" alt="How can we help you today?" class="bg-imagezero">
+      <div class="container overlay-content">
+        <!-- Breadcrumbs -->
+        <br>
+        <h1 class="hero-heading">Frequently Asked Questions</h1>
+      </div>
+    </section>
+
+<br>
+<section>
+	<div class="container">
+		<br>
+
+		<div class="row justify-content-center">
+		  <div class="col-12 col-md-6">
+		    <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
+		      <a class="list-group-item list-group-item-action active" id="list-ask-costumer" data-toggle="list" href="#list-askcostumer" role="tab" aria-controls="costumer">For Costumers</a>
+		      <a class="list-group-item list-group-item-action" id="list-ask-company" data-toggle="list" href="#list-askcompany" role="tab" aria-controls="company">For Company</a> 
+		    </div>
+		  </div>
+		</div>
+		<br>
+		<div class="row">
+		  <div class="col-12">
+		    <div class="tab-content" id="nav-tabContent">
+		      <div class="tab-pane fade" id="list-askcompany" role="tabpanel" aria-labelledby="list-ask-company">
+		      	<!-- start accordion -->
+		      	<div class="accordion" id="accordionExample">
+					<div class="card">
+					    <div class="card-header" id="headingCompanyOne">
+					      <h2 class="mb-0">
+					        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseCompanyOne" aria-expanded="true" aria-controls="collapseCompanyOne">
+					          What is LeisureBonus voucher?
+					        </button>
+					      </h2>
+					    </div>
+
+					    <div id="collapseCompanyOne" class="collapse show" aria-labelledby="headingCompanyOne" data-parent="#accordionExample">
+					      <div class="card-body">
+					       A LeisureBonus voucher is a gift that companies will offer to their employees automaticcaly our to your clients or partners and it can be used for booking a flight. 
+							It makes a perfect gift for any occasion and can be received and gifted instantly.
+					      </div>
+					    </div>
+					  </div>
+					  
+					</div>
+					<div class="accordion" id="accordionExample">
+					<div class="card">
+					    <div class="card-header" id="headingCompanyTwo">
+					      <h2 class="mb-0">
+					        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseCompanyTwo" aria-expanded="true" aria-controls="collapseCompanyTwo">
+					          Do I need to pay any fee?
+					        </button>
+					      </h2>
+					    </div>
+
+					    <div id="collapseCompanyTwo" class="collapse" aria-labelledby="headingCompanyTwo" data-parent="#accordionExample">
+					      <div class="card-body">
+					       Yes, to mantain our plataform we charge a fee for every voucher that we book for your employees, clients or partners.
+					      </div>
+					    </div>
+					  </div>
+					  
+					</div>
+					<div class="accordion" id="accordionExample">
+					<div class="card">
+					    <div class="card-header" id="headingCompanyThree">
+					      <h2 class="mb-0">
+					        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseCompanyTree" aria-expanded="true" aria-controls="collapseCompanyTree">
+					          How can I cancel or change our contract with LeisureBonus?
+					        </button>
+					      </h2>
+					    </div>
+
+					    <div id="collapseCompanyTree" class="collapse" aria-labelledby="headingCompanyThree" data-parent="#accordionExample">
+					      <div class="card-body">
+					       The company just need to contact us for both ways, we will make sure that your experience with was a great improvement for your company and if you want to change your LeisureBonus plan we can help you to chosse which one suits you best.
+					      </div>
+					    </div>
+					  </div>
+					  
+					</div>
+					<div class="accordion" id="accordionExample">
+					<div class="card">
+					    <div class="card-header" id="headingCompanyFour">
+					      <h2 class="mb-0">
+					        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseCompanyFour" aria-expanded="true" aria-controls="collapseCompanyFour">
+					          Does my partners or clients need to have an account to receive their voucher?
+					        </button>
+					      </h2>
+					    </div>
+
+					    <div id="collapseCompanyFour" class="collapse" aria-labelledby="headingCompanyFour" data-parent="#accordionExample">
+					      <div class="card-body">
+					       No. If you want to offer vouchers to your partners or clients, you just need to contact us and we will put the vouchers into one of your Human Resources employee account.
+					      </div>
+					    </div>
+					  </div>
+					  
+					</div>
+					<div class="accordion" id="accordionExample">
+					<div class="card">
+					    <div class="card-header" id="headingCompanyFive">
+					      <h2 class="mb-0">
+					        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseCompanyFive" aria-expanded="true" aria-controls="collapseCompanyFive">
+					          When do I need to pay the invoice?
+					        </button>
+					      </h2>
+					    </div>
+
+					    <div id="collapseCompanyFive" class="collapse" aria-labelledby="headingCompanyFive" data-parent="#accordionExample">
+					      <div class="card-body">
+					       We will send an invoice at begining of each month with all details (who won vouchers, who are registered and how much do you need to pay).
+							After you pay the invoice we will book all flight vouchers that your employees had won.
+					      </div>
+					    </div>
+					  </div>
+					  
+					</div>
+				<!-- end accordion -->
+
+		      </div>
+
+		      <div class="tab-pane fade show active" id="list-askcostumer" role="tabpanel" aria-labelledby="list-ask-costumer">
+		      	<!-- start accordion -->
+		      	<div class="accordion" id="accordionExample">
+					  <div class="card">
+					    <div class="card-header" id="headingOne">
+					      <h2 class="mb-0">
+					        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+					          Creating an Account
+					        </button>
+					      </h2>
+					    </div>
+
+					    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+					      <div class="card-body">
+					      	<p>
+					        <span>To create an account:</span>
+		 					</p>
+		 					<ol>
+		 						<li>
+		                           <span>Head to the LeisureBonus website and click on 'Register' in the top right corner.</span>
+		                       </li>
+		                       <li>
+		                           <span>Enter the information required for your company then click 'Continue'. For most companies, this will be a corporate email or employee ID.</span>
+		                        </li>
+		                        <li>
+		                           <span>Complete the rest of the required information and then 'Create Account'.</span>
+		                        </li>
+		                    </ol>
+		                     <p>
+					        <span>Please remember that LeisureBonus is only available for corporate users, you will need a CODE which is provided for your company.</span>
+		 					</p>
+		            		
+					      </div>
+					    </div>
+					  </div>
+					  <div class="card">
+					    <div class="card-header" id="headingTwo">
+					      <h2 class="mb-0">
+					        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+					          Reset your Password
+					        </button>
+					      </h2>
+					    </div>
+					    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+					      <div class="card-body">
+					        <p>
+					        <span>If you can't remember your password you can always request a reset from the login page:</span>
+		 					</p>
+		 
+		                    <ol>
+		 						<li>
+		                           <span>Head to the login page and enter your email.</span>
+		                       </li>
+		                        <li>
+		                           <span>On the password page select 'Forgot your password?' from the options underneath.</span>
+		                       </li>
+		                        <li>
+		                           <span>Enter the email linked to your LeisureBonus account and you'll then receive an email with a link to reset your password.</span>
+		                       </li>
+		 					</ol>
+		 					<p>
+		                		<span>Remember your password must be at least 8 characters with at least one uppercase letter, one lowercase letter and either numbers or symbols.</span>
+		                	</p>
+					      </div>
+					    </div>
+					  </div>
+					  <div class="card">
+					    <div class="card-header" id="headingThree">
+					      <h2 class="mb-0">
+					        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+					          How will I receive my voucher?
+					        </button>
+					      </h2>
+					    </div>
+					    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+					      <div class="card-body">
+					        The recipient will receive an email with a link to a LeisureBonus page in order to see their voucher. You can download a printable PDF and use it to book your flight.
+		               
+					      </div>
+					    </div>
+					  </div>
+					  <div class="card">
+					    <div class="card-header" id="headingFour">
+					      <h2 class="mb-0">
+					        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+					          Can I customise the voucher?
+					        </button>
+					      </h2>
+					    </div>
+					    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+					      <div class="card-body">
+					        No. Your voucher will be costumised for your company.
+					      </div>
+					    </div>
+					  </div>
+					  <div class="card">
+					    <div class="card-header" id="headingFive">
+					      <h2 class="mb-0">
+					        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+					          How long does it take to get my voucher?
+					        </button>
+					      </h2>
+					    </div>
+					    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+					      <div class="card-body">
+					        After we send an email with the winer, the winer will have to wait about 2 to 8 days. We will book your voucher and post it into your account.
+					      </div>
+					    </div>
+					  </div>
+					  <div class="card">
+					    <div class="card-header" id="headingSix">
+					      <h2 class="mb-0">
+					        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+					          How long is a voucher valid for?
+					        </button>
+					      </h2>
+					    </div>
+					    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+					      <div class="card-body">
+					        It depends on which airline company. You need to contact the airline to get that information.
+					      </div>
+					    </div>
+					  </div>
+					  <div class="card">
+					    <div class="card-header" id="headingSeven">
+					      <h2 class="mb-0">
+					        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+					          Do I need to pay any fee?
+					        </button>
+					      </h2>
+					    </div>
+					    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
+					      <div class="card-body">
+					        No. The costumer registered on our plataform doens't need to pay any fee. Costumer's company will support all fees we charge.
+					      </div>
+					    </div>
+					  </div>
+					  <div class="card">
+					    <div class="card-header" id="headingHeight">
+					      <h2 class="mb-0">
+					        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseHeight" aria-expanded="false" aria-controls="collapseHeight">
+					          Why my account doesn't exist?
+					        </button>
+					      </h2>
+					    </div>
+					    <div id="collapseHeight" class="collapse" aria-labelledby="headingHeight" data-parent="#accordionExample">
+					      <div class="card-body">
+					        <p>If you have created an account in LeisureBonus plataform and you can access it, there are few reasons for that:</p>
+							<ol>
+		 						<li>
+		                           <span>You forgot your username or your password.</span>
+		                       </li>
+		                       <li>
+		                           <span>Your company might have canceled contract with our plataform.</span>
+		                       </li>
+		                   	</ol>
+
+					      </div>
+					    </div>
+					  </div>
+					</div>
+				<!-- end accordion -->
+
+		      </div>
+		    </div>
+		</div>
+		</div>
+	</div>
+</section>
+	
+
+{% endblock %}

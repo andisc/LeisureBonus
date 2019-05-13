@@ -1,0 +1,276 @@
+{% extends 'Base.html' %}
+{% load static %}
+
+{% block title %} Home Page {% endblock %}
+
+
+{% block content %}
+<div class="container-relative">
+  <img src="{% static 'images/image2.jpg' %}" class="bg-imagerelative">
+
+  <div class="container-fluid text-block" >
+          <div class="row text-center justify-content-center section-intro">
+            <div class="col-12 col-md-10 col-lg-8">
+            	
+              <h1 class="display-3">One membership.<br>
+				Hundreds of travels</h1>
+              <span class="lead">A benefit offered through your company that gives you
+				opportunities to travel.</span>
+
+            </div>
+            <!--end of col-->
+          </div>
+          <!--end of row-->
+          <div class="container">
+          	<form method="post" action="{% url 'refercompany' %}">
+              	{% csrf_token %}
+          		<div class="row justify-content-center">
+			    	<div class="col-12 col-md-6 align-self-center" >
+			    		<input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Suggest your company name" id="companyname" name="companyname">
+			    	</div>
+			    	<div class="col-8 col-md-3 align-self-center">
+			    	<button class="buttonSuggestion" type="submit">Refer my company</button>
+			    	</div>
+		  		</div>
+		  </form>
+          
+          </div>
+        </div>
+</div>
+<br>
+<hr class="style-two">
+	
+<section>
+	<div class="container">
+	<div class="text-center">
+    	<h2>Why does companies choose LeisureBonus?</h2>
+	</div>
+	<br>
+	<div class="row">
+		<div class="container-15p">
+		Most of the companies choose LeisureBonus to give employees benefits in order to reward them for their work. You can see some of the benefits that employees and the company can get if they are connected with Leisure Bonus.
+		</div>
+	
+	</div>
+</div>
+</section>
+	<br>
+	<div class="container-cards">
+      <div class="card-deck">
+		  <div class="card">
+		  	<div style="text-align: center"> 
+		    	<img src="{% static 'images/boostcreativity.png' %}" class="card-img-top" alt="...">
+			</div>
+		    <div class="card-body">
+		      <h5 class="card-title">Boost Creativity & Enhance Productivity</h5>
+		      <p class="text-muted">Travel is a big relief from stress for your employees. Some time away from work will help to relax them and re-energize them.</p>
+		    </div>
+		  </div>
+		  <div class="card">
+		  	<div style="text-align: center"> 
+		    	<img src="{% static 'images/dedicationandloyalty.png' %}" class="card-img-top" alt="...">
+			</div>
+		    <div class="card-body">
+		      <h5 class="card-title">Dedication & Loyalty</h5>
+		      <p class="text-muted">If your employees are happy, they would become more dedicated and loyal to the company.</p>
+		    </div>
+		  </div>
+		  <div class="card">
+		  	<div style="text-align: center"> 
+		    	<img src="{% static 'images/increasebenefits.png' %}" class="card-img-top" alt="...">
+		    </div>
+		    <div class="card-body">
+		      <h5 class="card-title">Attract Talent and increase your benefits package</h5>
+		      <p class="text-muted">A generous employee benefits package can be an excellent way to recruit and keep the talents.</p>
+		    </div>
+		  </div>
+		</div>
+		<br>
+		<div class="card-deck">
+		  <div class="card">
+		  	<div style="text-align: center"> 
+		    	<img src="{% static 'images/employeesappreciated.png' %}" class="card-img-top" alt="...">
+		    </div>
+		    <div class="card-body">
+		      <h5 class="card-title">Employees Feel Appreciated</h5>
+		      <p class="text-muted">Travel incentive comes with experiences that remain with employees even after the trip is over.</p>
+		    </div>
+		  </div>
+		  <div class="card">
+		  	<div style="text-align: center"> 
+		    	<img src="{% static 'images/officeculture.png' %}" class="card-img-top" alt="...">
+		    </div>
+		    <div class="card-body">
+		      <h5 class="card-title">Office culture</h5>
+		      <p class="text-muted">Create an office culture atmosphere that encourages breaks, time off, and vacations.</p>
+		    </div>
+		  </div>
+		  <div class="card">
+		  	<div style="text-align: center"> 
+		    	<img src="{% static 'images/betterimage.png' %}" class="card-img-top" alt="...">
+		    </div>
+		    <div class="card-body">
+		      <h5 class="card-title">Better Positive Image for the Company</h5>
+		      <p class="text-muted">Your employees are your brand ambassadors. They would help to build a positive image about your company.</p>
+		    </div>
+		  </div>
+		</div>
+	</div>
+
+	
+<br>	
+
+<section class="bg-gray-100">
+	<div class="container">
+		<br>
+        <div class="text-center pb-lg-4">
+          <h2 class="mb-5">What we would like to offer you</h2>
+          <div class="row">
+		    <div class="col-md-6" style="text-align: left;">
+		    	<br>
+		      	✔ Flights from more than 100 airlines<br>
+				✔ Departures from where you want<br>
+				✔ Online vouchers<br>
+				✔ Loved by thousands of gift recipients each month<br>
+			<br>
+			<p class="text-dark">
+          By combining the simplicity of a gift card for flights, LeisureBonus becomes an personal and valued benefit. Every month we will riffle off and book flight vouchers and give them to your employees. Whatever the occasion, a flight voucher is the perfect getaway surprise. Together we create new memories.
+      		</p>
+		    </div>
+		    <div class="col-md-6">
+		      	<div class="row mt-4 mt-md-0">
+
+						<div class="col-7 pl-5 pr-2 mb-3">
+							<img class="border-radius-3 wow fadeInLeft" data-wow-duration="0.8s" data-wow-delay="0s" src="{% static 'images/01.jpeg' %}" width="100%" alt="" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0s; animation-name: fadeInLeft;">
+						</div>
+						<div class="col-5 align-self-end pl-2 mb-3">
+							<img class="border-radius-3 wow fadeInDown" data-wow-duration="0.8s" data-wow-delay="0.2s" src="{% static 'images/02.jpeg' %}" width="100%"  alt="" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.2s; animation-name: fadeInDown;">
+						</div>
+						<div class="col-5 offset-1">
+							<img class="border-radius-3 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s" src="{% static 'images/05.jpeg' %}" width="100%"  alt="" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.4s; animation-name: fadeInUp;">
+						</div>
+						<div class="col-5 px-2 mb-3">
+							<img class="border-radius-3 wow fadeInRight" data-wow-duration="0.8s" data-wow-delay="0.6s" src="{% static 'images/04.jpeg' %}" width="100%"  alt="" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.6s; animation-name: fadeInRight;">
+						</div>
+					</div>
+		    </div>
+		  </div>
+		  <div class="row">
+			
+        </div>
+        <br>
+      </div>
+</section>
+<br>
+<section>
+	<div class="container">
+		<div class="containerGraphic">
+			<div class="row">
+	          	<div class="col-lg-5 col-md-12">
+	              	<div class="card">
+		                <div class="card-body">
+		                    <canvas id="chDonut1"></canvas>
+		                </div>
+		            </div>
+	          	</div>
+	          	<div class="col-lg-7 col-md-12 ml-auto">
+	              <br>
+		            <h2>Why should you offer travel bonus to your employees?</h2>
+		        	<br>
+					About 65% of workers use their vacations to travel and discover new sites.
+					That is why the best privilege that can be offered is to give them as a benefit of their work the opportunity to travel.
+	          	</div>
+	          	<br>
+	      </div>
+	    </div>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+		<script src="{% static 'js/chart.js' %}"></script>
+
+	</div>
+</section>
+<br>
+<hr class="style-two">
+<br>
+<section>
+	<div class="container">
+		<h2>What are you waiting for?</h2>
+		<br>
+		Take your employees to one of this place and let them relax and enjoy their holidays.
+	</div>
+</section>
+<br>
+<div class="bd-example">
+  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'images/image5.jpeg' %}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>First slide label</h5>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/image6.jpeg' %}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Second slide label</h5>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/image7.jpeg' %}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Third slide label</h5>
+          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/image8.jpeg' %}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>The world is a book</h5>
+          <p>The world is a book and those who do not travel read only one page.</p>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+<br>
+
+
+
+<hr class="style-two">
+<div class="containerBecomePartner">
+	<div class="text-center">
+		<h2>Want to become a LeisureBonus partner?</h2>
+	</div>
+	<div class="">
+		Benefit from new corporate customers.
+		<br>
+		We partner with airlines and accommodation companies, send us a message to become our partner.
+		<br>
+		<br>
+	</div>
+
+	<button class="buttonBecomePartner" href="a" >Become a partner</button>
+	<br>
+
+</div>
+
+{% endblock %}
