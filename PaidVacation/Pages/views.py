@@ -74,7 +74,7 @@ def cookiespolicy_view(request):
 
 def choosemybonus_view(request):
     user_agent = get_user_agent(request)
-    return render(request, "Accounts/ChooseMyBonus.html", {"is_mobile": user_agent.is_mobile})
+    return render(request, "Accounts/choosemybonus.html", {"is_mobile": user_agent.is_mobile})
 
 def myhistory_view(request):
     if request.user.is_authenticated == False:
@@ -91,7 +91,7 @@ def myhistory_view(request):
         user_company = ''
 
     employee_vouchers = Vouchers.objects.filter(idemployee = request.user.id, idcodecompany = user_company)
-    return render(request, "Accounts/MyHistory.html", {"is_mobile": user_agent.is_mobile, 'employee_vouchers' : employee_vouchers})
+    return render(request, "Accounts/myhistory.html", {"is_mobile": user_agent.is_mobile, 'employee_vouchers' : employee_vouchers})
 
 
 def personalprofile_view(request):
@@ -168,7 +168,7 @@ def generateauomaticwinners_view(request):
             newwiner.save()
 
 
-    return HttpResponseRedirect('/MyAccount/GenerateWinners/')
+    return HttpResponseRedirect('/MyAccount/generatewinners/')
 
 
 
