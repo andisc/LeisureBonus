@@ -59,7 +59,7 @@ APPLICATION_ROOT = os.path.realpath(os.path.dirname(__file__))
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(APPLICATION_ROOT, '../Pages/Templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'Pages/Templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
