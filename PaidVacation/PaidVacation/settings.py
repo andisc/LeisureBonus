@@ -53,10 +53,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'PaidVacation.urls'
 
+APPLICATION_ROOT = os.path.realpath(os.path.dirname(__file__))
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(APPLICATION_ROOT, 'Templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
