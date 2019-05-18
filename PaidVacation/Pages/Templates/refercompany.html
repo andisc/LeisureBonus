@@ -13,8 +13,9 @@
 
      <link rel="stylesheet" href="{% static 'css/Main.css' %}">
      <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' type='image/x-icon' %}">
 
-    <title>{% block title %}Hello, world! {% endblock %}</title>
+    <title>{% block title %}Refer your company | LeisureBonus{% endblock %}</title>
   </head>
   <body>
     
@@ -42,6 +43,7 @@
               <div class="col-12 col-md-5">
                   <div class="containerReferCompanyright">
                   <br>
+                  {% if sentReference == False %}
                     <form method="POST" action="{% url 'refernewcompany' %}"> 
                         
                       {% csrf_token %}
@@ -91,8 +93,30 @@
 
                         <br>
 
-                        <button class="buttonBecomePartner" href="a" >Send Reference</button>
+                        <button class="buttonBecomePartner" >Send Reference</button>
                     </form>
+                    {% else %}
+                      <div class="row justify-content-center">
+                        <img src="{% static 'images/sentsuccessfully.png' %}" id="SentSuccess" width="100px" height="100px" style="z-index: 100;">
+                      </div>
+                      <div class="row justify-content-center">
+                          <h3>Thank you for your contact</h3>
+                      </div>
+                      <div class="row justify-content-center">
+                          <b>Your message was received.</b>
+                      </div>
+                      <div class="row justify-content-center">
+                          We will evaluate your request and we will contact your company.
+                      </div>
+                      <br>
+                      <hr class="style-two">
+                      <div class="row justify-content-center">
+                          <a href="{% url 'home' %}">Go back to home page</a>
+                      </div>
+
+                      <hr class="style-two">
+                      <br>
+                    {% endif %}
                    </div>
                    <br><br><br>
               </div>
@@ -103,11 +127,11 @@
 
 
     <br>
-    <footer class="bg-gray text-light pt-5 pb-5" >
+    <footer class="bg-gray text-light pt-5 pb-5"  >
         <div class="container" >
           <div class="row">
             <div class="col-12 col-md-3">
-              <img alt="Image" src="% static 'images/leisurebonus.png' %}" class="mb-4">
+              <img src="{% static 'images/leisurebonusgrey.png' %}" class="mb-4 logolinkfooter">
               <p class="text-muted">
                 © 2019 Leisure Bonus
               </p>
@@ -147,6 +171,9 @@
                     </li>
                     <li>
                       <a class="FooterLink" href="{% url 'privacypolicy' %}">Privacy Policy</a>
+                    </li>
+                    <li>
+                      <a class="FooterLink" href="{% url 'cookiespolicy' %}">Cookies Policy</a>
                     </li>
                   </ul>
                 </div>

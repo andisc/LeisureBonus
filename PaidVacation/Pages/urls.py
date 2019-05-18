@@ -29,6 +29,8 @@ urlpatterns = [
     path('MyAccount/GenerateWinners/', views.generatewinners_view, name='generatewinners_view'),
     path('MyAccount/GenerateAutomaticWinners/', views.generateauomaticwinners_view, name='generateauomaticwinners_view'),
     path('MyAccount/VouchersConfiguration/', views.vouchersconfiguration_view, name='vouchersconfiguration_view'),
+    path('MyAccount/SettingsConfiguration/', views.settingsconfiguration_view, name='settingsconfiguration_view'),
+    path('MyAccount/SettingsConfiguration/DeleteAccount', views.settingsdeleteaccount_view, name='settingsdeleteaccount_view'),
 ]
 
 

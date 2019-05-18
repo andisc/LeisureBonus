@@ -14,6 +14,8 @@ class UserProfile(models.Model):
     phone = models.DecimalField(decimal_places=0, max_digits=10, blank=True, null=True)
     favoriteairline = models.CharField(max_length=25, blank=True, null=True)
     favoritecountry = models.CharField(max_length=25, blank=True, null=True)
+    emailnotification = models.BooleanField(default=True)
+    phonenotification = models.BooleanField(default=False)
     createddate = models.DateTimeField(auto_now_add=True)
     modifiedddate = models.DateTimeField(auto_now=True)
     class Meta:
@@ -44,11 +46,15 @@ class ReferencedCompanies(models.Model):
     myrole = models.CharField(max_length=100)
     department = models.CharField(max_length=100)
     phonenumber = models.DecimalField(decimal_places=0, max_digits=9)
+    read = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
     createddate = models.DateTimeField(auto_now_add=True)
     modifiedddate = models.DateTimeField(auto_now=True)
     class Meta:
         verbose_name_plural = "ReferencedCompanies"
+
+    def __str__(self):
+        return f'{self.company}'
 
 
 class Companies(models.Model):
@@ -92,8 +98,6 @@ class Winners(models.Model):
 class Vouchers(models.Model):
     idvoucher = models.AutoField(primary_key=True)
     idcodewinner = models.OneToOneField(Winners, to_field='idwinner', on_delete=models.CASCADE)
-    idcodecompany = models.ForeignKey(Companies, to_field='idcode', on_delete=models.CASCADE)
-    idemployee = models.ForeignKey(User, on_delete=models.CASCADE)
     voucherlocation = models.FileField(upload_to='documents/')
     mntvoucher = models.DecimalField(decimal_places=2, max_digits=9)
     currency = models.CharField(max_length=1)
@@ -107,6 +111,14 @@ class Vouchers(models.Model):
     class Meta:
         verbose_name_plural = "Vouchers"
 
-
+class DeletedAccounts(models.Model):
+    iddeletedaccount = models.AutoField(primary_key=True)
+    motive = models.CharField(max_length=100)
+    othermotivedesc = models.CharField(max_length=255, blank=True)
+    read = models.BooleanField(default=False)
+    createddate = models.DateTimeField(auto_now_add=True)
+    modifiedddate = models.DateTimeField(auto_now=True)
+    class Meta:
+        verbose_name_plural = "DeletedAccounts"
 
     

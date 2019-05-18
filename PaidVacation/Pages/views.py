@@ -5,7 +5,7 @@ from django.contrib import auth
 from django.http import HttpResponse, Http404, HttpResponseRedirect, HttpResponseNotFound
 from django import forms
 from .forms import UserRegistrationForm
-from .forms import ReferCompanyForm, newCompanyForm, newVoucherForm, ContactUsForm, newWinnerForm
+from .forms import ReferCompanyForm, newCompanyForm, newVoucherForm, ContactUsForm, newWinnerForm, newDeletedAccountsForm
 from .models import Companies, UserProfile, Vouchers, Winners
 from django_user_agents.utils import get_user_agent
 from django.views.generic.edit import CreateView
@@ -73,6 +73,9 @@ def cookiespolicy_view(request):
 
 
 def choosemybonus_view(request):
+    if request.user.is_authenticated == False:
+        return HttpResponseRedirect('/')
+
     user_agent = get_user_agent(request)
     return render(request, "Accounts/choosemybonus.html", {"is_mobile": user_agent.is_mobile})
 
@@ -83,14 +86,17 @@ def myhistory_view(request):
     user_agent = get_user_agent(request)
 
     user_company = UserProfile.objects.filter(user = request.user).values_list('company', flat=True)
-    print (user_company)
+
     
     if user_company.count() > 0:
         user_company = (user_company[0])
     else:
         user_company = ''
 
-    employee_vouchers = Vouchers.objects.filter(idemployee = request.user.id, idcodecompany = user_company)
+    idwinner = Winners.objects.filter(idemployee = request.user, idcodecompany = user_company).values_list('idwinner', flat=True)
+
+    employee_vouchers = Vouchers.objects.filter(idcodewinner__in = idwinner)
+
     return render(request, "Accounts/myhistory.html", {"is_mobile": user_agent.is_mobile, 'employee_vouchers' : employee_vouchers})
 
 
@@ -122,6 +128,37 @@ def adminconfiguration_view(request):
     allcompanies = Companies.objects.all()
 
     return render(request, "Accounts/adminconfiguration.html", {"is_mobile": user_agent.is_mobile, 'form' : form, 'allcompanies' : allcompanies})
+
+
+def settingsconfiguration_view(request):
+    if request.user.is_authenticated == False:
+        return HttpResponseRedirect('/')
+
+    user_agent = get_user_agent(request)
+
+    emailnotification = UserProfile.objects.filter(user = request.user).values_list('emailnotification', flat=True)[0]
+    phonenotification = UserProfile.objects.filter(user = request.user).values_list('phonenotification', flat=True)[0]
+
+    form = UserRegistrationForm(initial={'emailnotification': emailnotification, 'phonenotification': phonenotification} )
+    formDeleteAccount = newDeletedAccountsForm(request.POST or None )
+
+    return render(request, "Accounts/settingsconfiguration.html", {"is_mobile": user_agent.is_mobile, "form" : form, "formDeleteAccount" : formDeleteAccount})
+
+
+def settingsdeleteaccount_view(request):
+    if request.user.is_authenticated == False:
+        return HttpResponseRedirect('/')
+
+    formDeleteAccount = newDeletedAccountsForm(request.POST or None )
+
+    if request.method == 'POST':
+        if formDeleteAccount.is_valid():
+            formDeleteAccount.save()
+            user = User.objects.get(username=request.user)
+            if user is not None:
+                user.delete()
+
+    return logout_view(request) #chama a view de logout
 
 
 def generatewinners_view(request):
@@ -184,16 +221,20 @@ def vouchersconfiguration_view(request):
 def refercompany_view(request):
     companyname = request.POST.get('companyname', '')
     form = ReferCompanyForm(initial={'company': companyname})
+    sentReference = False
 
-    return render(request, "refercompany.html", {'form' : form})
+    return render(request, "refercompany.html", {'form' : form, 'sentReference' : sentReference})
 
 
 def refernewcompany_view(request):
     form = ReferCompanyForm(request.POST or None )
+    sentReference = False
+
     if form.is_valid():
        form.save()
+       sentReference = True
 
-    return render(request, "refercompany.html", {'form' : form})
+    return render(request, "refercompany.html", {'form' : form, 'sentReference' : sentReference})
 
 
 

@@ -1,5 +1,5 @@
 from django import forms
-from .models import ReferencedCompanies, Companies ,Vouchers, MessagesContacts, Winners
+from .models import ReferencedCompanies, Companies ,Vouchers, MessagesContacts, Winners, DeletedAccounts
 import datetime, calendar
 
 
@@ -62,12 +62,12 @@ VOUCHER_STATE_CHOICES = [
 ]
 
 AIRLINE_COMPANY_CHOICES = [
-    (u'images/TAPLogo.png', u'Tap'),
-    (u'images/EasyjetLogo.png', u'Easyjet'),
-    (u'images/RyanairLogo.png', u'Rynair'),
-    (u'images/EmiratesLogo.png', u'Emirates'),
-    (u'images/BritishAirwaysLogo.png', u'BritishAirways'),
-    (u'images/LufthansaLogo.png', u'Lufthansa'),
+    (u'aircompanies/TAPLogo.png', u'Tap'),
+    (u'aircompanies/EasyjetLogo.png', u'Easyjet'),
+    (u'aircompanies/RyanairLogo.png', u'Rynair'),
+    (u'aircompanies/EmiratesLogo.png', u'Emirates'),
+    (u'aircompanies/BritishAirwaysLogo.png', u'BritishAirways'),
+    (u'aircompanies/LufthansaLogo.png', u'Lufthansa'),
        
 ]
 
@@ -86,6 +86,14 @@ SEXGENDER_CHOICES = [
 GENERATEVOUCHERSOURCE_CHOICES = [
     (u'manual', u'Manual'),
     (u'automatic', u'Automatic'),
+]
+
+DELETEDACCOUNT_CHOICES=[
+    ('I have safety concerns.','I have safety concerns.'),
+    ('I have privacy concerns.','I have privacy concerns.'),
+    ('I don’t find it useful.','I don’t find it useful.'),
+    ('I don’t understand how to use it.','I don’t understand how to use it.'),
+    ('Other','Other')
 ]
 
 class UserRegistrationForm(forms.Form):
@@ -153,6 +161,16 @@ class UserRegistrationForm(forms.Form):
         label = '',
         widget=forms.NumberInput(attrs={'placeholder': "Phone", 'class': 'form-control'}),
     )
+    emailnotification = forms.BooleanField(
+        required = True,
+        label = "Email",
+        widget=forms.CheckboxInput(attrs={'placeholder': "Email", 'class': 'form-check-label'}),
+    )
+    phonenotification = forms.BooleanField(
+        required = True,
+        label = "Text messages",
+        widget=forms.CheckboxInput(attrs={'placeholder': "Text messages", 'class': 'form-check-label'}),
+    )
 
 
 class ContactUsForm(forms.ModelForm):
@@ -213,7 +231,7 @@ class newWinnerForm(forms.ModelForm):
 class newVoucherForm(forms.ModelForm):
     class Meta:
         model = Vouchers
-        fields = ['idcodewinner', 'idcodecompany', 'idemployee', 'voucherlocation', 'mntvoucher', 'currency', 'title', 'description', 'state', 'airlinecompany', 'active']
+        fields = ['idcodewinner', 'voucherlocation', 'mntvoucher', 'currency', 'title', 'description', 'state', 'airlinecompany', 'active']
         widgets = {
             #'idcodecompany' : forms.ModelChoiceField(queryset=Companies.objects.all(), attrs={'name': "a"}),
             #'idemployee' : forms.TextInput(attrs={'placeholder': "ID Employee", 'class': 'textBoxStyleBorder'}),
@@ -226,6 +244,19 @@ class newVoucherForm(forms.ModelForm):
             'airlinecompany' : forms.Select(choices=AIRLINE_COMPANY_CHOICES, attrs={'class': "form-control"}),
             'active' : forms.CheckboxInput(attrs={'placeholder': "Active2", 'class': 'form-check-label'}),
         }
+
+
+class newDeletedAccountsForm(forms.ModelForm):
+    class Meta:
+        model = DeletedAccounts
+        fields = ['motive', 'othermotivedesc']
+        widgets = {
+            #'idemployee' : forms.TextInput(attrs={'placeholder': "Id employee", 'class': 'form-control', 'size': '20px'}),
+            #'idcodecompany' : forms.TextInput(attrs={'placeholder': "Company Name", 'class': 'form-control'}),
+            'motive' : forms.RadioSelect(choices=DELETEDACCOUNT_CHOICES, attrs={'class': "chooseradio"}),
+            'othermotivedesc' : forms.Textarea(attrs={'placeholder': "Enter your message", "rows": 5, 'class': 'form-control'}),
+        }
+
 
     #def __init__(self, user, *args, **kwargs):
     #    super(newVoucherForm, self).__init__(*args, **kwargs)

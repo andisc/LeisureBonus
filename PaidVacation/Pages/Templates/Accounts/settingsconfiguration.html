@@ -1,0 +1,113 @@
+{% extends 'Accounts/myaccount.html' %}
+{% load static %}
+
+{% block contentMyAccount %}
+
+<script>
+function myFunction() {
+  var f1 = document.getElementById("firstDeleteContainer");
+  var f2 = document.getElementById("secondDeleteContainer");
+    
+  f1.style.display = "none";
+  f2.style.display = "block";
+  
+}
+</script>
+
+<section>
+	<div class="container">
+		<div class="row">
+			<h3>Personal Information</h3>
+			<p> Basic information, like name and personal contacts, this will help us to personalize your account.</p>
+		</div>
+	</div>
+</section>
+
+
+<section class="mb-4">
+	<form>
+		<div class="container-perfil">
+			<div class="container-perfil-top p-3"><h4>Account support</h4></div>
+			<div class="container-perfil-down">
+				<p>We may need to send you messages regarding your account, your trips, legal notifications, security and privacy matters, and customer support requests. For your security you cannot disable email notifications and we may contact you by phone or other means if needed.</p>
+				<p>
+					{{ form.emailnotification }} {{ form.emailnotification.label }}
+				</p>
+				<p>
+					{{ form.phonenotification }} {{ form.phonenotification.label }}
+				</p>
+			</div>
+		</div>
+		<button class="buttonSettings">Save</button>
+	</form>
+</section>
+
+<section class="mb-4">
+	<div class="container-perfil">
+		<div class="container-perfil-top p-3"><h4>Payment methods</h4></div>
+		<div class="container-perfil-down">
+			<button class="buttonSettings" >Add payment methods</a>
+		</div>
+	</div>
+</section>
+
+<section class="mb-4">
+	<div class="container-perfil">
+		<div class="container-perfil-top p-3"><h4>Delete Account</h4></div>
+		<div class="container-perfil-down" id="firstDeleteContainer">
+			<button class="buttonSettings" onclick="myFunction()">Delete my account</button>
+		</div>
+		<div class="container-perfil-down" id="secondDeleteContainer" style="display: none">
+			<form method="POST" action="{% url 'settingsdeleteaccount_view' %}">
+			{% csrf_token %}
+			<div class="row">
+		        <div class="col-12 col-md-7">
+		          <h5>
+		            Tell us why you’re deleting your account
+		          </h5>
+		          {{ formDeleteAccount.motive }}
+		          <p>Care to tell us more?</p>
+		          {{ formDeleteAccount.othermotivedesc }}
+		          <br>
+		            <h5>
+		              What's going to happen
+		            </h5>
+		            <ul class="space-4">
+		              <li>
+		                Your account and all your profile will be deleted.
+		              </li>
+		              <li>
+		                If you have any voucher which you haven't used yet, it will be also deleted.
+		              </li>
+		              <li>
+		                After deleting your account, if you want to create a new account you need to get a new CODE from your company.
+		              </li>
+		            </ul>
+		       </div>
+
+		        <div class="col-12 col-md-5">
+		          <h5>
+		            Alternatives to deleting
+		          </h5>
+
+		          <h6>
+		            Change notification preferences
+		          </h6>
+		          <p>
+		            Are we sending you too much email? Change your notification preferences.
+		          </p>
+		        </div>
+		      </div>
+		      <button type="submit"  class="buttonSettings">Delete my account</button>
+		  	</form>
+		  </div>
+
+		
+	</div>
+</section>
+
+
+
+
+
+{% endblock %}
