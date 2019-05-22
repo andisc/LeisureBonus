@@ -6,11 +6,13 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect, HttpRespons
 from django import forms
 from .forms import UserRegistrationForm
 from .forms import ReferCompanyForm, newCompanyForm, newVoucherForm, ContactUsForm, newWinnerForm, newDeletedAccountsForm
-from .models import Companies, UserProfile, Vouchers, Winners
+from .models import Companies, UserProfile, Vouchers, Winners, CountryAirlineCompany
 from django_user_agents.utils import get_user_agent
 from django.views.generic.edit import CreateView
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
+from django.views.generic.base import TemplateView
+from django.http import JsonResponse
 import random
 
 
@@ -211,7 +213,11 @@ def generateauomaticwinners_view(request):
 
 def vouchersconfiguration_view(request):
     user_agent = get_user_agent(request)
-    formVoucher = newVoucherForm(request.POST or None )
+
+    n_winners = Winners.objects.exclude(state = "Completed").values_list('idwinner', flat=True)
+    print(n_winners)
+
+    formVoucher = newVoucherForm(initial={'idcodewinner' : 0})
 
 
     return render(request, "Accounts/vouchersconfiguration.html", {"is_mobile": user_agent.is_mobile, 'formVoucher': formVoucher})
@@ -315,6 +321,8 @@ def uploadvoucher_view(request):
     text_error = ''
     saveresult = False
     print ('entra')
+
+    
     formVoucher = newVoucherForm(request.POST, request.FILES)
     if request.method == 'POST' and request.FILES['voucherlocation']:
         
@@ -346,6 +354,25 @@ def downloadvoucher_view(request):
     response['Content-Disposition'] = 'attachment; filename=filename'
     return response
 
+
+class HomePageView(TemplateView):
+    template_name = 'Accounts/choosemybonus.html'
+
+    def get_context_data(self, **kwargs):
+        return {'message': 'Hello World!'}
+
+
+def choosecountry_view(request):
+    country = request.GET.get('country', None)
+    print('aquii.....')
+
+    data = {
+        "countryairline" : list(CountryAirlineCompany.objects.filter(countrycode=country).values_list('airlinecompany', flat=True))
+        #"employees":[{"firstName":"John", "lastName":"Doe"}]
+    }
+    print(data)
+
+    return JsonResponse(data, safe=False)
 
     #if request.method == 'POST':
     #    form = UserLoginForm(request.POST)

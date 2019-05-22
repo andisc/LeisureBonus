@@ -3,6 +3,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import handler404
 from . import views
+from Pages.views import HomePageView
+
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -30,7 +32,8 @@ urlpatterns = [
     path('MyAccount/GenerateAutomaticWinners/', views.generateauomaticwinners_view, name='generateauomaticwinners_view'),
     path('MyAccount/VouchersConfiguration/', views.vouchersconfiguration_view, name='vouchersconfiguration_view'),
     path('MyAccount/SettingsConfiguration/', views.settingsconfiguration_view, name='settingsconfiguration_view'),
-    path('MyAccount/SettingsConfiguration/DeleteAccount', views.settingsdeleteaccount_view, name='settingsdeleteaccount_view'),
+    path('MyAccount/SettingsConfiguration/DeleteAccount/', views.settingsdeleteaccount_view, name='settingsdeleteaccount_view'),
+    path('ajax/choosecountry/', views.choosecountry_view, name='choosecountry'),
 ]
 
 

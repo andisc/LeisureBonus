@@ -121,4 +121,17 @@ class DeletedAccounts(models.Model):
     class Meta:
         verbose_name_plural = "DeletedAccounts"
 
+
+class CountryAirlineCompany(models.Model):
+    countrycode = models.CharField(max_length=2)
+    countrydescription = models.CharField(max_length=20)
+    airlinecompany = models.CharField(max_length=30)
+    active = models.BooleanField(default=True)
+    createddate = models.DateTimeField(auto_now_add=True)
+    modifiedddate = models.DateTimeField(auto_now=True)
+    class Meta:
+        verbose_name_plural = "CountryAirlineCompany"
+
+    def __str__(self):
+        return f'{self.countrycode}' + ' ' + f'{self.airlinecompany}'
     

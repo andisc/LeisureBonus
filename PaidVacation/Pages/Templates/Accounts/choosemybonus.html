@@ -1,6 +1,8 @@
 {% extends 'Accounts/myaccount.html' %}
 {% load static %}
 
+{% block title %}Choose your bonus | LeisureBonus{% endblock %}
+
 {% block contentMyAccount %}
 
 
@@ -24,6 +26,52 @@
 <script src="{% static 'js/appsweetalert.js' %}"></script> 
 
 
+    <!-- Javascript for map -->
+    <link rel="stylesheet" media="all" href="{% static 'map/jquery-jvectormap.css' %}"/> 
+  <script src="{% static 'map/jquery-1.8.2.js' %}"></script> 
+  <script src="{% static 'map/jquery-jvectormap.js' %}"></script> 
+  <script src="{% static 'map/jquery-mousewheel.js' %}"></script> 
+
+  <script src="{% static 'map/jvectormap.js' %}"></script>
+
+  <script src="{% static 'map/abstract-element.js' %}"></script>
+  <script src="{% static 'map/abstract-canvas-element.js' %}"></script>
+  <script src="{% static 'map/abstract-shape-element.js' %}"></script>
+
+  <script src="{% static 'map/svg-element.js' %}"></script>
+  <script src="{% static 'map/svg-group-element.js' %}"></script>
+  <script src="{% static 'map/svg-canvas-element.js' %}"></script>
+  <script src="{% static 'map/svg-shape-element.js' %}"></script>
+  <script src="{% static 'map/svg-path-element.js' %}"></script>
+  <script src="{% static 'map/svg-circle-element.js' %}"></script>
+  <script src="{% static 'map/svg-image-element.js' %}"></script>
+  <script src="{% static 'map/svg-text-element.js' %}"></script>
+
+  <script src="{% static 'map/vml-element.js' %}"></script>
+  <script src="{% static 'map/vml-group-element.js' %}"></script>
+  <script src="{% static 'map/vml-canvas-element.js' %}"></script>
+  <script src="{% static 'map/vml-shape-element.js' %}"></script>
+  <script src="{% static 'map/vml-path-element.js' %}"></script>
+  <script src="{% static 'map/vml-circle-element.js' %}"></script>
+  <script src="{% static 'map/vml-image-element.js' %}"></script>
+
+  <script src="{% static 'map/map-object.js' %}"></script>
+  <script src="{% static 'map/region.js' %}"></script>
+  <script src="{% static 'map/marker.js' %}"></script>
+
+  <script src="{% static 'map/vector-canvas.js' %}"></script>
+  <script src="{% static 'map/simple-scale.js' %}"></script>
+  <script src="{% static 'map/ordinal-scale.js' %}"></script>
+  <script src="{% static 'map/numeric-scale.js' %}"></script>
+  <script src="{% static 'map/color-scale.js' %}"></script>
+  <script src="{% static 'map/legend.js' %}"></script>
+  <script src="{% static 'map/data-series.js' %}"></script>
+  <script src="{% static 'map/proj.js' %}"></script>
+  <script src="{% static 'map/map.js' %}"></script>
+
+  <script src="{% static 'map/jquery-jvectormap-world-mill-en.js' %}"></script>
+  <script src="{% static 'map/jquery-country.js' %}"></script> 
+
 <div class="modal fade" id="change_password" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -46,13 +94,20 @@
 	<div class="container">
 		<div class="row" style="height: 300px">
 			<div id="map1" style="width: 100%; height: 100%"></div>
+			<button id="focus-single">Focus on Australia</button>
 		</div>
 	</div>
+	<br>
+	<label id="selectedcountry">....</label>
+	${data.countryairline}
+	
 	<br>
 	<div class="textMyAccount">Please choose one of the choices bellow</div>
 	<br>
   	<div class="container">
-	  <div class="row">
+	  <div class="row" id="div1">
+	  	
+	  		<!--
 		    <div class="col">
 		    	<input type="radio" class="chooseairliner" name="size" id="size_1" onClick="choose()" value="small" checked />
 				 <label class="labelchooseairliner"  for="size_1"><img src="{% static 'aircompanies/TapLogo.png' %}" width="100px" height="100px"></label>
@@ -79,6 +134,7 @@
 		    </div>
 		    <div class="col">col</div>
 		    <div class="col">col</div>
+			-->
 		</div>
 	</div>
 

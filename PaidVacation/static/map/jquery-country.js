@@ -1,3 +1,70 @@
+
+
+
+
+
+function myFunction(code) {
+  
+  /*alert("" + code)*/
+  document.getElementById("selectedcountry").textContent = code;
+  
+
+  var country = code;
+
+      $.ajax({
+        url: '/ajax/choosecountry/',
+        data: {
+          'country': country
+        },
+        dataType: 'json',
+        success: function (data) {
+            
+          var myNode = document.getElementById("div1");
+          while (myNode.firstChild) {
+              myNode.removeChild(myNode.firstChild);
+          }
+
+          var element = document.getElementById("div1");
+          
+          for(count in data.countryairline)
+          {
+              
+              /*alert(data.countryairline[i]);*/
+              var newCol = document.createElement("div");
+              newCol.setAttribute("class", "col-6 col-md-2");
+
+              var x = document.createElement("input");
+              x.setAttribute("type", "radio");
+              x.setAttribute("name", "size");
+              x.setAttribute("id", "size_" + count);
+              x.className = "chooseairliner";
+              x.setAttribute("onClick", "choose()");
+              newCol.appendChild(x);
+
+              var label = document.createElement("label");
+              label.className = "labelchooseairliner";
+              label.setAttribute("for", "size_" + count);
+
+
+              var image = document.createElement("img");
+              image.src =  "/static/aircompanies/" + data.countryairline[count] + "Logo.png";
+              image.setAttribute("width", "100px");
+              image.setAttribute("height", "100px");
+              label.appendChild(image);
+
+              newCol.appendChild(label);
+
+              
+              element.appendChild(newCol);
+
+
+          }
+          
+          
+        }
+      });
+}
+
 jQuery.noConflict();
     jQuery(function(){
       var $ = jQuery;
@@ -17,11 +84,17 @@ jQuery.noConflict();
       $('#map1').vectorMap({
         map: 'world_mill_en',
         panOnDrag: true,
+        backgroundColor: '#cccccc',
         focusOn: {
           x: 0.5,
           y: 0.5,
           scale: 2,
           animate: true
+        },
+        onRegionClick: function(event, code, region)
+        {
+          /*alert("" + name)*/
+          myFunction(code)
         },
         series: {
           regions: [{
