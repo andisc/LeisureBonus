@@ -14,33 +14,23 @@
 
 <section>
 	<div class="container-perfil">
-	<h4 class="p-3">Perfil</h4>
+	<div class="container-perfil-top p-3"><h4>Perfil</h4></div>
 		<div class="accordion" id="accordionExample">
-		  <div class="card">
-		    <div class="card-header" id="headingOne">
-		      <h2 class="mb-0">
-		        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="width: 100%;">
-		          <div class="row justify-content-start" style="text-align: left">
-				    <div class="col-3 col-md-3 perfil-text-title">FOTO</div>
-				    <div class="col-9 col-md-9 perfil-text-description">Add a picture to personalize your account</div>
-		          </div>
-		        </button>
-		      </h2>
-		    </div>
-
-		    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-		      <div class="card-body">
-		        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-		      </div>
-		    </div>
-		  </div>
+		  
 		  <div class="card">
 		    <div class="card-header" id="headingTwo">
 		      <h2 class="mb-0">
 		        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="width: 100%;">
 		          <div class="row" style="text-align: left">
 				    <div class="col-5 col-md-3 perfil-text-title">NAME</div>
-				    <div class="col-7 col-md-9 perfil-text">{{ first_name }} {{ last_name }}</div>
+				    <div class="col-6 col-md-8 perfil-text">{{ first_name }} {{ last_name }}</div>
+				    <div class="col-1 col-md-1 perfil-text">
+				    	{% if first_name|length > 0 %}
+					    	<img src="{% static 'images/correcticon.png' %}" class="InfoIcons">
+						{% else %}
+					    	<img src="{% static 'images/cautionicon.png' %}" class="InfoIcons">
+						{% endif %}
+					</div>
 		          </div>
 		        </button>
 		      </h2>
@@ -66,7 +56,14 @@
 		        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%;">
 		          <div class="row" style="text-align: left">
 				    <div class="col-5 col-md-3 perfil-text-title">BIRTHDAY</div>
-				    <div class="col-7 col-md-9 perfil-text">{{ birthday }} {{ birthdaymonth }} {{ birthdayyear }}</div>
+				    <div class="col-6 col-md-8 perfil-text">{{ birthday }} {{ birthdaymonth }} {{ birthdayyear }}</div>
+				    <div class="col-1 col-md-1 perfil-text">
+				    	{% if birthday > 0 %}
+					    	<img src="{% static 'images/correcticon.png' %}" class="InfoIcons">
+						{% else %}
+					    	<img src="{% static 'images/cautionicon.png' %}" class="InfoIcons">
+						{% endif %}
+					</div>
 		          </div>
 		        </button>
 		      </h2>
@@ -95,7 +92,14 @@
 		        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="width: 100%;">
 		          <div class="row" style="text-align: left">
 				    <div class="col-5 col-md-3 perfil-text-title">GENDER</div>
-				    <div class="col-7 col-md-9"> </div>
+				    <div class="col-6 col-md-8"> </div>
+				    <div class="col-1 col-md-1 perfil-text">
+				    	{% if form.sexgender|length > 0 %}
+					    	<img src="{% static 'images/correcticon.png' %}" class="InfoIcons">
+						{% else %}
+					    	<img src="{% static 'images/cautionicon.png' %}" class="InfoIcons">
+						{% endif %}
+					</div>
 		          </div>
 		        </button>
 		      </h2>
@@ -111,7 +115,7 @@
 		      </div>
 		      </div>
 		    </div>
-		    <div class="card">
+		  <div class="card">
 		    <div class="card-header" id="headingFive">
 		      <h2 class="mb-0">
 		        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="width: 100%;">
@@ -133,6 +137,36 @@
 		      </div>
 		      </div>
 		    </div>
+		    <div class="card">
+		    <div class="card-header" id="headingOne">
+		      <h2 class="mb-0">
+		        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="width: 100%;">
+		          <div class="row justify-content-start" style="text-align: left">
+				    <div class="col-3 col-md-3 perfil-text-title">WORK</div>
+				    <div class="col-8 col-md-8 perfil-text-description"></div>
+				    <div class="col-1 col-md-1 perfil-text">
+				    	{% if form.work|length > 0 %}
+					    	<img src="{% static 'images/correcticon.png' %}" class="InfoIcons">
+						{% else %}
+					    	<img src="{% static 'images/cautionicon.png' %}" class="InfoIcons">
+						{% endif %}
+					</div>
+		          </div>
+		        </button>
+		      </h2>
+		    </div>
+
+		    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+		      <div class="card-body">
+		        <div class="row mt-2 justify-content-start">
+		              <div class="col-8 col-md-4">
+		                  {{ form.work }}
+		                  <div class="text-danger">{{ form.work.errors.as_text }}</div>
+		              </div>
+		          </div>
+		      </div>
+		    </div>
+		  </div>
 		  </div>
 		</div>
 </div>
@@ -141,7 +175,7 @@
 <br>
 <section>
 	<div class="container-perfil">
-	<h4 class="p-3">Contact Information</h4>
+	<div class="container-perfil-top p-3"><h4>Contact Information</h4></div>
 		<div class="accordion" id="accordion2">
 		  <div class="card">
 		    <div class="card-header" id="headingOne">
@@ -149,7 +183,14 @@
 		        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#InfocollapseOne" aria-expanded="false" aria-controls="InfocollapseOne" style="width: 100%;">
 		          <div class="row justify-content-start" style="text-align: left">
 				    <div class="col-5 col-md-3 perfil-text-title">EMAIL</div>
-				    <div class="col-7 col-md-9 perfil-text-description">We contact you through this email</div>
+				    <div class="col-6 col-md-8 perfil-text-description">We contact you through this email</div>
+				    <div class="col-1 col-md-1 perfil-text">
+				    	{% if form.email|length > 0 %}
+					    	<img src="{% static 'images/correcticon.png' %}" class="InfoIcons">
+						{% else %}
+					    	<img src="{% static 'images/cautionicon.png' %}" class="InfoIcons">
+						{% endif %}
+					</div>
 		          </div>
 		        </button>
 		      </h2>
@@ -172,7 +213,14 @@
 		        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#InfocollapseTwo" aria-expanded="false" aria-controls="InfocollapseTwo" style="width: 100%;">
 		          <div class="row" style="text-align: left">
 				    <div class="col-5 col-md-3 perfil-text-title">PHONE</div>
-				    <div class="col-7 col-md-9 perfil-text-description">Add a phone number to help you mantaining your account secure</div>
+				    <div class="col-6 col-md-8 perfil-text-description">Add a phone number to help you mantaining your account secure</div>
+				    <div class="col-1 col-md-1 perfil-text">
+				    	{% if form.phone|length > 0 %}
+					    	<img src="{% static 'images/correcticon.png' %}" class="InfoIcons">
+						{% else %}
+					    	<img src="{% static 'images/cautionicon.png' %}" class="InfoIcons">
+						{% endif %}
+					</div>
 		          </div>
 		        </button>
 		      </h2>

@@ -3,7 +3,7 @@
 
 
 
-function myFunction(code) {
+function onCountryClick(code) {
   
   /*alert("" + code)*/
   document.getElementById("selectedcountry").textContent = code;
@@ -12,45 +12,105 @@ function myFunction(code) {
   var country = code;
 
       $.ajax({
-        url: '/ajax/choosecountry/',
+        url: "/ajax/choosecountry/",
         data: {
           'country': country
         },
         dataType: 'json',
         success: function (data) {
+          
             
-          var myNode = document.getElementById("div1");
+          /*alert("__"  );*/
+
+          /* Remove all childs */
+          var myNode = document.getElementById("PaginationContainer");
           while (myNode.firstChild) {
               myNode.removeChild(myNode.firstChild);
           }
 
-          var element = document.getElementById("div1");
+
+          var elementPagination = document.getElementById("PaginationContainer");
           
-          for(count in data.countryairline)
+          var i;
+          for (i=1; i<(Math.ceil(data.countryairline.length / 18)) +1; i++) { 
+            
+            var newrow = document.createElement("div");
+            newrow.setAttribute("id", "div_" + i);
+            newrow.setAttribute("class", "row");
+            newrow.setAttribute("data-page", i);
+            if(i > 1 )
+              newrow.style.display = "none";
+            elementPagination.appendChild(newrow);
+          }
+
+
+
+          var row_id = 1;
+          var row_id_aux = 0;
+          var count;
+          for(count=0; count < data.countryairline.length; count++)
           {
+            
+            row_id_aux = row_id_aux + 1; 
+            if(row_id_aux == 19)
+            {
+                row_id = row_id + 1;
+                row_id_aux = 1;
+            }
+
+            var element = document.getElementById("div_" + row_id);
               
+              
+
               /*alert(data.countryairline[i]);*/
               var newCol = document.createElement("div");
-              newCol.setAttribute("class", "col-6 col-md-2");
+              newCol.setAttribute("class", "col-6 col-sm-4 col-md-3 col-lg-2");
 
               var x = document.createElement("input");
               x.setAttribute("type", "radio");
               x.setAttribute("name", "size");
               x.setAttribute("id", "size_" + count);
               x.className = "chooseairliner";
-              x.setAttribute("onClick", "choose()");
+              x.setAttribute("onClick", "choose('"+ data.countryairline[count].airline +"', '" + country + "')");
               newCol.appendChild(x);
 
               var label = document.createElement("label");
-              label.className = "labelchooseairliner";
+              label.className = "labelchooseairliner p-1";
               label.setAttribute("for", "size_" + count);
 
 
               var image = document.createElement("img");
-              image.src =  "/static/aircompanies/" + data.countryairline[count] + "Logo.png";
+              image.src =  "/static/aircompanies/" + data.countryairline[count].airline + "Logo.png";
               image.setAttribute("width", "100px");
               image.setAttribute("height", "100px");
               label.appendChild(image);
+
+
+              var rankinglabel = document.createElement("span");
+
+              /*  */
+              if(data.countryairline[count].ranking > 8){
+                rankinglabel.setAttribute("class", "p-1 box-ranking box-ranking-color-gold");
+              }
+              else if (data.countryairline[count].ranking > 7 && data.countryairline[count].ranking <= 7.9){
+                rankinglabel.setAttribute("class", "p-1 box-ranking box-ranking-color-silver");
+              }
+              else{
+                rankinglabel.setAttribute("class", "p-1 box-ranking box-ranking-color-brown");
+              }
+
+              rankinglabel.textContent =  data.countryairline[count].ranking;
+
+              var rankinglabel2 = document.createElement("span");
+              rankinglabel2.setAttribute("class", "box-ranking-2");
+              rankinglabel2.textContent = "/10";
+
+              rankinglabel.appendChild(rankinglabel2);
+
+              /* Add childs inside a label */
+              label.appendChild(image);
+              label.appendChild(rankinglabel);
+
 
               newCol.appendChild(label);
 
@@ -59,6 +119,69 @@ function myFunction(code) {
 
 
           }
+
+
+          /* build pagination icons */
+          var rowpaginationicons = document.createElement("nav");
+          rowpaginationicons.setAttribute("class", "row justify-content-around mt-4");
+
+
+          var paginationcentered = document.createElement("div");
+          paginationcentered.setAttribute("class", "col-4 pagination");
+          paginationcentered.setAttribute("width", "100%");
+
+          var pagination = document.createElement("ul");
+          pagination.setAttribute("class", "pagination ");
+
+          var previouspage = document.createElement("li");
+          previouspage.setAttribute("data-page", "-");
+
+          var previouspage_link = document.createElement("a");
+          previouspage_link.setAttribute("class", "page-link");
+          previouspage_link.setAttribute("href", "#");
+          previouspage_link.setAttribute("onClick", "changepages('-')");
+          previouspage_link.textContent = "Previous";
+          previouspage.appendChild(previouspage_link);
+
+          pagination.appendChild(previouspage);
+
+          var j;
+          for (j=1; j<(Math.ceil(data.countryairline.length / 18)) +1; j++) { 
+            
+            var newpage = document.createElement("li");
+            newpage.setAttribute("data-page", j);
+
+            var newpage_link = document.createElement("a");
+            newpage_link.setAttribute("class", "page-link");
+            /*newpage_link.setAttribute("href", "#");*/
+            newpage_link.setAttribute("onClick", "changepages(" + j + ")");
+            newpage_link.textContent = j;
+            newpage.appendChild(newpage_link);
+            pagination.appendChild(newpage);
+          }
+
+
+          var nextpage = document.createElement("li");
+          nextpage.setAttribute("data-page", "+");
+
+          var nextpage_link = document.createElement("a");
+          nextpage_link.setAttribute("class", "page-link");
+          nextpage_link.setAttribute("href", "#");
+          nextpage_link.setAttribute("onClick", "changepages('+')");
+          nextpage_link.textContent = "Next";
+          nextpage.appendChild(nextpage_link);
+
+
+          
+          pagination.appendChild(nextpage);
+
+          paginationcentered.appendChild(pagination);
+
+          rowpaginationicons.appendChild(paginationcentered);
+
+          elementPagination.appendChild(rowpaginationicons);
+
+          
           
           
         }
@@ -70,10 +193,22 @@ jQuery.noConflict();
       var $ = jQuery;
 
       $('#focus-single').click(function(){
-        $('#map1').vectorMap('set', 'focus', {region: 'AU', animate: true});
+        $('#map1').vectorMap('set', 'focus', {region: 'DE', animate: true});
       });
       $('#focus-multiple').click(function(){
         $('#map1').vectorMap('set', 'focus', {regions: ['AU', 'JP'], animate: true});
+      });
+      $('#focus-multiple-europe').click(function(){
+        $('#map1').vectorMap('set', 'focus', {regions: ['PT', 'PL'], animate: true});
+      });
+      $('#focus-multiple-asia').click(function(){
+        $('#map1').vectorMap('set', 'focus', {regions: ['IR', 'JP'], animate: true});
+      });
+      $('#focus-multiple-africa').click(function(){
+        $('#map1').vectorMap('set', 'focus', {regions: ['DZ', 'ZA'], animate: true});
+      });
+      $('#focus-multiple-america').click(function(){
+        $('#map1').vectorMap('set', 'focus', {regions: ['US', 'CL'], animate: true});
       });
       $('#focus-coords').click(function(){
         $('#map1').vectorMap('set', 'focus', {scale: 7, lat: 35, lng: 33, animate: true});
@@ -91,10 +226,26 @@ jQuery.noConflict();
           scale: 2,
           animate: true
         },
+         markerStyle: {
+          initial: {
+            fill: '#4DAC26'
+          },
+          selected: {
+            fill: '#CA0020'
+          }
+        },
         onRegionClick: function(event, code, region)
         {
           /*alert("" + name)*/
-          myFunction(code)
+          onCountryClick(code)
+        },
+        onMarkerSelected: function(){
+          if (window.localStorage) {
+            window.localStorage.setItem(
+              'jvectormap-selected-markers',
+              JSON.stringify(map.getSelectedMarkers())
+            );
+          }
         },
         series: {
           regions: [{

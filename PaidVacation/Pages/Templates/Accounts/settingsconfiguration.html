@@ -14,7 +14,32 @@ function myFunction() {
   f2.style.display = "block";
   
 }
+
+
+function save() {
+
+	var var_emailnotification = document.getElementById("id_emailnotification").checked;
+	var var_phonenotification = document.getElementById("id_phonenotification").checked;
+
+    $.ajax({
+    	data: {
+          'var_emailnotification': var_emailnotification,
+          'var_phonenotification': var_phonenotification
+        },
+        dataType: 'json',
+        url: "/ajax/SavePersonalInformation/",
+        success : function(json) {
+        	var x = document.getElementById("saveresult");
+        	x.style.visibility = "visible";
+        	alert('alert')
+            
+        }
+    })
+
+};
+
 </script>
+
 
 <section>
 	<div class="container">
@@ -27,7 +52,8 @@ function myFunction() {
 
 
 <section class="mb-4">
-	<form>
+	<form method="POST" >
+		{% csrf_token %}
 		<div class="container-perfil">
 			<div class="container-perfil-top p-3"><h4>Account support</h4></div>
 			<div class="container-perfil-down">
@@ -40,7 +66,7 @@ function myFunction() {
 				</p>
 			</div>
 		</div>
-		<button class="buttonSettings">Save</button>
+		<button class="buttonSettings" onClick="save()" >Save</button><div id="saveresult" style="visibility:hidden">aaa</div>
 	</form>
 </section>
 
@@ -48,7 +74,23 @@ function myFunction() {
 	<div class="container-perfil">
 		<div class="container-perfil-top p-3"><h4>Payment methods</h4></div>
 		<div class="container-perfil-down">
-			<button class="buttonSettings" >Add payment methods</a>
+			<div class="container">
+				<div class="row mb-2">
+					<div>
+						<img src="{% static 'images/informationicon.png' %}" width="20px" height="20px">
+					</div>
+					<div class="col-11 col-md-11">
+					By saving a credit card, you agree to our Terms & Conditions, and if you use it to pay one of our plan, you authorize your credit card to be charged on a recurring basis until you cancel, which you can do at any time.
+					</div>
+					<div class="row">
+
+					</div>
+				</div>
+			</div>
+			<button class="buttonSettings" >Add payment methods</button>
+				<div class="alert alert-warning" role="alert">
+				  Your plan doesn't allow you to access to payments methods.
+				</div>
 		</div>
 	</div>
 </section>

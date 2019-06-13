@@ -7,7 +7,20 @@
 
 
 <script>
-	function choose() {
+	function choose(airline, country) {
+
+	var choicelegend = document.getElementById("choicelegend");
+
+	if (airline != "None" )
+	{
+		choicelegend.style.display = "block";
+		document.getElementById("favoriteairline").textContent = airline;
+		document.getElementById("countrychoice").textContent = country;
+	}
+	else{
+		choicelegend.style.display = "none";
+	}
+
     swal({
     	type: "success",
     	title: 'Your answer has been saved',
@@ -18,7 +31,66 @@
         showConfirmButton: !1
     });
 
+    $.ajax({
+        url: "/ajax/savechoice/",
+        data : { 'airline': airline, 'country': country},
+        success : function(json) {
+            console.log("requested access complete");
+        }
+    })
+
 };
+
+function changepages(i_parentLiPage) {
+
+	 // store pagination container so we only select it once
+    var $paginationContainer = $(".pagination-container"),
+        $pagination = $paginationContainer.find('.pagination ul');
+    // click event
+    $pagination.find("li a").on('click.pageChange',function(e){
+        e.preventDefault();
+        // get parent li's data-page attribute and current page
+    var parentLiPage = i_parentLiPage,
+    currentPage = parseInt( $(".pagination-container div[data-page]:visible").data('page') ),
+    numPages = $paginationContainer.find("div[data-page]").length;
+
+    // make sure they aren't clicking the current page
+    if ( parseInt(parentLiPage) !== parseInt(currentPage) ) {
+
+    // hide the current page
+    $paginationContainer.find("div[data-page]:visible").hide();
+    if ( parentLiPage === '+' ) {
+                // next page
+        $paginationContainer.find("div[data-page="+( currentPage+1>numPages ? numPages : currentPage+1 )+"]").show();
+    } else if ( parentLiPage === '-' ) {
+                // previous page
+        $paginationContainer.find("div[data-page="+( currentPage-1<1 ? 1 : currentPage-1 )+"]").show();
+    } else {
+        // specific page
+
+        $paginationContainer.find("div[data-page="+parseInt(parentLiPage)+"]").show();
+            }
+        }
+    });
+};
+
+function reloadAirlines() {
+
+	var favoriteairline = "{{user_favoriteairline}}";
+
+	var choicelegend = document.getElementById("choicelegend");
+
+	if (favoriteairline != "None" )
+	{
+		choicelegend.style.display = "display";
+	}
+	else{
+		choicelegend.style.display = "none";
+	}
+
+        onCountryClick('');
+    }
+ 	window.onload = reloadAirlines;
 </script>
 
 <script src="{% static 'js/sweetalert2.min.js' %}"></script> 
@@ -86,31 +158,69 @@
 </div>
 
 
-	<div class="titleMyAccount">Choose my bonus</div>
+	<h2>Choose my bonus</h2>
 	<br>
-	<div class="textMyAccount">We help you to choose the best airline company to fly with. Please select the country where you would like to travel</div>
+	<div>We help you to choose the best airline company to fly with. Please select the country where you would like to travel.</div>
 	<br>	
 	
 	<div class="container">
 		<div class="row" style="height: 300px">
-			<div id="map1" style="width: 100%; height: 100%"></div>
-			<button id="focus-single">Focus on Australia</button>
+			<div id="map1" class="map-container"></div>
 		</div>
+		<br>
 	</div>
 	<br>
-	<label id="selectedcountry">....</label>
+
+<section>
+	<div class="jumbotron-header__cta">
+	<div class="row">
+	<div class="col-md-3 jumbotron-header__cta-text-container">
+		<label id="focus-multiple-europe" class="cardContinents"><span class="textInsideContinentsImage">Europe</span><img src="{% static 'images/europeanImage.jpg' %}" class="continentsImage"></label>
+	</div>
+	<div class="col-md-3 jumbotron-header__cta-text-container">
+		<label id="focus-multiple-asia" class="cardContinents"><span class="textInsideContinentsImage">Asia</span><img src="{% static 'images/asiaImage.jpeg' %}" class="continentsImage"></label>
+	</div>
+	<div class="col-md-3 jumbotron-header__cta-text-container">
+		<label id="focus-multiple-africa" class="cardContinents"><span class="textInsideContinentsImage">Africa</span><img src="{% static 'images/africaImage.jpeg' %}" class="continentsImage"></label>
+	</div>
+	<div class="col-md-3 jumbotron-header__cta-text-container">
+		<label id="focus-multiple-america" class="cardContinents"><span class="textInsideContinentsImage">America</span><img src="{% static 'images/americaImage.jpg' %}" class="continentsImage"></label>
+	</div>
+	</div>
+	</div>
+</section>
 	
 	
-	<br>
-	<div class="textMyAccount">Please choose one of the choices bellow</div>
-	<br>
+<div class="container">
+	<div class="row">
+		<div class="col-12 col-md-6">
+			<h5>Please choose one of the choices bellow:</h5>
+			The following airlines operates in <label id="selectedcountry"></label>
+			<br>
+		</div>
+		<div class="col-12 col-md-6">
+			<div id="choicelegend" class="choice-legend">
+				<h5>Your preferences</h5>
+				<b>Your country choice is: <label id="countrychoice">{{user_favoritecountry}}</label></b>
+				<br>
+				<b>Your favorite airline is: <label id="favoriteairline">{{user_favoriteairline}}</label></b>
+			</div>
+		</div>
+	</div>
+</div>
   	<div class="container">
-	  <div class="row" id="div1">
+  	<div id="PaginationContainer" class="pagination-container" >
+	  <!--<div class="row" id="div1" data-page="1">
+
+
+
 	  	
-	  		<!--
+	  		
 		    <div class="col">
-		    	<input type="radio" class="chooseairliner" name="size" id="size_1" onClick="choose()" value="small" checked />
-				 <label class="labelchooseairliner"  for="size_1"><img src="{% static 'aircompanies/TapLogo.png' %}" width="100px" height="100px"></label>
+		    	<input type="radio" class="chooseairliner" name="size" id="size_1" onClick="choose()" value="small"  />
+				 <label class="labelchooseairliner p-1"  for="size_1"><img src="{% static 'aircompanies/TapLogo.png' %}" width="100px" height="100px">
+				 	<span class="p-1 box-ranking">7.0/<span style="font-size: 14px">10</span></span>
+				 	</label>
 		    </div>
 		    <div class="col">
 		    	<input type="radio" class="chooseairliner" name="size" id="size_2" onClick="choose()" value="small" />
@@ -134,10 +244,104 @@
 		    </div>
 		    <div class="col">col</div>
 		    <div class="col">col</div>
-			-->
+			
+
+			
+			   
+			   </div>
+			   <div data-page="2" style="display:none;">
+			      <p>Content for Div Number 2</p>
+			   </div>
+			   <div data-page="3" style="display:none;">
+			      <p>Content for Div Number 3</p>
+			   </div>
+			   <div data-page="4" style="display:none;">
+			      <p>Content for Div Number 4</p>
+			   </div>
+			   <div data-page="5" style="display:none;">
+			      <p>Content for Div Number 5</p>
+			   </div>
+
+			  
+
+			<div class="text-center">
+				<div class="pagination pagination-centered">
+					<ul class="pagination">
+						<li class="page-item" data-page="-"><a class="page-link" onClick="changepages('-')" href="#">&lt;</a></li>
+						<li class="page-item" data-page="1"><a class="page-link" onClick="changepages(1)" href="#">1</a></li>
+						<li class="page-item" data-page="2"><a class="page-link" onClick="changepages(2)" href="#">2</a></li>
+						<li class="page-item" data-page="+"><a class="page-link" onClick="changepages('+')"href="#">&gt;</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+
+		
+			<div class="row justify-content-around">
+				<div class="col-4 pagination " width="100%">
+					<ul class="pagination ">
+						<li data-page="-"><a class="page-link" href="#" onclick="changepages('-')">Previous</a></li>
+						<li data-page="1"><a class="page-link" href="#" onclick="changepages(1)">1</a></li>
+						<li data-page="2"><a class="page-link" href="#" onclick="changepages(2)">2</a></li>
+						<li data-page="+"><a class="page-link" href="#" onclick="changepages('+')">Next</a></li>
+					</ul>
+				</div>
+			  </div>
+		-->
+		
+
+
 		</div>
 	</div>
-
+	<label>* Please note that if you choose an airline company which don't sell gift cards we will contact you to choose another airline. </label>
+<section>
+	<div class="container mt-4">
+		
+		<div class="ranking-legend">
+			<h5>Global Airline Rankings in 2019</h5>
+			<div class="row">
+				<span class="circle-legend box-ranking-color-gold ml-2 mr-2">*</span>Best airlines with more than 8.0 score ranking
+			</div>
+			<div class="row">
+				<span class="circle-legend box-ranking-color-silver ml-2 mr-2">*</span>Airlines with score ranking between 7.0 and 8.0
+			</div>
+			<div class="row">
+				<span class="circle-legend box-ranking-color-brown ml-2 mr-2">*</span>Airlines with less than 6.0 score ranking
+			</div>
+			
+		</div>
+	
+	</div>
+	
+</section>
+	<section id="about-score" class="about-score">
+	<h4>How is the Score calculated?</h4>
+	<div class="about-score__item">
+	<span class="about-score__item-icon about-score__item-icon--performance"></span>
+	<div class="about-score__item-content">
+	<h5 class="about-score__item-heading">On-Time Performance</h5>
+	<p class="about-score__item-description">We gather arrival and departure statistics for every plane and calculate how many of an airline's flights are on schedule.</p>
+	</div>
+	</div>
+	<div class="about-score__item">
+	<span class="about-score__item-icon about-score__item-icon--quality"></span>
+	<div class="about-score__item-content">
+	<h5 class="about-score__item-heading">Service Quality</h5>
+	<p class="about-score__item-description">We surveyed thousands of air passengers around the world and asked them to rate the food, comfort and crew of their most used airlines.</p>
+	</div>
+	</div>
+	<div class="about-score__item">
+	<span class="about-score__item-icon about-score__item-icon--claim-processing"></span>
+	<div class="about-score__item-content">
+	<h5 class="about-score__item-heading">Claim Processing</h5>
+	<p class="about-score__item-description">This relates to how efficiently airlines handle compensation claims, including how long it takes them to pay out.</p>
+	</div>
+	</div>
+	<div class="about-score__link-wrapper">
+	<p class="about-score__link">To learn more about the AirHelp Score methodology click <a href="https://static.airhelp.com/pdf/2019-airline-score/methodology_airhelp_score_2019__global_airline_rankings-en_us.pdf?ver=1557409112289" target="_blank" data-gtm="Body,clicked,ScoringDetails,ScoringDetails" title="Learn more about AirHelp Score">here</a>.</p>
+	</div>
+</section>
 
 
 {% endblock %}

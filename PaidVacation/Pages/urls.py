@@ -33,7 +33,9 @@ urlpatterns = [
     path('MyAccount/VouchersConfiguration/', views.vouchersconfiguration_view, name='vouchersconfiguration_view'),
     path('MyAccount/SettingsConfiguration/', views.settingsconfiguration_view, name='settingsconfiguration_view'),
     path('MyAccount/SettingsConfiguration/DeleteAccount/', views.settingsdeleteaccount_view, name='settingsdeleteaccount_view'),
+    path('ajax/SavePersonalInformation/', views.settingsconfigurationsave_view, name='settingsconfigurationsave_view'),
     path('ajax/choosecountry/', views.choosecountry_view, name='choosecountry'),
+    path('ajax/savechoice/', views.savechoice_view, name='savechoice'),
 ]
 
 

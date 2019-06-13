@@ -1,5 +1,5 @@
 from django import forms
-from .models import ReferencedCompanies, Companies ,Vouchers, MessagesContacts, Winners, DeletedAccounts
+from .models import ReferencedCompanies, Companies ,Vouchers, MessagesContacts, Winners, DeletedAccounts, FeedbackEmployees
 import datetime, calendar
 
 
@@ -156,18 +156,24 @@ class UserRegistrationForm(forms.Form):
         max_length = 1,
         widget=forms.Select(choices = SEXGENDER_CHOICES, attrs={'placeholder': "Sex gender", 'class': 'form-control'}),
     )
+    work = forms.CharField(
+        required = True,
+        label = 'Company name or job title',
+        max_length = 50,
+        widget=forms.TextInput(attrs={'placeholder': "Company name or job title", 'class': 'form-control'}),
+    )
     phone = forms.DecimalField(
         required = False,
         label = '',
         widget=forms.NumberInput(attrs={'placeholder': "Phone", 'class': 'form-control'}),
     )
     emailnotification = forms.BooleanField(
-        required = True,
+        required = False,
         label = "Email",
         widget=forms.CheckboxInput(attrs={'placeholder': "Email", 'class': 'form-check-label'}),
     )
     phonenotification = forms.BooleanField(
-        required = True,
+        required = False,
         label = "Text messages",
         widget=forms.CheckboxInput(attrs={'placeholder': "Text messages", 'class': 'form-check-label'}),
     )
@@ -257,6 +263,17 @@ class newDeletedAccountsForm(forms.ModelForm):
             'othermotivedesc' : forms.Textarea(attrs={'placeholder': "Enter your message", "rows": 5, 'class': 'form-control'}),
         }
 
+
+class newFeedbackEmployeesForm(forms.ModelForm):
+    class Meta:
+        model = FeedbackEmployees
+        fields = ['traveldestination', 'feedbackmessage']
+        widgets = {
+            #'idemployee' : forms.TextInput(attrs={'placeholder': "Id employee", 'class': 'form-control', 'size': '20px'}),
+            #'idcodecompany' : forms.TextInput(attrs={'placeholder': "Company Name", 'class': 'form-control'}),
+            'traveldestination' : forms.TextInput(attrs={'placeholder': "Travel destination", 'class': 'form-control'}),
+            'feedbackmessage' : forms.Textarea(attrs={'placeholder': "Enter your feedback", "rows": 5, 'class': 'form-control'}),
+        }
 
     #def __init__(self, user, *args, **kwargs):
     #    super(newVoucherForm, self).__init__(*args, **kwargs)

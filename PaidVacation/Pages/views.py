@@ -6,16 +6,22 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect, HttpRespons
 from django import forms
 from .forms import UserRegistrationForm
 from .forms import ReferCompanyForm, newCompanyForm, newVoucherForm, ContactUsForm, newWinnerForm, newDeletedAccountsForm
-from .models import Companies, UserProfile, Vouchers, Winners, CountryAirlineCompany
+from .models import Companies, UserProfile, Vouchers, Winners, CountryAirlineCompany, AirlineCompanies
 from django_user_agents.utils import get_user_agent
 from django.views.generic.edit import CreateView
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from django.views.generic.base import TemplateView
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 import random
 
 
+def to_python(value):
+    if value == 'true':
+        return True
+    else:
+        return False
 
 # Create your views here.
 
@@ -24,20 +30,24 @@ def error_404_view(request, exception):
 
 def home(request):
     user_agent = get_user_agent(request)
-    return render(request, "home.html", {"is_mobile": user_agent.is_mobile})
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
+    return render(request, "home.html", {"is_mobile": is_mobile})
 
 def howitworks(request):
     user_agent = get_user_agent(request)
-    return render(request, "howitworks.html", {"is_mobile": user_agent.is_mobile})
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
+    return render(request, "howitworks.html", {"is_mobile": is_mobile})
 
 def plansdetails_view(request):
     user_agent = get_user_agent(request)
-    return render(request, "plansdetails.html", {"is_mobile": user_agent.is_mobile})
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
+    return render(request, "plansdetails.html", {"is_mobile": is_mobile})
 
 
 def about(request):
     user_agent = get_user_agent(request)
-    return render(request, "about.html", {"is_mobile": user_agent.is_mobile})
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
+    return render(request, "about.html", {"is_mobile": is_mobile})
 
 
 def logout_view(request):
@@ -46,6 +56,7 @@ def logout_view(request):
 
 def contactus_view(request):
     user_agent = get_user_agent(request)
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
     form = ContactUsForm(request.POST or None )
     sendresult = False
 
@@ -54,38 +65,49 @@ def contactus_view(request):
        sendresult = True
        form = ContactUsForm()
 
-    return render(request, "contactus.html", {"is_mobile": user_agent.is_mobile, "form" : form, "sendresult": sendresult})
+    return render(request, "contactus.html", {"is_mobile": is_mobile, "form" : form, "sendresult": sendresult})
 
 
 def faq_view(request):
     user_agent = get_user_agent(request)
-    return render(request, "faq.html", {"is_mobile": user_agent.is_mobile})
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
+    return render(request, "faq.html", {"is_mobile": is_mobile})
 
 def termsconditions_view(request):
     user_agent = get_user_agent(request)
-    return render(request, "termsconditions.html", {"is_mobile": user_agent.is_mobile})
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
+    return render(request, "termsconditions.html", {"is_mobile": is_mobile})
 
 def privacypolicy_view(request):
     user_agent = get_user_agent(request)
-    return render(request, "privacypolicy.html", {"is_mobile": user_agent.is_mobile})
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
+    return render(request, "privacypolicy.html", {"is_mobile": is_mobile})
 
 def cookiespolicy_view(request):
     user_agent = get_user_agent(request)
-    return render(request, "cookiespolicy.html", {"is_mobile": user_agent.is_mobile})
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
+    return render(request, "cookiespolicy.html", {"is_mobile": is_mobile})
 
 
 def choosemybonus_view(request):
     if request.user.is_authenticated == False:
         return HttpResponseRedirect('/')
 
+    user_favoritecountry = UserProfile.objects.filter(user = request.user).values_list('favoritecountry', flat=True)[0]
+    user_favoriteairline = UserProfile.objects.filter(user = request.user).values_list('favoriteairline', flat=True)[0]
+    print(user_favoritecountry)
+    print(user_favoriteairline)
+
     user_agent = get_user_agent(request)
-    return render(request, "Accounts/choosemybonus.html", {"is_mobile": user_agent.is_mobile})
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
+    return render(request, "Accounts/choosemybonus.html", {"is_mobile": is_mobile, "user_favoritecountry":user_favoritecountry, "user_favoriteairline":user_favoriteairline })
 
 def myhistory_view(request):
     if request.user.is_authenticated == False:
         return HttpResponseRedirect('/')
 
     user_agent = get_user_agent(request)
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
 
     user_company = UserProfile.objects.filter(user = request.user).values_list('company', flat=True)
 
@@ -99,7 +121,7 @@ def myhistory_view(request):
 
     employee_vouchers = Vouchers.objects.filter(idcodewinner__in = idwinner)
 
-    return render(request, "Accounts/myhistory.html", {"is_mobile": user_agent.is_mobile, 'employee_vouchers' : employee_vouchers})
+    return render(request, "Accounts/myhistory.html", {"is_mobile": is_mobile, 'employee_vouchers' : employee_vouchers})
 
 
 def personalprofile_view(request):
@@ -107,6 +129,7 @@ def personalprofile_view(request):
         return HttpResponseRedirect('/')
 
     user_agent = get_user_agent(request)
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
     form = UserRegistrationForm(request.POST or None )
 
     birthday = UserProfile.objects.filter(user = request.user).values_list('birthday', flat=True)[0]
@@ -115,10 +138,12 @@ def personalprofile_view(request):
     first_name = request.user.first_name
     last_name = request.user.last_name
     email = request.user.email
+    phone = UserProfile.objects.filter(user = request.user).values_list('phone', flat=True)[0]
+    work = UserProfile.objects.filter(user = request.user).values_list('work', flat=True)[0]
 
-    form = UserRegistrationForm(initial={'firstname': first_name, 'lastname': last_name, 'birthday': birthday, 'birthdaymonth': birthdaymonth, 'birthdayyear': birthdayyear, 'email': email})
+    form = UserRegistrationForm(initial={'firstname': first_name, 'lastname': last_name, 'birthday': birthday, 'birthdaymonth': birthdaymonth, 'birthdayyear': birthdayyear, 'email': email, 'phone':phone, 'work':work})
 
-    return render(request, "Accounts/personalprofile.html", {"is_mobile": user_agent.is_mobile, 'form' : form, 'first_name': first_name, 'last_name': last_name, 'birthday': birthday, 'birthdaymonth': birthdaymonth, 'birthdayyear': birthdayyear})
+    return render(request, "Accounts/personalprofile.html", {"is_mobile": is_mobile, 'form' : form, 'first_name': first_name, 'last_name': last_name, 'birthday': birthday, 'birthdaymonth': birthdaymonth, 'birthdayyear': birthdayyear})
 
 
 def adminconfiguration_view(request):
@@ -126,10 +151,11 @@ def adminconfiguration_view(request):
         return HttpResponseRedirect('/')
 
     user_agent = get_user_agent(request)
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
     form = newCompanyForm(request.POST or None )
     allcompanies = Companies.objects.all()
 
-    return render(request, "Accounts/adminconfiguration.html", {"is_mobile": user_agent.is_mobile, 'form' : form, 'allcompanies' : allcompanies})
+    return render(request, "Accounts/adminconfiguration.html", {"is_mobile": is_mobile, 'form' : form, 'allcompanies' : allcompanies})
 
 
 def settingsconfiguration_view(request):
@@ -137,6 +163,7 @@ def settingsconfiguration_view(request):
         return HttpResponseRedirect('/')
 
     user_agent = get_user_agent(request)
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
 
     emailnotification = UserProfile.objects.filter(user = request.user).values_list('emailnotification', flat=True)[0]
     phonenotification = UserProfile.objects.filter(user = request.user).values_list('phonenotification', flat=True)[0]
@@ -144,7 +171,27 @@ def settingsconfiguration_view(request):
     form = UserRegistrationForm(initial={'emailnotification': emailnotification, 'phonenotification': phonenotification} )
     formDeleteAccount = newDeletedAccountsForm(request.POST or None )
 
-    return render(request, "Accounts/settingsconfiguration.html", {"is_mobile": user_agent.is_mobile, "form" : form, "formDeleteAccount" : formDeleteAccount})
+    return render(request, "Accounts/settingsconfiguration.html", {"is_mobile": is_mobile, "form" : form, "formDeleteAccount" : formDeleteAccount})
+
+
+def settingsconfigurationsave_view(request):
+    if request.user.is_authenticated == False:
+        return HttpResponseRedirect('/')
+    
+    emailnotification = request.GET.get('var_emailnotification', None)
+    phonenotification = request.GET.get('var_phonenotification', None)
+
+    user = UserProfile.objects.get(user = request.user)
+    user.emailnotification = to_python(emailnotification)
+    user.phonenotification = to_python(phonenotification)
+    user.save()
+
+    data = {
+        "result" : 'Result'
+    }
+
+    return JsonResponse(data, safe=False)
+    #return HttpResponseRedirect('/MyAccount/SettingsConfiguration/')
 
 
 def settingsdeleteaccount_view(request):
@@ -168,6 +215,7 @@ def generatewinners_view(request):
         return HttpResponseRedirect('/')
 
     user_agent = get_user_agent(request)
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
     formWinner = newWinnerForm(request.POST or None )
     allwinners = Winners.objects.all()
 
@@ -176,7 +224,7 @@ def generatewinners_view(request):
             formWinner.save()
 
 
-    return render(request, "Accounts/generatewinners.html", {"is_mobile": user_agent.is_mobile, "allwinners" : allwinners, "formWinner": formWinner})
+    return render(request, "Accounts/generatewinners.html", {"is_mobile": is_mobile, "allwinners" : allwinners, "formWinner": formWinner})
 
 
 def random_func(allusers):
@@ -213,6 +261,7 @@ def generateauomaticwinners_view(request):
 
 def vouchersconfiguration_view(request):
     user_agent = get_user_agent(request)
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
 
     n_winners = Winners.objects.exclude(state = "Completed").values_list('idwinner', flat=True)
     print(n_winners)
@@ -220,7 +269,7 @@ def vouchersconfiguration_view(request):
     formVoucher = newVoucherForm(initial={'idcodewinner' : 0})
 
 
-    return render(request, "Accounts/vouchersconfiguration.html", {"is_mobile": user_agent.is_mobile, 'formVoucher': formVoucher})
+    return render(request, "Accounts/vouchersconfiguration.html", {"is_mobile": is_mobile, 'formVoucher': formVoucher})
 
 
 
@@ -247,6 +296,8 @@ def refernewcompany_view(request):
 
 def register(request):
     user_agent = get_user_agent(request)
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
+
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
@@ -278,7 +329,7 @@ def register(request):
                 raise forms.ValidationError("This company don't exists or it is not active.")
     else:
         form = UserRegistrationForm()
-    return render(request, 'Accounts/register.html', {"is_mobile": user_agent.is_mobile, 'form' : form})
+    return render(request, 'Accounts/register.html', {"is_mobile": is_mobile, 'form' : form})
 
 
 def MyAccount_view(request):
@@ -301,6 +352,7 @@ def MyAccount_view(request):
  
 def createcompany_view(request):
     user_agent = get_user_agent(request)
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
     form = newCompanyForm(request.POST or None)
     formVoucher = newVoucherForm(request.POST or None )
     text_error = ''
@@ -313,17 +365,22 @@ def createcompany_view(request):
             saveresult = True
         else:
             text_error = form.errors.as_data()
-    return render(request, "Accounts/adminconfiguration.html", {"is_mobile": user_agent.is_mobile, 'form' : form, 'formVoucher': formVoucher, 'saveresult' : saveresult, 'text_error' : text_error, 'allcompanies' : allcompanies})
+    return render(request, "Accounts/adminconfiguration.html", {"is_mobile": is_mobile, 'form' : form, 'formVoucher': formVoucher, 'saveresult' : saveresult, 'text_error' : text_error, 'allcompanies' : allcompanies})
 
 
 def uploadvoucher_view(request):
     user_agent = get_user_agent(request)
+    is_mobile = user_agent.is_mobile or user_agent.is_tablet
     text_error = ''
     saveresult = False
     print ('entra')
 
     
     formVoucher = newVoucherForm(request.POST, request.FILES)
+
+    user = UserProfile.objects.get(user = request.user)
+    formVoucher.airlinecompany = user.favoriteairline 
+
     if request.method == 'POST' and request.FILES['voucherlocation']:
         
         myfile = request.FILES['voucherlocation']
@@ -341,8 +398,8 @@ def uploadvoucher_view(request):
             saveresult = True
         else:
             text_error = form.errors.as_data()
-        return render(request, 'Accounts/vouchersconfiguration.html', {"is_mobile": user_agent.is_mobile, 'formVoucher': formVoucher, 'saveresult' : saveresult, 'text_error' : text_error, })
-    return render(request, 'Accounts/vouchersconfiguration.html', {"is_mobile": user_agent.is_mobile, 'formVoucher': formVoucher, 'saveresult' : saveresult, 'text_error' : text_error, })
+        return render(request, 'Accounts/vouchersconfiguration.html', {"is_mobile": is_mobile, 'formVoucher': formVoucher, 'saveresult' : saveresult, 'text_error' : text_error, })
+    return render(request, 'Accounts/vouchersconfiguration.html', {"is_mobile": is_mobile, 'formVoucher': formVoucher, 'saveresult' : saveresult, 'text_error' : text_error, })
 
 
 def downloadvoucher_view(request):
@@ -362,17 +419,43 @@ class HomePageView(TemplateView):
         return {'message': 'Hello World!'}
 
 
+@csrf_exempt
 def choosecountry_view(request):
+   
     country = request.GET.get('country', None)
     print('aquii.....')
 
+    result = []
+    if country == "":
+        allcountrydata = CountryAirlineCompany.objects.select_related()
+    else:
+        allcountrydata = CountryAirlineCompany.objects.select_related().filter(countrycode=country)
+
+    for countryairline in allcountrydata:
+        result.append({'airline' : countryairline.airlinecompany.airlinecompany, 'ranking' : countryairline.airlinecompany.ranking})
+
+
     data = {
-        "countryairline" : list(CountryAirlineCompany.objects.filter(countrycode=country).values_list('airlinecompany', flat=True))
-        #"employees":[{"firstName":"John", "lastName":"Doe"}]
+        #"countryairline" : list(CountryAirlineCompany.objects.filter(countrycode=country).values_list('airlinecompany', flat=True)),
+        "countryairline" : result
     }
     print(data)
 
     return JsonResponse(data, safe=False)
+
+
+def savechoice_view(request):
+    airline = request.GET.get('airline', None)
+    country = request.GET.get('country', None)
+    print("entra : " + str(airline))
+
+    user = UserProfile.objects.get(user = request.user)
+    user.favoriteairline = str(airline)  # save user airline choice
+    user.favoritecountry = str(country)
+    user.save()
+
+    return JsonResponse("", safe=False)
+
 
     #if request.method == 'POST':
     #    form = UserLoginForm(request.POST)

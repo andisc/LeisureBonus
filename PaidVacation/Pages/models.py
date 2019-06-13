@@ -11,6 +11,7 @@ class UserProfile(models.Model):
     birthday = models.DecimalField(decimal_places=0, max_digits=2)
     birthdayyear = models.DecimalField(decimal_places=0, max_digits=4)
     sexgender = models.CharField(max_length=1, blank=True, null=True)
+    work = models.CharField(max_length=50, blank=True, null=True)
     phone = models.DecimalField(decimal_places=0, max_digits=10, blank=True, null=True)
     favoriteairline = models.CharField(max_length=25, blank=True, null=True)
     favoritecountry = models.CharField(max_length=25, blank=True, null=True)
@@ -122,10 +123,24 @@ class DeletedAccounts(models.Model):
         verbose_name_plural = "DeletedAccounts"
 
 
+class AirlineCompanies(models.Model):
+    airlinecompany = models.CharField(max_length=30, unique=True)
+    ranking = models.DecimalField(decimal_places=2, max_digits=4)
+    active = models.BooleanField(default=True)
+    createddate = models.DateTimeField(auto_now_add=True)
+    modifiedddate = models.DateTimeField(auto_now=True)
+    class Meta:
+        verbose_name_plural = "AirlineCompanies"
+
+    def __str__(self):
+        return f'{self.airlinecompany}' + ' - ' + f'{self.ranking}'
+
+
+
 class CountryAirlineCompany(models.Model):
     countrycode = models.CharField(max_length=2)
     countrydescription = models.CharField(max_length=20)
-    airlinecompany = models.CharField(max_length=30)
+    airlinecompany = models.ForeignKey(AirlineCompanies, to_field='airlinecompany', on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
     createddate = models.DateTimeField(auto_now_add=True)
     modifiedddate = models.DateTimeField(auto_now=True)
@@ -134,4 +149,18 @@ class CountryAirlineCompany(models.Model):
 
     def __str__(self):
         return f'{self.countrycode}' + ' ' + f'{self.airlinecompany}'
+
+
+class FeedbackEmployees(models.Model):
+    idemployee = models.ForeignKey(User, to_field='username', on_delete=models.CASCADE)
+    traveldestination = models.CharField(max_length=20)
+    feedbackmessage = models.CharField(max_length=255)
+    active = models.BooleanField(default=True)
+    createddate = models.DateTimeField(auto_now_add=True)
+    modifiedddate = models.DateTimeField(auto_now=True)
+    class Meta:
+        verbose_name_plural = "FeedbackEmployees"
+
+
+
     
