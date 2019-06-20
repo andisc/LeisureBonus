@@ -10,6 +10,9 @@
       	<div class="alert alert-warning alert-dismissible fade show" role="alert">
 		  <strong>Note:</strong> You haven't won any voucher yet. You will be the next winner!
 		</div>
+		<br>
+		<br>
+		<br>
 	{% else %}
 	
 		<div class="row">
@@ -82,6 +85,76 @@
 		{% endfor %}
 		</div>
 	{% endif %}
+<br>
+<br>
+<div>If you won any voucher and you can't access it, don't worry we are buying it for you.</div>
+<div class="text-muted">Vouchers have three states before you can access it.</div>
+<div class="mt-4">
+	<div class="row mb-2">
+		<div class="col-3 col-md-2 col-lg-1">
+			<img src="{% static 'images/newicon.png' %}" class="img-icon">
+		</div>
+		<div class="col-9 col-md-10 col-lg-11">
+			<div class="font-weight-bold">New </div>
+			<div class="text-muted">You won a new travel voucher</div>
+		</div>
+	</div>
+	<div class="row mb-2">
+		<div class="col-3 col-md-2 col-lg-1">
+			<img src="{% static 'images/inprogressicon.png' %}" class="img-icon">
+		</div>
+		<div class="col-9 col-md-10 col-lg-11">
+			<div class="font-weight-bold">In progress</div>
+			<div class="text-muted">The voucher is in progress to be aproved for your company</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 col-md-2 col-lg-1">
+			<img src="{% static 'images/completedicon.png' %}" class="img-icon">
+		</div>
+		<div class="col-9 col-md-10 col-lg-11">
+			<div class="font-weight-bold">Completed</div>
+			<div class="text-muted">You can access it and it's ready to use</div>
+		</div>
+	</div>
+</div>
+<br>
+<br>
+<section>
+	{% if sendfeedback == True %}
+        	<div class="alert alert-success" role="alert">
+  		  <b>Success:</b> Thank you for your time, your feedback has been recorded.
+  		</div>
+  	{% endif %}
+	<div class="container-feedback">
+		<form method="POST" action="{% url 'myhistory_view' %}">
+          {% csrf_token %}
+          	<div class="row mb-4">
+          		<div class="col">
+          			<h5>We love to hear your ideas!</h5>
+					To help us improve, we'd like to receive your feedback about your experience in LeisureBonus.
+				</div>
+          	</div>
+			<div class="row mb-3">
+				<div class="col">
+					{{ form.traveldestination }}
+                  <div class="errorField">{{ form.traveldestination.errors.as_text }}</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					{{ form.feedbackmessage }}
+                  <div class="errorField">{{ form.feedbackmessage.errors.as_text }}</div>
+				</div>
+			</div>
+			<div class="row justify-content-end">
+				<div class="col-6 col-md-5 col-lg-3 ">
+					<button type="submit" class="buttonBecomePartner" >Send feedback</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>
 
 
 {% endblock %}

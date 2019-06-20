@@ -15,7 +15,7 @@
 	{
 		choicelegend.style.display = "block";
 		document.getElementById("favoriteairline").textContent = airline;
-		document.getElementById("countrychoice").textContent = country;
+		document.getElementById("countrychoice").textContent = GetCountryName(country);
 	}
 	else{
 		choicelegend.style.display = "none";
@@ -77,6 +77,8 @@ function changepages(i_parentLiPage) {
 function reloadAirlines() {
 
 	var favoriteairline = "{{user_favoriteairline}}";
+
+	document.getElementById("countrychoice").textContent = GetCountryName("{{user_favoritecountry}}");
 
 	var choicelegend = document.getElementById("choicelegend");
 
@@ -143,6 +145,8 @@ function reloadAirlines() {
 
   <script src="{% static 'map/jquery-jvectormap-world-mill-en.js' %}"></script>
   <script src="{% static 'map/jquery-country.js' %}"></script> 
+  <script src="{% static 'map/return-country.js' %}"></script> 
+
 
 <div class="modal fade" id="change_password" role="dialog">
     <div class="modal-dialog modal-sm">
@@ -171,6 +175,8 @@ function reloadAirlines() {
 	</div>
 	<br>
 
+<h4>Explore a region on the map</h4>
+
 <section>
 	<div class="jumbotron-header__cta">
 	<div class="row">
@@ -192,15 +198,15 @@ function reloadAirlines() {
 	
 	
 <div class="container">
-	<div class="row">
+	<div class="row mt-5">
 		<div class="col-12 col-md-6">
-			<h5>Please choose one of the choices bellow:</h5>
+			<h4>Please choose one of the choices bellow:</h4>
 			The following airlines operates in <label id="selectedcountry"></label>
 			<br>
 		</div>
 		<div class="col-12 col-md-6">
 			<div id="choicelegend" class="choice-legend">
-				<h5>Your preferences</h5>
+				<h5>You already saved this preferences</h5>
 				<b>Your country choice is: <label id="countrychoice">{{user_favoritecountry}}</label></b>
 				<br>
 				<b>Your favorite airline is: <label id="favoriteairline">{{user_favoriteairline}}</label></b>

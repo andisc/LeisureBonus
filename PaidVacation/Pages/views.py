@@ -5,7 +5,7 @@ from django.contrib import auth
 from django.http import HttpResponse, Http404, HttpResponseRedirect, HttpResponseNotFound
 from django import forms
 from .forms import UserRegistrationForm
-from .forms import ReferCompanyForm, newCompanyForm, newVoucherForm, ContactUsForm, newWinnerForm, newDeletedAccountsForm
+from .forms import ReferCompanyForm, newCompanyForm, newVoucherForm, ContactUsForm, newWinnerForm, newDeletedAccountsForm, newFeedbackEmployeesForm
 from .models import Companies, UserProfile, Vouchers, Winners, CountryAirlineCompany, AirlineCompanies
 from django_user_agents.utils import get_user_agent
 from django.views.generic.edit import CreateView
@@ -108,6 +108,9 @@ def myhistory_view(request):
 
     user_agent = get_user_agent(request)
     is_mobile = user_agent.is_mobile or user_agent.is_tablet
+    sendfeedback = False
+
+    form = newFeedbackEmployeesForm(request.POST or None) 
 
     user_company = UserProfile.objects.filter(user = request.user).values_list('company', flat=True)
 
@@ -121,7 +124,15 @@ def myhistory_view(request):
 
     employee_vouchers = Vouchers.objects.filter(idcodewinner__in = idwinner)
 
-    return render(request, "Accounts/myhistory.html", {"is_mobile": is_mobile, 'employee_vouchers' : employee_vouchers})
+    # save feedback
+    if request.method == 'POST':
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.idemployee = request.user
+            post.save()
+            sendfeedback = True
+
+    return render(request, "Accounts/myhistory.html", {"is_mobile": is_mobile, 'employee_vouchers' : employee_vouchers, 'form' : form, 'sendfeedback' : sendfeedback})
 
 
 def personalprofile_view(request):

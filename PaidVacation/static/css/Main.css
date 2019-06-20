@@ -1320,6 +1320,13 @@ input.chooseairliner[type="radio"]:checked + label{
     
 }
 
+.container-feedback{
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    padding: 5px; 
+    background-color: #edefed;
+}
+
 .perfil-text-title{
   color: #5f6368;
   font-size: 14px;
@@ -1482,5 +1489,23 @@ input.chooseairliner[type="radio"]:checked + label{
     margin-bottom: 0;
     color: #2d3c4d;
 }
+
+.text-muted{
+    color: #869ab8;
+}
+
+
+.img-icon{
+    width: 50px;
+    height: 50px;
+}
+
+
+
+
+
+
+}
+
 
 

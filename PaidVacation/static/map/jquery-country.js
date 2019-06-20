@@ -6,7 +6,7 @@
 function onCountryClick(code) {
   
   /*alert("" + code)*/
-  document.getElementById("selectedcountry").textContent = code;
+  document.getElementById("selectedcountry").textContent = GetCountryName(code);
   
 
   var country = code;
