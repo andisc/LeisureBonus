@@ -127,7 +127,7 @@ function onCountryClick(code) {
 
 
           var paginationcentered = document.createElement("div");
-          paginationcentered.setAttribute("class", "col-4 pagination");
+          paginationcentered.setAttribute("class", "col-12 col-md-4 pagination");
           paginationcentered.setAttribute("width", "100%");
 
           var pagination = document.createElement("ul");

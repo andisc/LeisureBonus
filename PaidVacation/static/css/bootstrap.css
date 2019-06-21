@@ -669,6 +669,10 @@ img.bg-imagerelative {
     background: #f8f9fa !important;
 }
 
+.bg-gray-200 {
+    background-color: #f1f4f8!important;
+}
+
 .light-overlay, .dark-overlay, .gradient-overlay {
     position: relative;
     overflow: hidden;

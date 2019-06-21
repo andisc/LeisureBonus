@@ -5,12 +5,79 @@
 
 {% block contentMyAccount %}
 
+<script>
+	function changeprofile() {
+
+	var firstname_value = document.getElementById("id_firstname").value;
+	var lastname_value = document.getElementById("id_lastname").value;
+	var birthday_value = document.getElementById("id_birthday").value;
+	var birthdaymonth_value = document.getElementById("id_birthdaymonth").value;
+	var birthdayyear_value = document.getElementById("id_birthdayyear").value;
+	var sexgender_value = document.getElementById("id_sexgender").value;
+	var work_value = document.getElementById("id_work").value;
+	var email_value = document.getElementById("id_email").value;
+	var phone_value = document.getElementById("id_phone").value;
+
+
+    $.ajax({
+        url: "/ajax/changeprofile/",
+        data : { 'firstname_value': firstname_value, 'lastname_value': lastname_value, 
+        	'birthday_value': birthday_value, 'birthdaymonth_value': birthdaymonth_value,
+        	'birthdayyear_value':birthdayyear_value, 'sexgender_value': sexgender_value,
+        	'work_value': work_value, 'email_value': email_value, 'phone_value': phone_value
+    		},
+        success : function(json) {
+            var alertchangeprofile = document.getElementById("alertchangeprofile");
+
+			alertchangeprofile.style.display = "block";
+			
+        }
+    })
+
+};
+
+function changepassword() {
+
+		var newpassword_value = document.getElementById("newpassword").value;
+		var oldpassword_value = document.getElementById("oldpassword").value;
+
+		$.ajax({
+        url: "/ajax/changepassword/",
+        data : { 'newpassword_value': newpassword_value, 'oldpassword_value': oldpassword_value
+    		},
+        success : function(data) {
+        	var alertchangepassword = document.getElementById("alertchangepassword");
+        	var alertchangepassworderror = document.getElementById("alertchangepassworderror");
+        	alertchangepassword.style.display = "none";
+        	alertchangepassworderror.style.display = "none";
+            
+			if (data.resultchangepassword == true)
+			{
+				
+				alertchangepassword.style.display = "block";
+			}
+			else{
+				
+				alertchangepassworderror.style.display = "block";
+			}
+			
+        }
+    })
+
+	};
+
+</script>
+
 <section>
 	<div class="row">
 		<h3>Personal Information</h3>
 		<p> Basic information, like name and personal contacts, this will help us to personalize your account.</p>
 	</div>
 </section>
+
+<div id="alertchangeprofile" class="alert alert-success" role="alert" style="display: none">
+  	<b>Success:</b> Thank you for your time, your feedback has been recorded.
+</div>
 
 <section>
 	<div class="container-perfil">
@@ -128,12 +195,34 @@
 		    </div>
 		    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
 		      <div class="card-body">
+		      	<div class="row">
+		      		<div id="alertchangepassword" class="alert alert-success" role="alert" style="display: none">
+					  	<b>Password changed successfully!</b><br>
+					  	Your password has been changed.
+					</div>
+					<div id="alertchangepassworderror" class="alert alert-danger" role="alert" style="display: none">
+					  	<b>Please see below for error messages!</b> <br>
+					  	Your password doesn't match. Please enter the correct password.
+					</div>
+		      	</div>
 		        <div class="row mt-2 justify-content-start">
 		              <div class="col-8 col-md-4">
-		                  {{ form.password }}
-		                  <div class="text-danger">{{ form.password.errors.as_text }}</div>
+		                  <input type="password" id="oldpassword" name="oldpassword" class="form-control" placeholder="Your passord">
+		              </div>
+		              <div class="col-8 col-md-4">
+		                  <input type="password" id="newpassword" name="newpsw" class="form-control" placeholder="New passord">
 		              </div>
 		          </div>
+		          <div class="row">
+		          	<div class="col">
+		          		* Please note that after changing your password you will need log in again.
+		          	</div>
+		          </div>
+		          <div class="row justify-content-end">
+						<div class="col-6 col-md-5 col-lg-3 ">
+							<button type="submit" class="buttonBecomePartner" onClick="changepassword()" >Change your password</button>
+						</div>
+					</div>
 		      </div>
 		      </div>
 		    </div>
@@ -239,6 +328,11 @@
 		</div>
 </div>
 </section>
+<div class="row justify-content-end">
+	<div class="col-6 col-md-5 col-lg-3 ">
+		<button type="submit" class="buttonBecomePartner" onClick="changeprofile()" >Change Profile</button>
+	</div>
+</div>
 
 
 

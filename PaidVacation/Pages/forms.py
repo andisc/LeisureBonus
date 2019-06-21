@@ -135,7 +135,7 @@ class UserRegistrationForm(forms.Form):
     )
     birthday = forms.CharField(
         required = True,
-        widget=forms.Select(choices=days_choices(), attrs={'placeholder': "Enter your CODE here", 'class': 'form-control'}),
+        widget=forms.Select(choices=days_choices(), attrs={'id': 'id_birthday', 'placeholder': "Enter your CODE here", 'class': 'form-control'}),
     )
     birthdaymonth = forms.CharField(
         required = True,

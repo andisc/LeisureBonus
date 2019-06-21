@@ -14,6 +14,7 @@ from django.conf import settings
 from django.views.generic.base import TemplateView
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.hashers import check_password
 import random
 
 
@@ -95,8 +96,7 @@ def choosemybonus_view(request):
 
     user_favoritecountry = UserProfile.objects.filter(user = request.user).values_list('favoritecountry', flat=True)[0]
     user_favoriteairline = UserProfile.objects.filter(user = request.user).values_list('favoriteairline', flat=True)[0]
-    print(user_favoritecountry)
-    print(user_favoriteairline)
+
 
     user_agent = get_user_agent(request)
     is_mobile = user_agent.is_mobile or user_agent.is_tablet
@@ -149,10 +149,11 @@ def personalprofile_view(request):
     first_name = request.user.first_name
     last_name = request.user.last_name
     email = request.user.email
+    sexgender = UserProfile.objects.filter(user = request.user).values_list('sexgender', flat=True)[0]
     phone = UserProfile.objects.filter(user = request.user).values_list('phone', flat=True)[0]
     work = UserProfile.objects.filter(user = request.user).values_list('work', flat=True)[0]
 
-    form = UserRegistrationForm(initial={'firstname': first_name, 'lastname': last_name, 'birthday': birthday, 'birthdaymonth': birthdaymonth, 'birthdayyear': birthdayyear, 'email': email, 'phone':phone, 'work':work})
+    form = UserRegistrationForm(initial={'firstname': first_name, 'lastname': last_name, 'birthday': birthday, 'birthdaymonth': birthdaymonth, 'birthdayyear': birthdayyear, 'email': email, 'phone':phone, 'work':work, 'sexgender':sexgender})
 
     return render(request, "Accounts/personalprofile.html", {"is_mobile": is_mobile, 'form' : form, 'first_name': first_name, 'last_name': last_name, 'birthday': birthday, 'birthdaymonth': birthdaymonth, 'birthdayyear': birthdayyear})
 
@@ -275,7 +276,6 @@ def vouchersconfiguration_view(request):
     is_mobile = user_agent.is_mobile or user_agent.is_tablet
 
     n_winners = Winners.objects.exclude(state = "Completed").values_list('idwinner', flat=True)
-    print(n_winners)
 
     formVoucher = newVoucherForm(initial={'idcodewinner' : 0})
 
@@ -384,7 +384,6 @@ def uploadvoucher_view(request):
     is_mobile = user_agent.is_mobile or user_agent.is_tablet
     text_error = ''
     saveresult = False
-    print ('entra')
 
     
     formVoucher = newVoucherForm(request.POST, request.FILES)
@@ -400,8 +399,7 @@ def uploadvoucher_view(request):
 
         if formVoucher.is_valid():
             idcodewinner =  formVoucher.instance.idcodewinner
-            print("------")
-            print(idcodewinner)
+            
             p = Winners.objects.get(pk=str(idcodewinner))
             p.state = 'Completed'
             p.save()
@@ -434,23 +432,24 @@ class HomePageView(TemplateView):
 def choosecountry_view(request):
    
     country = request.GET.get('country', None)
-    print('aquii.....')
 
     result = []
     if country == "":
-        allcountrydata = CountryAirlineCompany.objects.select_related()
+        allcountrydata = AirlineCompanies.objects.select_related()
+        for countryairline in allcountrydata:
+            result.append({'airline' : countryairline.airlinecompany, 'ranking' : countryairline.ranking})
+
     else:
         allcountrydata = CountryAirlineCompany.objects.select_related().filter(countrycode=country)
-
-    for countryairline in allcountrydata:
-        result.append({'airline' : countryairline.airlinecompany.airlinecompany, 'ranking' : countryairline.airlinecompany.ranking})
+        for countryairline in allcountrydata:
+            result.append({'airline' : countryairline.airlinecompany.airlinecompany, 'ranking' : countryairline.airlinecompany.ranking})
 
 
     data = {
         #"countryairline" : list(CountryAirlineCompany.objects.filter(countrycode=country).values_list('airlinecompany', flat=True)),
         "countryairline" : result
     }
-    print(data)
+    #print(data)
 
     return JsonResponse(data, safe=False)
 
@@ -458,8 +457,8 @@ def choosecountry_view(request):
 def savechoice_view(request):
     airline = request.GET.get('airline', None)
     country = request.GET.get('country', None)
-    print("entra : " + str(airline))
 
+    #update airline and favorite country
     user = UserProfile.objects.get(user = request.user)
     user.favoriteairline = str(airline)  # save user airline choice
     user.favoritecountry = str(country)
@@ -467,6 +466,58 @@ def savechoice_view(request):
 
     return JsonResponse("", safe=False)
 
+
+def changepassword_view(request):
+
+    oldpassword_value = request.GET.get('oldpassword_value', None)
+    newpassword_value = request.GET.get('newpassword_value', None)
+    resultchangepassword = False
+    
+
+    user = User.objects.get(username = request.user)
+
+    if check_password(oldpassword_value, user.password):
+        user.set_password(newpassword_value)
+        user.save()
+        resultchangepassword = True
+
+    data = {
+        "resultchangepassword" : resultchangepassword
+    }
+
+    return JsonResponse(data, safe=False)
+
+
+
+def changeprofile_view(request):
+    firstname_value = request.GET.get('firstname_value', None)
+    lastname_value = request.GET.get('lastname_value', None)
+    birthday_value = request.GET.get('birthday_value', None)
+    birthdaymonth_value = request.GET.get('birthdaymonth_value', None)
+    birthdayyear_value = request.GET.get('birthdayyear_value', None)
+    sexgender_value = request.GET.get('sexgender_value', None)
+    work_value = request.GET.get('work_value', None)
+    email_value = request.GET.get('email_value', None)
+    phone_value = request.GET.get('phone_value', None)
+
+    #update user profile
+    user = User.objects.get(username = request.user)
+    user.first_name = firstname_value
+    user.last_name = lastname_value
+    user.email = str(email_value)
+    user.save()
+
+    user_profile = UserProfile.objects.get(user = request.user)
+    user_profile.birthday = str(birthday_value)
+    user_profile.birthdaymonth = str(birthdaymonth_value)
+    user_profile.birthdayyear = str(birthdayyear_value)
+    user_profile.sexgender = str(sexgender_value)
+    user_profile.work = str(work_value)
+    user_profile.phone = str(phone_value)
+    user_profile.save()
+
+
+    return JsonResponse("", safe=False)
 
     #if request.method == 'POST':
     #    form = UserLoginForm(request.POST)

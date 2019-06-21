@@ -84,7 +84,7 @@ function reloadAirlines() {
 
 	if (favoriteairline != "None" )
 	{
-		choicelegend.style.display = "display";
+		choicelegend.style.display = "block";
 	}
 	else{
 		choicelegend.style.display = "none";
@@ -206,7 +206,7 @@ function reloadAirlines() {
 		</div>
 		<div class="col-12 col-md-6">
 			<div id="choicelegend" class="choice-legend">
-				<h5>You already saved this preferences</h5>
+				<h5>You already saved your preferences</h5>
 				<b>Your country choice is: <label id="countrychoice">{{user_favoritecountry}}</label></b>
 				<br>
 				<b>Your favorite airline is: <label id="favoriteairline">{{user_favoriteairline}}</label></b>

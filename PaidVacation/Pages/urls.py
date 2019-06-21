@@ -36,6 +36,8 @@ urlpatterns = [
     path('ajax/SavePersonalInformation/', views.settingsconfigurationsave_view, name='settingsconfigurationsave_view'),
     path('ajax/choosecountry/', views.choosecountry_view, name='choosecountry'),
     path('ajax/savechoice/', views.savechoice_view, name='savechoice'),
+    path('ajax/changeprofile/', views.changeprofile_view, name='changeprofile'),
+    path('ajax/changepassword/', views.changepassword_view, name='changepassword'),
 ]
 
 
