@@ -1,4 +1,4 @@
-
+/*
 // Get the modal
 var modal = document.getElementById('myModal');
 
@@ -39,4 +39,4 @@ function clickmenulogin() {
 	var modallogin = document.getElementById('exampleModalCenter');
   	modallogin.style.display = "block";
 }
-
+*/

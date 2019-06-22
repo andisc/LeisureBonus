@@ -513,7 +513,11 @@ def changeprofile_view(request):
     user_profile.birthdayyear = str(birthdayyear_value)
     user_profile.sexgender = str(sexgender_value)
     user_profile.work = str(work_value)
-    user_profile.phone = str(phone_value)
+    print("____" + phone_value)
+    if phone_value == "":
+        user_profile.phone = None
+    else:
+        user_profile.phone = int(phone_value)
     user_profile.save()
 
 

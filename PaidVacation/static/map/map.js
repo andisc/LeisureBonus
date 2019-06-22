@@ -773,6 +773,7 @@ jvm.Map.prototype = {
     this.setSelected(type, select);
   },
 
+
   /**
    * Remove the selected state from all the currently selected regions.
    */

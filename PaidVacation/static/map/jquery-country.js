@@ -216,7 +216,9 @@ jQuery.noConflict();
       $('#focus-init').click(function(){
         $('#map1').vectorMap('set', 'focus', {scale: 1, x: 0.5, y: 0.5, animate: true});
       });
-      $('#map1').vectorMap({
+      var map = new jvm.Map({
+        container: $('#map1'),
+      //$('#map1').vectorMap({
         map: 'world_mill_en',
         panOnDrag: true,
         backgroundColor: '#cccccc',
@@ -234,16 +236,27 @@ jQuery.noConflict();
             fill: '#CA0020'
           }
         },
+        regionsSelectable: true,
+        markersSelectable: true,
+        markersSelectableOne: true,
+        selectedRegions: JSON.parse( window.localStorage.getItem('jvectormap-selected-regions') || '[]' ),
+        selectedMarkers: JSON.parse( window.localStorage.getItem('jvectormap-selected-markers') || '[]' ),
+
         onRegionClick: function(event, code, region)
         {
-          /*alert("" + name)*/
+          // Delete all selected regions
+          map.clearSelectedRegions();
+
+          // Call function to generate airline companies for the country
           onCountryClick(code)
         },
-        onMarkerSelected: function(){
+        onRegionSelected: function(event, code, isSelected, selectedRegions){
+          console.log('region-select', code, isSelected, selectedRegions);
+
           if (window.localStorage) {
             window.localStorage.setItem(
-              'jvectormap-selected-markers',
-              JSON.stringify(map.getSelectedMarkers())
+              'jvectormap-selected-regions',
+              JSON.stringify(selectedRegions)
             );
           }
         },
