@@ -29,7 +29,7 @@
     <script src="{% static 'js/bootstrap.js' %}"></script>
     <script src="{% static 'js/generaterandomcode.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
-  <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
+    <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
 
     <script src="{% static 'js/wow.min.js' %}"></script>
      
@@ -112,6 +112,23 @@ function clickmenulogin() {
 
           
               <ul class="navbar-nav ml-auto">
+
+              <div class="languagebutton">
+                <li class="dropdown language-selector">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true" aria-expanded="false"> 
+                    <img src="https://demo.neontheme.com/assets/images/flags/flag-uk.png" width="16" height="16"> </a> 
+                    <ul class="dropdown-menu pull-right"> 
+                      <li class="active"> <a href="#"> <img src="https://demo.neontheme.com/assets/images/flags/flag-uk.png" width="16" height="16"> <span>English</span> </a> </li> 
+                      <!--
+                      <li> <a href="#"> <img src="https://demo.neontheme.com/assets/images/flags/flag-de.png" width="16" height="16"> <span>Deutsch</span> </a> </li> 
+                      <li> <a href="#"> <img src="https://demo.neontheme.com/assets/images/flags/flag-fr.png" width="16" height="16"> <span>François</span> </a> </li> 
+                      <li> <a href="#"> <img src="https://demo.neontheme.com/assets/images/flags/flag-al.png" width="16" height="16"> <span>Shqip</span> </a> </li> 
+                      <li> <a href="#"> <img src="https://demo.neontheme.com/assets/images/flags/flag-es.png" width="16" height="16"> <span>Español</span> </a> </li> 
+                      -->
+                    </ul> 
+                  </li>
+                </div>
+               
                 {% if user.is_authenticated %}
                 <div class="usernamelabel">{{ user.get_full_name }}</div>
                   <a class="LogoutButton" href="{% url 'logout' %}" style="text-decoration: none;"> LOGOUT <img src="{% static 'images/logout.png' %}" width="20px" height="20px"></a>

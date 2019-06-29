@@ -324,7 +324,7 @@ def register(request):
             birthdayyear =  userObj['birthdayyear']
             if (Companies.objects.filter(idcode = code).filter(active = True).exists() ):
                 if not (User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
-                    new_user = User.objects.create_user(username, email, password)
+                    new_user = User.objects.create_user(username.lower(), email, password)
                     new_user.first_name = first_name
                     new_user.last_name = last_name
                     user = authenticate(username = username, password = password)
@@ -347,7 +347,7 @@ def MyAccount_view(request):
     user_agent = get_user_agent(request)
     username = request.POST.get('username', '')
     passw = request.POST.get('password', '')
-    user = authenticate(username = username, password = passw)
+    user = authenticate(username = username.lower(), password = passw)
 
     if request.user.is_authenticated:
 

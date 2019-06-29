@@ -290,6 +290,15 @@ body {
 
 /* ---------  <a> styles  ----------  */
 
+.languagebutton{
+    margin: 10px;
+    font-size: 17px;
+    padding: 5px;
+    vertical-align: middle;
+    display: table-cell;
+    height: inherit;
+}
+
 .usernamelabel{
     margin: 10px;
     font-size: 17px;
@@ -1498,13 +1507,6 @@ input.chooseairliner[type="radio"]:checked + label{
 .img-icon{
     width: 50px;
     height: 50px;
-}
-
-
-
-
-
-
 }
 
 
