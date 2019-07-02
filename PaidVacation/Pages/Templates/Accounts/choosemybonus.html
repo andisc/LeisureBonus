@@ -171,6 +171,11 @@ function reloadAirlines() {
 		<div class="row" style="height: 300px">
 			<div id="map1" class="map-container"></div>
 		</div>
+		<div class="row justify-content-end pt-3">
+			<div class="col-6 col-md-3"> 
+				<label id="clearselectedcountries" style="color: #63a0cf;">Clear country filter</label>
+			</div>
+		</div>
 		<br>
 	</div>
 	<br>
@@ -213,90 +218,94 @@ function reloadAirlines() {
 		</div>
 	</div>
 </div>
-  	<div class="container">
-  	<div id="PaginationContainer" class="pagination-container" >
-	  <!--<div class="row" id="div1" data-page="1">
+
+  	<div class="container mt-5 mb-5">
+  	<div >
+  		There are <label id="airlinecount"></label> airline companies available
+	  	<div id="PaginationContainer" class="pagination-container" >
+		  <!--<div class="row" id="div1" data-page="1">
 
 
 
-	  	
-	  		
-		    <div class="col">
-		    	<input type="radio" class="chooseairliner" name="size" id="size_1" onClick="choose()" value="small"  />
-				 <label class="labelchooseairliner p-1"  for="size_1"><img src="{% static 'aircompanies/TapLogo.png' %}" width="100px" height="100px">
-				 	<span class="p-1 box-ranking">7.0/<span style="font-size: 14px">10</span></span>
-				 	</label>
-		    </div>
-		    <div class="col">
-		    	<input type="radio" class="chooseairliner" name="size" id="size_2" onClick="choose()" value="small" />
-				 <label class="labelchooseairliner"  for="size_2"><img src="{% static 'images/EasyJetLogo.png' %}" width="100px" height="100px"></label>
-		    </div>
-		    <div class="col">
-		    	<input type="radio" class="chooseairliner" name="size" id="size_3" onClick="choose()" value="small" />
-				 <label class="labelchooseairliner" for="size_3"><img src="{% static 'images/RyanairLogo.png' %}" width="100px" height="100px"></label>
-		    </div>
-		    <div class="col">
-		    	<input type="radio" class="chooseairliner" name="size" id="size_4" value="small" />
-				 <label class="labelchooseairliner" for="size_4"><img src="{% static 'images/EmiratesLogo.png' %}" width="100px" height="100px"></label>
-		    </div>
-		    <div class="col">
-		    	<input type="radio" class="chooseairliner" name="size" id="size_5" value="small" />
-				 <label class="labelchooseairliner" for="size_5"><img src="{% static 'images/BritishAirwaysLogo.png' %}" width="100px" height="100px"></label>
-		    </div>
-		    <div class="col">
-		    	<input type="radio" class="chooseairliner" name="size" id="size_6" value="small" />
-				 <label class="labelchooseairliner" for="size_6"><img src="{% static 'images/LufthansaLogo.png' %}" width="100px" height="100px"></label>
-		    </div>
-		    <div class="col">col</div>
-		    <div class="col">col</div>
-			
+		  	
+		  		
+			    <div class="col">
+			    	<input type="radio" class="chooseairliner" name="size" id="size_1" onClick="choose()" value="small"  />
+					 <label class="labelchooseairliner p-1"  for="size_1"><img src="{% static 'aircompanies/TapLogo.png' %}" width="100px" height="100px">
+					 	<span class="p-1 box-ranking">7.0/<span style="font-size: 14px">10</span></span>
+					 	</label>
+			    </div>
+			    <div class="col">
+			    	<input type="radio" class="chooseairliner" name="size" id="size_2" onClick="choose()" value="small" />
+					 <label class="labelchooseairliner"  for="size_2"><img src="{% static 'images/EasyJetLogo.png' %}" width="100px" height="100px"></label>
+			    </div>
+			    <div class="col">
+			    	<input type="radio" class="chooseairliner" name="size" id="size_3" onClick="choose()" value="small" />
+					 <label class="labelchooseairliner" for="size_3"><img src="{% static 'images/RyanairLogo.png' %}" width="100px" height="100px"></label>
+			    </div>
+			    <div class="col">
+			    	<input type="radio" class="chooseairliner" name="size" id="size_4" value="small" />
+					 <label class="labelchooseairliner" for="size_4"><img src="{% static 'images/EmiratesLogo.png' %}" width="100px" height="100px"></label>
+			    </div>
+			    <div class="col">
+			    	<input type="radio" class="chooseairliner" name="size" id="size_5" value="small" />
+					 <label class="labelchooseairliner" for="size_5"><img src="{% static 'images/BritishAirwaysLogo.png' %}" width="100px" height="100px"></label>
+			    </div>
+			    <div class="col">
+			    	<input type="radio" class="chooseairliner" name="size" id="size_6" value="small" />
+					 <label class="labelchooseairliner" for="size_6"><img src="{% static 'images/LufthansaLogo.png' %}" width="100px" height="100px"></label>
+			    </div>
+			    <div class="col">col</div>
+			    <div class="col">col</div>
+				
 
-			
-			   
-			   </div>
-			   <div data-page="2" style="display:none;">
-			      <p>Content for Div Number 2</p>
-			   </div>
-			   <div data-page="3" style="display:none;">
-			      <p>Content for Div Number 3</p>
-			   </div>
-			   <div data-page="4" style="display:none;">
-			      <p>Content for Div Number 4</p>
-			   </div>
-			   <div data-page="5" style="display:none;">
-			      <p>Content for Div Number 5</p>
-			   </div>
+				
+				   
+				   </div>
+				   <div data-page="2" style="display:none;">
+				      <p>Content for Div Number 2</p>
+				   </div>
+				   <div data-page="3" style="display:none;">
+				      <p>Content for Div Number 3</p>
+				   </div>
+				   <div data-page="4" style="display:none;">
+				      <p>Content for Div Number 4</p>
+				   </div>
+				   <div data-page="5" style="display:none;">
+				      <p>Content for Div Number 5</p>
+				   </div>
 
-			  
+				  
 
-			<div class="text-center">
-				<div class="pagination pagination-centered">
-					<ul class="pagination">
-						<li class="page-item" data-page="-"><a class="page-link" onClick="changepages('-')" href="#">&lt;</a></li>
-						<li class="page-item" data-page="1"><a class="page-link" onClick="changepages(1)" href="#">1</a></li>
-						<li class="page-item" data-page="2"><a class="page-link" onClick="changepages(2)" href="#">2</a></li>
-						<li class="page-item" data-page="+"><a class="page-link" onClick="changepages('+')"href="#">&gt;</a></li>
-					</ul>
+				<div class="text-center">
+					<div class="pagination pagination-centered">
+						<ul class="pagination">
+							<li class="page-item" data-page="-"><a class="page-link" onClick="changepages('-')" href="#">&lt;</a></li>
+							<li class="page-item" data-page="1"><a class="page-link" onClick="changepages(1)" href="#">1</a></li>
+							<li class="page-item" data-page="2"><a class="page-link" onClick="changepages(2)" href="#">2</a></li>
+							<li class="page-item" data-page="+"><a class="page-link" onClick="changepages('+')"href="#">&gt;</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
-		</div>
-		
+			
 
-		
-			<div class="row justify-content-around">
-				<div class="col-4 pagination " width="100%">
-					<ul class="pagination ">
-						<li data-page="-"><a class="page-link" href="#" onclick="changepages('-')">Previous</a></li>
-						<li data-page="1"><a class="page-link" href="#" onclick="changepages(1)">1</a></li>
-						<li data-page="2"><a class="page-link" href="#" onclick="changepages(2)">2</a></li>
-						<li data-page="+"><a class="page-link" href="#" onclick="changepages('+')">Next</a></li>
-					</ul>
-				</div>
-			  </div>
-		-->
-		
+			
+				<div class="row justify-content-around">
+					<div class="col-4 pagination " width="100%">
+						<ul class="pagination ">
+							<li data-page="-"><a class="page-link" href="#" onclick="changepages('-')">Previous</a></li>
+							<li data-page="1"><a class="page-link" href="#" onclick="changepages(1)">1</a></li>
+							<li data-page="2"><a class="page-link" href="#" onclick="changepages(2)">2</a></li>
+							<li data-page="+"><a class="page-link" href="#" onclick="changepages('+')">Next</a></li>
+						</ul>
+					</div>
+				  </div>
+			-->
+			
 
 
+			</div>
 		</div>
 	</div>
 	<label>* Please note that if you choose an airline company which don't sell gift cards we will contact you to choose another airline. </label>

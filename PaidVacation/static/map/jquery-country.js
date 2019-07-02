@@ -30,6 +30,8 @@ function onCountryClick(code) {
 
 
           var elementPagination = document.getElementById("PaginationContainer");
+
+          document.getElementById("airlinecount").textContent = data.countryairline.length;
           
           var i;
           for (i=1; i<(Math.ceil(data.countryairline.length / 18)) +1; i++) { 
@@ -123,7 +125,7 @@ function onCountryClick(code) {
 
           /* build pagination icons */
           var rowpaginationicons = document.createElement("nav");
-          rowpaginationicons.setAttribute("class", "row justify-content-around mt-4");
+          rowpaginationicons.setAttribute("class", "row justify-content-around mt-5");
 
 
           var paginationcentered = document.createElement("div");
@@ -215,6 +217,11 @@ jQuery.noConflict();
       });
       $('#focus-init').click(function(){
         $('#map1').vectorMap('set', 'focus', {scale: 1, x: 0.5, y: 0.5, animate: true});
+      });
+      $('#clearselectedcountries').click(function(){
+        // Delete all selected regions
+        map.clearSelectedRegions();
+        onCountryClick('');
       });
       var map = new jvm.Map({
         container: $('#map1'),
