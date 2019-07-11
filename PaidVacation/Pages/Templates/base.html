@@ -227,12 +227,14 @@
           <div class="modal-body">
             <form method="POST" action="{% url 'MyAccount' %}">
               {% csrf_token %}
-              <div >
-                  <input type='text' name='username' class="textBoxSignIn" id='username' placeholder="Username" autofocus> <br>
+              <div>
+                  <input type='text' name='username' class="textBoxSignIn" id='username' placeholder="Username" autofocus> 
                   <input type='password' name='password' class="textBoxSignIn" id='password' placeholder="Password"><br>
                   <input type="checkbox" name="rememberme"> Remember me
                   <br><br>
                   <input type='submit' value='Login' class="buttonSignin" style="width: 300px">
+                  <br>
+                  <a data-toggle="modal" data-target="#exampleModal">Forgot your password?</a>
               </div>
             </form>
           </div>
@@ -240,6 +242,33 @@
       </div>
     </div>
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Reset Password</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" action="{% url 'MyAccount' %}">
+              {% csrf_token %}
+              <div>
+                  <input type='text' name='username' class="textBoxSignIn" id='username' placeholder="Username" autofocus>
+                  <input type="checkbox" name="rememberme"> Remember me
+                  <br><br>
+                  <input type='submit' value='Login' class="buttonSignin" style="width: 300px">
+                  <br>
+                  <a data-toggle="modal" data-target="#exampleModal">Forgot your password?</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <br>
 
 

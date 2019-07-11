@@ -308,6 +308,7 @@ def refernewcompany_view(request):
 def register(request):
     user_agent = get_user_agent(request)
     is_mobile = user_agent.is_mobile or user_agent.is_tablet
+    error_message = ''
 
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
@@ -325,6 +326,7 @@ def register(request):
             if (Companies.objects.filter(idcode = code).filter(active = True).exists() ):
                 if not (User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
                     new_user = User.objects.create_user(username.lower(), email, password)
+                    
                     new_user.first_name = first_name
                     new_user.last_name = last_name
                     user = authenticate(username = username, password = password)
@@ -333,14 +335,19 @@ def register(request):
                     profileUser.save()
                     new_user.save()
                     login(request, user)
+
                     return HttpResponseRedirect('/')
                 else:
-                    raise forms.ValidationError('Looks like a username with that email or password already exists')
+                    error_message = 'Looks like a username with that email or password already exists'
+                    #raise forms.ValidationError('Looks like a username with that email or password already exists')
             else:
-                raise forms.ValidationError("This company don't exists or it is not active.")
+                error_message = "This company don't exists or it is not active."
+                #raise forms.ValidationError("This company don't exists or it is not active.")
+        print(form.errors)
     else:
+
         form = UserRegistrationForm()
-    return render(request, 'Accounts/register.html', {"is_mobile": is_mobile, 'form' : form})
+    return render(request, 'Accounts/register.html', {"is_mobile": is_mobile, 'form' : form, 'error_message' : error_message})
 
 
 def MyAccount_view(request):

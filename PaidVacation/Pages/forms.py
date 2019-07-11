@@ -157,7 +157,7 @@ class UserRegistrationForm(forms.Form):
         widget=forms.Select(choices = SEXGENDER_CHOICES, attrs={'placeholder': "Sex gender", 'class': 'form-control'}),
     )
     work = forms.CharField(
-        required = True,
+        required = False,
         label = 'Company name or job title',
         max_length = 50,
         widget=forms.TextInput(attrs={'placeholder': "Company name or job title", 'class': 'form-control'}),

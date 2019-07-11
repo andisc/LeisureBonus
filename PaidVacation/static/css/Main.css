@@ -364,11 +364,11 @@ a.FooterLink:active {
 }
 
 .logolink{
-    width: 250px;
+    width: 220px;
 }
 
 .logolinkfooter{
-    width: 200px;
+    width: 180px;
 }
 
 /*  -------  Different classes --------*/
@@ -1550,5 +1550,10 @@ input.chooseairliner[type="radio"]:checked + label{
     background-color: #cfcb17;
 }
 /*Cookie Consent End*/
+
+
+.imgrounded{
+    border-radius: 50%;
+}
 
 

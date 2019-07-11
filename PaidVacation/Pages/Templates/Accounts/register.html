@@ -8,7 +8,17 @@
 
     <div class="container">
       <div class="row mt-2 justify-content-center" >
-        <div class="col-10 col-md-6 border border-secondary shadow-sm mb-5 bg-white rounded" >
+        
+          
+        <div class="col-12 col-md-6" >
+           {% if error_message|length > 0 %}
+          <div class="row ml-1 mr-1 justify-content-center">
+            <div class="alert alert-danger" role="alert">
+              {{ error_message }}
+            </div>
+          </div>
+          {% endif %}
+          <div class="col border border-secondary shadow-sm mb-5 bg-white rounded">
           <div class="row pt-2 pb-2 justify-content-center shadow-sm" style="background-color: grey; color: white;" >
                   SIGN UP NOW
             </div>
@@ -82,6 +92,7 @@
           </div>
         </form>
       </div>
+    </div>
       </div>
       <div class="row mt-2 justify-content-center" >
         <p>

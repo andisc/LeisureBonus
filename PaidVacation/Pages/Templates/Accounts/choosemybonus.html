@@ -14,8 +14,16 @@
 	if (airline != "None" )
 	{
 		choicelegend.style.display = "block";
-		document.getElementById("favoriteairline").textContent = airline;
-		document.getElementById("countrychoice").textContent = GetCountryName(country);
+		document.getElementById("imgfavoriteairline").src = "{% static 'aircompanies/'%}" + airline + "Logo.png";
+
+		if(country.length == 0)
+		{
+			document.getElementById("imgcountrychoice").src = "{% static 'images/travelplacecountrychoice.jpeg' %}";
+		}
+		else{
+			document.getElementById("imgcountrychoice").src = "https://lipis.github.io/flag-icon-css/flags/1x1/"+ country.toLowerCase() +".svg";
+		}
+		
 	}
 	else{
 		choicelegend.style.display = "none";
@@ -77,8 +85,17 @@ function changepages(i_parentLiPage) {
 function reloadAirlines() {
 
 	var favoriteairline = "{{user_favoriteairline}}";
+	var favoritecountry = "{{user_favoritecountry}}";
 
-	document.getElementById("countrychoice").textContent = GetCountryName("{{user_favoritecountry}}");
+	document.getElementById("imgfavoriteairline").src = "{% static 'aircompanies/'%}" + favoriteairline + "Logo.png";
+
+	if(favoritecountry.length == 0)
+	{
+		document.getElementById("imgcountrychoice").src = "{% static 'images/travelplacecountrychoice.jpeg' %}";
+	}
+	else{
+		document.getElementById("imgcountrychoice").src = "https://lipis.github.io/flag-icon-css/flags/1x1/"+ favoritecountry.toLowerCase() +".svg";
+	}
 
 	var choicelegend = document.getElementById("choicelegend");
 
@@ -211,9 +228,11 @@ function reloadAirlines() {
 		<div class="col-12 col-md-6">
 			<div id="choicelegend" class="choice-legend">
 				<h5>You already saved your preferences</h5>
-				<b>Your country choice is: <label id="countrychoice">{{user_favoritecountry}}</label></b>
-				<br>
-				<b>Your favorite airline is: <label id="favoriteairline">{{user_favoriteairline}}</label></b>
+				<img id="imgfavoriteairline" src="{% static 'aircompanies/'%}{{ user_favoriteairline }}Logo.png"  width="100px" height="100px">
+				<img src="{% static 'images/aviao_rasto.png' %}"  width="150px" height="100px">
+				<img id="imgcountrychoice" src="https://lipis.github.io/flag-icon-css/flags/1x1/{{ user_favoritecountry|lower }}.svg" class="imgrounded"  width="50px" height="50px">
+				
+			
 			</div>
 		</div>
 	</div>
