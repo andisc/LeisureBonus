@@ -66,6 +66,40 @@
           }); 
       }); 
 
+
+      function resetPassword() {
+        // Get the modal
+        var resetemail_value = document.getElementById("resetemail").value;
+
+        /* hide success label */
+        var label_true_result = document.getElementById('resetpassord_result_true');
+        label_true_result.style.display = "none";
+        /* hide error label */
+        var label_false_result = document.getElementById('resetpassord_result_false');
+        label_false_result.style.display = "none";
+
+
+        $.ajax({
+            url: "/ajax/ResetPassword/",
+            data : { 'resetemail_value': resetemail_value
+            },
+            success : function(data) {
+                
+              if(data.resultresetpassword == true)
+              {
+                /* show success label */
+                var label_true_result = document.getElementById('resetpassord_result_true');
+                label_true_result.style.display = "block";
+              }
+              else{
+                /* show error label */
+                var label_false_result = document.getElementById('resetpassord_result_false');
+                label_false_result.style.display = "block";
+              }
+          
+            }
+        })
+      };
 //$(window).resize(function(){location.reload();});
 
 </script>
@@ -234,7 +268,7 @@
                   <br><br>
                   <input type='submit' value='Login' class="buttonSignin" style="width: 300px">
                   <br>
-                  <a data-toggle="modal" data-target="#exampleModal">Forgot your password?</a>
+                  <a data-toggle="modal" data-target="#ModalResetPassword">Forgot your password?</a>
               </div>
             </form>
           </div>
@@ -244,7 +278,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="ModalResetPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -254,17 +288,21 @@
             </button>
           </div>
           <div class="modal-body">
-            <form method="POST" action="{% url 'MyAccount' %}">
-              {% csrf_token %}
-              <div>
-                  <input type='text' name='username' class="textBoxSignIn" id='username' placeholder="Username" autofocus>
-                  <input type="checkbox" name="rememberme"> Remember me
-                  <br><br>
-                  <input type='submit' value='Login' class="buttonSignin" style="width: 300px">
-                  <br>
-                  <a data-toggle="modal" data-target="#exampleModal">Forgot your password?</a>
+              <div id="resetpassord_result_true" class="alert alert-success" role="alert" style="display:none">
+                Your password was changed with success. We sent you an e-mail with your new password.
               </div>
-            </form>
+              <div id="resetpassord_result_false" class="alert alert-danger" role="alert" style="display:none">
+                Sorry, we didn't find your e-mail. Please type the right e-mail.
+              </div>
+              <div>
+                  <label>Your E-mail</label>
+                  <input type='text' name='resetemail' class="textBoxSignIn" id='resetemail' placeholder="E-mail" autofocus>
+                  <br>
+                  We will send you an email with your new password.
+                  <br>
+                  <button type="submit" class="buttonBecomePartner" onClick="resetPassword()">Reset</button>
+                  <br>
+              </div>
           </div>
         </div>
       </div>

@@ -38,6 +38,7 @@ urlpatterns = [
     path('ajax/savechoice/', views.savechoice_view, name='savechoice'),
     path('ajax/changeprofile/', views.changeprofile_view, name='changeprofile'),
     path('ajax/changepassword/', views.changepassword_view, name='changepassword'),
+    path('ajax/ResetPassword/', views.ResetPassword_view, name='ResetPassword_view'),
 ]
 
 

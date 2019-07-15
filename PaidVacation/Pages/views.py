@@ -341,7 +341,7 @@ def register(request):
                     error_message = 'Looks like a username with that email or password already exists'
                     #raise forms.ValidationError('Looks like a username with that email or password already exists')
             else:
-                error_message = "This company don't exists or it is not active."
+                error_message = "This company don't exists or it is not active. Please contact your company to provide you the right code."
                 #raise forms.ValidationError("This company don't exists or it is not active.")
         print(form.errors)
     else:
@@ -364,8 +364,25 @@ def MyAccount_view(request):
         login(request, user)
         return choosemybonus_view(request)
     else:
+        print("no login")
         return HttpResponseRedirect('/')
 
+
+
+def ResetPassword_view(request):
+    resetemail_value = request.GET.get('resetemail_value', None)
+    resultresetpassword = False
+    
+    if(User.objects.filter(email = resetemail_value).exists()):
+        resultresetpassword = True
+        # atualizar para mudar de email
+
+   
+    data = {
+        "resultresetpassword" : resultresetpassword
+    }
+
+    return JsonResponse(data, safe=False)
 
  
 def createcompany_view(request):
