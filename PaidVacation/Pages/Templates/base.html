@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="{% static 'css/mainmobile.css' %}">
     <link rel="stylesheet" href="{% static 'css/Main.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+    
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' type='image/x-icon' %}">
     <script src="{% static 'js/ModalPopUp.js' %}"></script>
     <script src="{% static 'js/jquery-3.js' %}" ></script>
@@ -32,8 +34,8 @@
     <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
 
     <script src="{% static 'js/wow.min.js' %}"></script>
-     
-
+    <script src="{% static 'js/nav.js' %}" ></script> 
+    
 
 
     <title>{% block title %}{% endblock %}</title>
@@ -104,11 +106,142 @@
 
 </script>
 
+
+  
     
   </head>
   <body>
-    <header>
+
+<!-- Sidebar -->
+<div class="sidebar"  id="mySidebar">
+<div class="displayusername">
+  {% if user.is_authenticated %}
+  <div class="displayusername-icon">
+    <svg class="svg-icon" viewBox="0 0 20 20">
+      <g fill="none"  stroke="rgb(160, 159, 159)" >
+      <path fill="none" d="M12.443,9.672c0.203-0.496,0.329-1.052,0.329-1.652c0-1.969-1.241-3.565-2.772-3.565S7.228,6.051,7.228,8.02c0,0.599,0.126,1.156,0.33,1.652c-1.379,0.555-2.31,1.553-2.31,2.704c0,1.75,2.128,3.169,4.753,3.169c2.624,0,4.753-1.419,4.753-3.169C14.753,11.225,13.821,10.227,12.443,9.672z M10,5.247c1.094,0,1.98,1.242,1.98,2.773c0,1.531-0.887,2.772-1.98,2.772S8.02,9.551,8.02,8.02C8.02,6.489,8.906,5.247,10,5.247z M10,14.753c-2.187,0-3.96-1.063-3.96-2.377c0-0.854,0.757-1.596,1.885-2.015c0.508,0.745,1.245,1.224,2.076,1.224s1.567-0.479,2.076-1.224c1.127,0.418,1.885,1.162,1.885,2.015C13.961,13.689,12.188,14.753,10,14.753z M10,0.891c-5.031,0-9.109,4.079-9.109,9.109c0,5.031,4.079,9.109,9.109,9.109c5.031,0,9.109-4.078,9.109-9.109C19.109,4.969,15.031,0.891,10,0.891z M10,18.317c-4.593,0-8.317-3.725-8.317-8.317c0-4.593,3.724-8.317,8.317-8.317c4.593,0,8.317,3.724,8.317,8.317C18.317,14.593,14.593,18.317,10,18.317z"></path>
+      </g>
+    </svg>
+  </div>
+  <div class="displayusername-name">{{ user.get_full_name }}</div>
+  {% endif %}
+</div>
+  <div class="sidebar-menu">
+    <ul>
+      <li>
+        <a href="{% url 'home' %}" > Home </a>
+      </li>
+      {% if user.is_authenticated %}
+          <li >
+            <a href="{% url 'MyAccount' %}" > My Account </a>
+          </li>
+          <div class="sidebar-menu-inside">
+            <ul>
+              <li>
+                <a href="{% url 'choosemybonus_view' %}" > Choose My Bonus </a>
+              </li>
+              <li>
+                <a href="{% url 'myhistory_view' %}" > My History </a>
+              </li>
+              <li>
+                <a href="{% url 'personalprofile_view' %}" > Personal Profile </a>
+              </li>
+              {% if request.user.is_superuser %}
+              <li>
+                <a href="{% url 'adminconfiguration_view' %}" > Admin Configuration </a>
+              </li>
+              <li>
+                <a href="{% url 'generatewinners_view' %}" > Generate Winners </a>
+              </li>
+              <li>
+                <a href="{% url 'vouchersconfiguration_view' %}" > Vouchers Configuration</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+          <li>
+            <a href="{% url 'logout' %}" > Logout </a>
+          </li> 
+        {% else %}
+          <li>
+            <a href="{% url 'howitworks' %}"> How it works  </a>
+          </li>
+          <li>
+            <a href="{% url 'about' %}"> About </a>
+          </li>
+          <li>
+            <a data-toggle="modal" data-target="#exampleModalCenter" href="#"> Login </a>
+          </li>
+          <li>
+            <a href="{% url 'register' %}" > Register </a>
+          </li>
+        {% endif %}
+    </ul>
+  </div>
+  <div class="sidebar-menu-back">
+    <a class="toggle" onclick="w3_close()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="26" viewBox="0 0 14 26">
+      <g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="square" stroke-width="2" transform="translate(2 2)">
+      <path d="M0,0 L10,11"></path>
+      <path d="M0,11 L10,22" transform="matrix(1 0 0 -1 0 33)"></path>
+      </g>
+      </svg>
+      </a>
+  </div>
+  <div class="side-bar-botton">
+    © 2019-2020 Leisure Bonus
+    <br>
+    All rights reserved. <a href="{% url 'privacypolicy' %}">Privacy Policy</a>
+  </div>
+</div>
+
+    <!--<header>-->
       
+      <nav>
+      <div class="nav-bar-inner" id="full-nav-bar">
+        
+        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/leisurebonus.png' %}" class="logolink" ></a>
+        {% if is_mobile == True %}
+        <div class="nav-navigation">
+          <div class="nav-menu-pane">
+            <a class="toggle" onclick="w3_open()">
+              <svg xmlns="http://www.w3.org/2000/svg" id="hamburger-nav" width="32" height="18" viewBox="0 0 32 18">
+                <g fill="none" fill-rule="evenodd" stroke="#1E2122" stroke-linecap="square" stroke-width="2" transform="translate(1)">
+                <path d="M0 1L30 1M0 9L30 9M0 17L30 17"></path>
+                </g>
+                </svg>
+              </a>
+          </div>
+        </div>
+
+        {% else %}
+        <div class="nav-navigation">
+          <ul id="menu-top-navigation" class="menu-top-navigation">
+            <li class="howitworks dropdown-li" >
+            <a href="{% url 'howitworks' %}" id="menu-top-navigation-link-1"> How it works </a>
+            </li>
+            <li class="about dropdown-li" >
+              <a href="{% url 'about' %}" id="menu-top-navigation-link-2"> About </a>
+            </li>
+            
+            </ul>
+            
+            <div class="nav-menu-pane">
+              <a class="toggle" onclick="w3_open()">
+                <svg xmlns="http://www.w3.org/2000/svg" id="hamburger-nav" width="32" height="18" viewBox="0 0 32 18">
+                  <g fill="none" fill-rule="evenodd" id="hamburger-nav-g" stroke="#fff" stroke-linecap="square" stroke-width="2" transform="translate(1)">
+                  <path d="M0 1L30 1M0 9L30 9M0 17L30 17"></path>
+                  </g>
+                  </svg>
+                </a>
+            </div>
+        </div>
+        
+        {% endif %}
+      </div>
+    </nav>
+
+    <!--
       <nav class="navbar navbar-expand-md navbar-light bg-white">
         <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/leisurebonus.png' %}" class="logolink" ></a>
 
@@ -162,12 +295,12 @@
                     <img src="{% static 'images/flags/flag-uk.png' %}" width="16" height="16"> </a> 
                     <ul class="dropdown-menu pull-right"> 
                       <li class="active"> <a href="#"> <img src="{% static 'images/flags/flag-uk.png' %}" width="16" height="16"> <span>English</span> </a> </li> 
-                      <!--
+                      <--
                       <li> <a href="#"> <img src="{% static 'images/flags/flag-de.png' %}" width="16" height="16"> <span>Deutsch</span> </a> </li> 
                       <li> <a href="#"> <img src="{% static 'images/flags/flag-fr.png' %}" width="16" height="16"> <span>François</span> </a> </li> 
                       <li> <a href="#"> <img src="{% static 'images/flags/flag-pt.png' %}" width="16" height="16"> <span>Portugal</span> </a> </li> 
                       <li> <a href="#"> <img src="{% static 'images/flags/flag-es.png' %}" width="16" height="16"> <span>Español</span> </a> </li> 
-                      -->
+                      ->
                     </ul> 
                   </li>
                 </div>
@@ -183,7 +316,8 @@
           </div>
         {% endif %}
       </nav>
-    </header>
+    
+    </header>-->
 
 
 <!--
@@ -373,7 +507,7 @@
       <div id="cookieConsent">
     By using our site, you accept our cookies policy. Known more about our <a href="{% url 'cookiespolicy' %}">cookie policy</a>. <a class="cookieConsentOK">Okay, Thanks!</a>
 </div>
+
 </body>
    
-  
 </html>

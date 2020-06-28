@@ -459,8 +459,6 @@ a.FooterLink:active {
 }
 
 
-.containerGraphic{
-}
 
 hr.style-two { 
   border: 0; 
@@ -929,7 +927,6 @@ input.chooseairliner[type="radio"] {
   width: 100px;
   height: 100px;
   border-radius: 3px;
-  .transition;
   margin-bottom: 10px;
   box-shadow: 0 8px 35px 0 rgba(50, 50, 93, 0.1), 0 5px 15px 0 rgba(0, 0, 0, 0.07);
 }

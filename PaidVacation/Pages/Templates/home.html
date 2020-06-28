@@ -5,8 +5,11 @@
 
 
 {% block content %}
-<div class="container-relative">
-  <img src="{% static 'images/image2.jpg' %}" class="bg-imagerelative">
+<div>
+  <!--<img src="{% static 'images/image2.jpg' %}" class="bg-imagerelative"> -->
+  	<video id="bannerVideo" class="bg-imagerelative" width="100%" autoplay="" loop="" muted="" class="videosEvent" poster="{% static 'images/image2.jpg' %}" controlslist="nodownload">
+		<source src="{% static 'videos/loop_homepage.mp4' %}" type="video/mp4">
+	</video>
 
   <div class="container-fluid text-block" >
           <div class="row text-center justify-content-center section-intro">
@@ -204,7 +207,7 @@
 	</div>
 </section>
 
-<section class="pt-5 pb-5 bg-gray-200">
+<section class="pt-5 pb-5 bg-gray-100">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-12 col-md-5 col-lg-6 order-md-2">

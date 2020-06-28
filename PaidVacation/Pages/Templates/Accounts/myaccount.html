@@ -23,105 +23,11 @@ $(document).ready(function(){
 
 
 
-{% if is_mobile%}
-<div id="show" class="pt-2 pb-2" style="background-color: grey; width: 100%; text-align: center;">Menu</div>
-
-<div id="sidebarContentMobile" class="u-sidebar">
-	<div class="u-sidebar__scroller">
-		<div class="u-sidebar__container">
-			<div class="u-sidebar--panel__footer-offset">
-				<!-- Toggle Button -->
-				<div class="d-flex align-items-center border-bottom py-4 px-5">
-				    <h4 class="h5 mb-0">Account</h4>
-				    <button type="button" id="hide" class="close u-sidebar__close ml-auto">
-              <span aria-hidden="true">×</span>
-            </button>
-				</div>
-				<!-- End Toggle Button -->
-
-				<!-- Content -->
-				<div class="u-sidebar__content py-5">
-				<!-- Title -->
-				<div class="py-2 px-5">
-				    <h4 class="text-uppercase text-muted font-size-13 mb-0">Menu</h4>
-				</div>
-				<!-- End Title -->
-
-				<!-- List -->
-				<div class="list-group"  role="tablist">
-				              
-				    <a class="media align-items-center u-sidebar--panel__link py-2 px-5 active" href="{% url 'choosemybonus_view' %}" >
-				    <img class="max-width-4 mr-3 mCS_img_loaded" src="{% static 'svg/touch-dark-icon.svg' %}" alt="Image Description">
-				    <div class="media-body">
-				        <span>Choose my Bonus</span>
-				    </div>
-				    </a>
-				                
-				    <a class="media align-items-center u-sidebar--panel__link py-2 px-5" href="{% url 'myhistory_view' %}" >
-				    	<img class="max-width-4 mr-3 mCS_img_loaded" src="{% static 'svg/finance-dark-icon.svg' %}" alt="Image Description">
-				    	<div class="media-body">
-				        	<span>My History</span>
-				    	</div>
-				    </a>
-				                
-				    <a class="media align-items-center u-sidebar--panel__link py-2 px-5" id="list-messages-list" href="{% url 'personalprofile_view' %}" >
-				        <img class="max-width-4 mr-3 mCS_img_loaded" src="{% static 'svg/team-dark-icon.svg' %}" alt="Image Description">
-				        <div class="media-body">
-				            <span>Personal Profile</span>
-				        </div>
-				    </a>
-				    {% if request.user.is_superuser %}
-				    <a class="media align-items-center u-sidebar--panel__link py-2 px-5"  id="list-settings-list" href="{% url 'adminconfiguration_view' %}">
-				        <img class="max-width-4 mr-3 mCS_img_loaded" src="{% static 'svg/email-dark-icon.svg' %}" alt="Image Description">
-				        <div class="media-body">
-				            <span>Admin Configuration</span>
-				        </div>
-				    </a>
-
-				    <a class="media align-items-center u-sidebar--panel__link py-2 px-5"  id="list-settings-list" href="{% url 'generatewinners_view' %}">
-				        <img class="max-width-4 mr-3 mCS_img_loaded" src="{% static 'svg/email-dark-icon.svg' %}" alt="Image Description">
-				        <div class="media-body">
-				            <span>Generate Winners</span>
-				        </div>
-				    </a>
-				                
-				    <a class="media align-items-center u-sidebar--panel__link py-2 px-5" id="vouchers-configuration-list" href="{% url 'vouchersconfiguration_view' %}">
-				        <img class="max-width-4 mr-3 mCS_img_loaded" src="{% static 'svg/projects-dark-icon.svg' %}" alt="Image Description">
-				        <div class="media-body">
-				            <span>Vouchers Configuration</span>
-				        </div>
-				    </a>
-				    {% endif %}
-				    <!-- End List -->
-
-				    <!-- Title -->
-				    <div class="py-2 px-5">
-				        <h4 class="text-uppercase text-muted font-size-13 mb-0">Settings</h4>
-				    </div>
-				    <!-- End Title -->
-
-				    <!-- List -->
-				    <a class="media align-items-center u-sidebar--panel__link py-2 px-5" href="{% url 'settingsconfiguration_view' %}">
-				        <img class="max-width-4 mr-3 mCS_img_loaded" src="{% static 'svg/cog-dark-icon.svg' %}" alt="Image Description">
-				        <div class="media-body">
-				            <span>Settings</span>
-				        </div>
-				    </a>
-				          
-				    <!-- End List -->
-				</div>
-			</div>
-		</div>
-		</div>
-	<!-- End Content -->
-	</div>			      
-</div>
-{% endif %}
 
 
 
 
-<div class="container">
+<div class="container pt-5">
 	<div class="row">
 		{% if is_mobile == False%}
 		<div class="col-3 col-sm-3 col-md-3">
