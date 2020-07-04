@@ -16,6 +16,9 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import check_password
 import random
+import urllib
+#import urllib2
+import json
 
 
 def to_python(value):
@@ -70,41 +73,46 @@ def logout_view(request):
 
 
 def contactus_view(request):
+    print('passa aqui 1 - teste')
     user_agent = get_user_agent(request)
     is_mobile = user_agent.is_mobile or user_agent.is_tablet
     #comments_list = Comment.objects.order_by('-created_at')
 
-    if request.method == 'POST':
+    #if request.method == 'POST':
         #form = CommentForm(request.POST)
-        form = ContactUsForm(request.POST or None )
-        if form.is_valid():
-
-            ''' Begin reCAPTCHA validation '''
-            recaptcha_response = request.POST.get('g-recaptcha-response')
-            url = 'https://www.google.com/recaptcha/api/siteverify'
-            values = {
-                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
-                'response': recaptcha_response
-            }
-            data = urllib.urlencode(values)
-            req = urllib2.Request(url, data)
-            response = urllib2.urlopen(req)
-            result = json.load(response)
-            ''' End reCAPTCHA validation '''
-
-            if result['success']:
-                form.save()
-                sendresult = True
-                form = ContactUsForm()
-            #else:
-            #    messages.error(request, 'Invalid reCAPTCHA. Please try again.')
-
-            #return redirect('comments')
+    form = ContactUsForm(request.POST or None )
+    sendresult = False
+    if form.is_valid():
+        print("passa aqui 1")
+        ''' Begin reCAPTCHA validation '''
+        recaptcha_response = request.POST.get('g-recaptcha-response')
+        url = 'https://www.google.com/recaptcha/api/siteverify'
+        values = {
+            'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+            'response': recaptcha_response
+        }
+        data = urllib.parse.urlencode(values).encode()
+        req =  urllib.request.Request(url, data=data)
+        response = urllib.request.urlopen(req)
+        print('passa 1 ...')
+        print(response)
+        result = json.loads(response.read().decode())
+        ''' End reCAPTCHA validation '''
+        if result['success']:
+            print("passa aqui 1 - sucesso")
+            form.save()
+            sendresult = True
+            form = ContactUsForm()
+        else:
+            print('erro.....')
+        #    messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+        #return redirect('comments')
     #else:
     #    form = CommentForm()
 
    # return render(request, 'core/comments.html', {'comments': comments_list, 'form': form})
     return render(request, "contactus.html", {"is_mobile": is_mobile, "form" : form, "sendresult": sendresult})
+
 
 def faq_view(request):
     user_agent = get_user_agent(request)
