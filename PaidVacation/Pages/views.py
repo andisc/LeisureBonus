@@ -55,19 +55,56 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+#def contactus_view(request):
+#    user_agent = get_user_agent(request)
+#    is_mobile = user_agent.is_mobile or user_agent.is_tablet
+#    form = ContactUsForm(request.POST or None )
+#    sendresult = False
+#
+#    if form.is_valid():
+#       form.save()
+#       sendresult = True
+#       form = ContactUsForm()
+#
+#    return render(request, "contactus.html", {"is_mobile": is_mobile, "form" : form, "sendresult": sendresult})
+
+
 def contactus_view(request):
     user_agent = get_user_agent(request)
     is_mobile = user_agent.is_mobile or user_agent.is_tablet
-    form = ContactUsForm(request.POST or None )
-    sendresult = False
+    #comments_list = Comment.objects.order_by('-created_at')
 
-    if form.is_valid():
-       form.save()
-       sendresult = True
-       form = ContactUsForm()
+    if request.method == 'POST':
+        #form = CommentForm(request.POST)
+        form = ContactUsForm(request.POST or None )
+        if form.is_valid():
 
+            ''' Begin reCAPTCHA validation '''
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+                'response': recaptcha_response
+            }
+            data = urllib.urlencode(values)
+            req = urllib2.Request(url, data)
+            response = urllib2.urlopen(req)
+            result = json.load(response)
+            ''' End reCAPTCHA validation '''
+
+            if result['success']:
+                form.save()
+                sendresult = True
+                form = ContactUsForm()
+            #else:
+            #    messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+
+            #return redirect('comments')
+    #else:
+    #    form = CommentForm()
+
+   # return render(request, 'core/comments.html', {'comments': comments_list, 'form': form})
     return render(request, "contactus.html", {"is_mobile": is_mobile, "form" : form, "sendresult": sendresult})
-
 
 def faq_view(request):
     user_agent = get_user_agent(request)
