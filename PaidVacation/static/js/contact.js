@@ -12,7 +12,7 @@ $(function () {
 
     $('#contact-form').on('submit', function (e) {
         if (!e.isDefaultPrevented()) {
-            var url = "https://www.htmlhints.com/recaptcha/contact";
+            var url = "https://www.leisurebonus.com/contactus";
 
             $.ajax({
                 type: "POST",
