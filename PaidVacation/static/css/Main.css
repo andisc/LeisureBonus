@@ -1074,7 +1074,7 @@ input.chooseairliner[type="radio"]:checked + label{
 }
 
 .cardVoucher-title {
-    text-align: center;
+    text-align: left;
     color: #3c4858;
     text-decoration: none;
     font-size: 1.125rem;
@@ -1138,9 +1138,15 @@ input.chooseairliner[type="radio"]:checked + label{
 
 }
 
+.card-date{
+    font-size: x-small;
+    color: #999;
+    text-align: left;
+}
+
 .card-description{
     color: #999;
-    text-align: center;
+    text-align: left;
 }
 
 .btn-rounded {

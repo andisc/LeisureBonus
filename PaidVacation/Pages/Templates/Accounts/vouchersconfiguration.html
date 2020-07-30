@@ -1,6 +1,8 @@
 {% extends 'Accounts/myaccount.html' %}
 {% load static %}
 
+
+
 {% block contentMyAccount %}
 
 	{% if request.user.is_superuser %}
@@ -13,76 +15,243 @@
 			  <b>Success:</b> A new voucher was submited with success.
 			</div>
 		{% endif %}
-	  	<h3>Configurate new voucher</h3>
-	  	<br>
-	      	<form method="post" action="{% url 'uploadvoucher_view' %}" enctype="multipart/form-data">
-	        {% csrf_token %}
-	          <div class="form-row">
-	          	<div class="form-group col-md-6">
-	              {{ formVoucher.idcodewinner }}
-	                <div class="errorField">{{ formVoucher.idcodewinner.errors.as_text }}</div>
-	            </div>
-	          </div>
-	          <div class="form-row">
-	            <div class="form-group col-md-6">
-	              {{ formVoucher.idcodecompany }}
-	                <div class="errorField">{{ formVoucher.idcodecompany.errors.as_text }}</div>
-	            </div>
-	            <div class="form-group col-md-6">
-	              {{ formVoucher.idemployee }}
-	                <div class="errorField">{{ formVoucher.idemployee.errors.as_text }}</div>
-	            </div>
-	          </div>
-	          <div class="form-row">
-	            <div class="form-group col-md-6">
-	              {{ formVoucher.voucherlocation }}
-	                <div class="errorField">{{ formVoucher.voucherlocation.errors.as_text }}</div>
-	            </div>
-	          </div>
-	          <div class="form-row">
-	            <div class="form-group col-md-6">
-	              {{ formVoucher.mntvoucher }}
-	                <div class="errorField">{{ formVoucher.mntvoucher.errors.as_text }}</div>
-	            </div>
-	            <div class="form-group col-md-6">
-	              {{ formVoucher.currency }}
-	                <div class="errorField">{{ formVoucher.currency.errors.as_text }}</div>
-	            </div>
-	          </div>
-	          <div class="form-row">
-	            <div class="form-group col-md-6">
-	              {{ formVoucher.state }}
-	                <div class="errorField">{{ formVoucher.state.errors.as_text }}</div>
-	            </div>
-	            <div class="form-group col-md-6">
-	              {{ formVoucher.airlinecompany }}
-	                <div class="errorField">{{ formVoucher.airlinecompany.errors.as_text }}</div>
-	            </div>
-	          </div>
-	          <div class="form-row">
-	            <div class="form-group col-md-6">
-	              {{ formVoucher.title }}
-	                <div class="errorField">{{ formVoucher.title.errors.as_text }}</div>
-	            </div>
-	          </div>
-	          <div class="form-row">
-	            <div class="form-group col-md-6">
-	              {{ formVoucher.description }}
-	                <div class="errorField">{{ formVoucher.description.errors.as_text }}</div>
-	            </div>
-	          </div>
-	          <div class="form-row">
-	            <div class="form-group col-md-6">
-	              {{ formVoucher.active }} {{ formVoucher.active.label }}
-	                <div class="errorField">{{ formVoucher.active.errors.as_text }}</div>
-	            </div>
-	          </div>
-	          
 
-	          <br>
+		<br>
+		<div class="row">
+			<div class="col-12">
+			  <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
+				<a class="list-group-item list-group-item-action active" id="list-new-voucher" data-toggle="list" href="#list-newvoucher" role="tab" aria-controls="home">New Voucher</a>
+				<a class="list-group-item list-group-item-action" id="list-update-voucher" data-toggle="list" href="#list-updatevoucher" role="tab" aria-controls="profile">Update voucher</a>
+			  </div>
+			</div>
+			<div class="row"> 
+				<div class="col-12">
+				<div class="tab-content" id="nav-tabContent">
+					<div class="tab-pane fade show active" id="list-newvoucher" role="tabpanel" aria-labelledby="list-new-voucher">
+						
+						<!-- Start Configurate a new voucher -->
+						<h3>Configurate new voucher</h3>
+						<br>
+							<form method="post" action="{% url 'uploadvoucher_view' %}" enctype="multipart/form-data">
+							{% csrf_token %}
+							<div class="form-row">
+								<div class="form-group col-md-6">
+								{{ formVoucher.idcodewinner }}
+									<div class="errorField">{{ formVoucher.idcodewinner.errors.as_text }}</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+								{{ formVoucher.idcodecompany }}
+									<div class="errorField">{{ formVoucher.idcodecompany.errors.as_text }}</div>
+								</div>
+								<div class="form-group col-md-6">
+								{{ formVoucher.idemployee }}
+									<div class="errorField">{{ formVoucher.idemployee.errors.as_text }}</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+								{{ formVoucher.voucherlocation }}
+									<div class="errorField">{{ formVoucher.voucherlocation.errors.as_text }}</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+								{{ formVoucher.mntvoucher }}
+									<div class="errorField">{{ formVoucher.mntvoucher.errors.as_text }}</div>
+								</div>
+								<div class="form-group col-md-6">
+								{{ formVoucher.currency }}
+									<div class="errorField">{{ formVoucher.currency.errors.as_text }}</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+								{{ formVoucher.state }}
+									<div class="errorField">{{ formVoucher.state.errors.as_text }}</div>
+								</div>
+								<div class="form-group col-md-6">
+								{{ formVoucher.airlinecompany }}
+									<div class="errorField">{{ formVoucher.airlinecompany.errors.as_text }}</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+								{{ formVoucher.title }}
+									<div class="errorField">{{ formVoucher.title.errors.as_text }}</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+								{{ formVoucher.description }}
+									<div class="errorField">{{ formVoucher.description.errors.as_text }}</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+								{{ formVoucher.active }} {{ formVoucher.active.label }}
+									<div class="errorField">{{ formVoucher.active.errors.as_text }}</div>
+								</div>
+							</div>
+							
 
-	          <button type="submit" class="buttonBecomePartner" >Add new voucher</button>
-	      </form>
-    {% endif %}
+							<br>
+
+							<button type="submit" class="buttonBecomePartner" >Add new voucher</button>
+						</form>
+						<!-- End Configurate a new voucher -->
+					</div>
+					<div class="tab-pane fade" id="list-updatevoucher" role="tabpanel" aria-labelledby="list-update-voucher">
+						
+						<!-- Start update existing voucher -->
+						<button  onclick="refresh_f()" class="buttonBecomePartner" >Refresh ID Vouchers</button>
+						<br>
+						<div class="form-group col-md-6">
+							ID Voucher:
+							<select id="voucher" name = "voucher" onchange="changeVoucher(this)" style="width:80px;">
+							</select>
+						</div><br>
+						<div class="update-voucher">
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label >ID Code Winner:</label>
+									<input id="idwinner" disabled>
+								</div>
+								<div class="form-group col-md-6">
+									<label >File Location:</label>
+									<label id="labelfilelocation"></label>
+									<input type="file" id="locationfilevoucher">
+								</div>
+								<div class="form-group col-md-6">
+									<label >Voucher amount:</label>
+									<input id="mntvoucher">
+								</div>
+								<div class="form-group col-md-6">
+									<label >Currency:</label>
+									<input id="currency">
+								</div>
+								<div class="form-group col-md-6">
+									<label>State:</label>
+									<input id="state">
+								</div>
+								<div class="form-group col-md-6">
+									<label>Favorite Airline:</label>
+									<input id="favoriteairline">
+								</div>
+								<div class="form-group col-md-6">
+									<label>Voucher Title:</label>
+									<input id="vouchertitle">
+								</div>
+								<div class="form-group col-md-6">
+									<label>Voucher Description:</label>
+									<input id="voucherdescription">
+								</div>
+								<div class="form-group col-md-6">
+									<label>Active:</label>
+									<input type="checkbox" id="checkboxactive" >
+								</div>
+							</div>
+						</div>
+
+						<button  onclick="updatevoucher_f()" class="buttonBecomePartner" >Update voucher</button>
+						<!-- End update existingvoucher -->
+					
+					</div>
+				</div>
+				</div>
+			</div>
+		  </div>
+
+	  	
+	{% endif %}
+	
+	<script>
+		function refresh_f() {
+			$.ajax({
+				url: '/ajax/refreshVoucher/',
+				
+				success: function (data) {
+					var x = document.getElementById("voucher");
+					x.remo
+					//remover opçoes existentes na dropbox
+					for (i = x.length - 1; i >= 0; i--) {
+						x.remove(i);
+					}
+
+					// adiciona as opçoes na dropbox
+					for(var i=0; i<data.length; i++)
+					{
+						var option = document.createElement("option");
+						option.text = data[i].idvoucher;
+						x.add(option);
+					}
+					
+					
+				}
+			});
+		}
+
+		function changeVoucher(selectObject) {
+			var id_selectedvoucher = selectObject.value;  
+			
+			$.ajax({
+				url: '/ajax/getSelectedVoucher/',
+				data : { 'id_selectedvoucher': id_selectedvoucher },
+				success: function (data) {
+					document.getElementById("idwinner").value = data.idcodewinner;
+					document.getElementById("labelfilelocation").innerHTML = data.voucherlocation;
+					document.getElementById("mntvoucher").value = data.mntvoucher;
+					document.getElementById("currency").value = data.currency;
+					document.getElementById("state").value = data.state;
+					document.getElementById("favoriteairline").value = data.airlinecompany;
+					document.getElementById("vouchertitle").value = data.title;
+					document.getElementById("voucherdescription").value = data.description;
+					document.getElementById("checkboxactive").checked = data.active;
+				}
+			});
+		}
+
+
+		function updatevoucher_f() {
+			// get selected option with id voucher
+			var e = document.getElementById("voucher");
+			var id_selectedvoucher = e.options[e.selectedIndex].text;
+			
+			var flagupdatefilelocation = false
+			var filelocation;
+			alert(document.getElementById("labelfilelocation").innerHTML);
+			if (document.getElementById("locationfilevoucher").files.length > 0){
+				alert(document.getElementById("locationfilevoucher").files.item(0).name);
+				flagupdatefilelocation = true;
+				//filelocation = document.getElementById("locationfilevoucher").files.item(0).name;
+				filelocation = document.getElementById("locationfilevoucher").files[0];
+			}
+
+			alert(filelocation);
+
+			$.ajax({
+				url: '/ajax/UpdateVoucher/',
+				data : { 
+					'idvoucher': id_selectedvoucher,
+					'idwinner': document.getElementById("idwinner").value,
+					'mntvoucher': document.getElementById("mntvoucher").value,
+					'flagupdatefilelocation' : flagupdatefilelocation,
+					'filelocation': filelocation,
+					'currency': document.getElementById("currency").value,
+					'state': document.getElementById("state").value,
+					'favoriteairline': document.getElementById("favoriteairline").value,
+					'vouchertitle': document.getElementById("vouchertitle").value,
+					'voucherdescription': document.getElementById("voucherdescription").value,
+					'checkboxactive': document.getElementById("checkboxactive").checked,
+			 	},
+				success: function (data) {
+					alert('success');
+
+				}
+			});
+
+		}
+	</script>
 
 {% endblock %}

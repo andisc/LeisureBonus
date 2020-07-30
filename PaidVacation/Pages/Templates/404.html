@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load staticfiles %}
 
 {% block content %}
 
@@ -12,7 +13,8 @@
 				Oops!
 				
 			</div>
-			<div class="text-404">
+			<img src="{% staticfiles 'images/404_notfound.png' %}" >
+			<div class="h2 text-404">
 					Error code: 404
 			</div>
 			<br>

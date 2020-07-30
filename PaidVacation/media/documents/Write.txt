@@ -1,6 +1,0 @@
-COMPRA_DL           Joao luis             Sapatos
-COMPRA_DL2Lisboa rua x
-COMPRA_DL          André Gama              Casaco
-COMPRA_DL2Lisboa rua x222
-COMPRA_DL          André Gama          Computador
-COMPRA_DL        Paulo Santos           Televisão

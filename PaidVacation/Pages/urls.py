@@ -23,7 +23,7 @@ urlpatterns = [
     path('cookies-policy/', views.cookiespolicy_view, name='cookiespolicy'),
     path('CreateCompany/', views.createcompany_view, name='createcompany'),
     path('UploadVoucher/', views.uploadvoucher_view, name='uploadvoucher_view'),
-    path('DownloadVoucher/', views.downloadvoucher_view, name='downloadvoucher_view'),
+    path('DownloadVoucher/<int:idvoucher>/', views.downloadvoucher_view, name='downloadvoucher_view'),
     path('MyAccount/MyHistory/', views.myhistory_view, name='myhistory_view'),
     path('MyAccount/ChooseMyBonus/', views.choosemybonus_view, name='choosemybonus_view'),
     path('MyAccount/PersonalProfile/', views.personalprofile_view, name='personalprofile_view'),
@@ -39,6 +39,9 @@ urlpatterns = [
     path('ajax/changeprofile/', views.changeprofile_view, name='changeprofile'),
     path('ajax/changepassword/', views.changepassword_view, name='changepassword'),
     path('ajax/ResetPassword/', views.ResetPassword_view, name='ResetPassword_view'),
+    path('ajax/refreshVoucher/', views.refreshVoucher_view, name='refreshVoucher_view'),
+    path('ajax/getSelectedVoucher/', views.getSelectedVoucher_view, name='getSelectedVoucher_view'),
+    path('ajax/UpdateVoucher/', views.updateVoucher_view, name='updateVoucher_view'),
 ]
 
 

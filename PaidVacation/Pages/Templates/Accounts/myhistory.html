@@ -41,17 +41,16 @@
 				    <!-- Title -->
 				    <h4 class="cardVoucher-title">{{ voucher.title }}</h4>
 				    <!-- Text -->
-				    <div class="card-description"> {% now "Y-m-d" %} {{ voucher.createddate }}
-                      {{ voucher.description }}
+				    <div class="card-date"> {{ voucher.createddate|date:'Y-m-d H:i' }}</div>
+					<div class="card-description">{{ voucher.description }}</div>
                       <br>
-                    </div>
                     <hr>
 				    <div class="card-footer2">
                         <div class="price">
-                          {{ voucher.currency }}{{ voucher.mntvoucher }}
+							{{ voucher.currency }}{{ voucher.mntvoucher }}
                         </div>
                         <div class="stats">
-                          <a href="{% url 'downloadvoucher_view' %}"><button class="btn btn-outline-warning mr-3">Download</button></a>
+                          <a href="{% url 'downloadvoucher_view' idvoucher=voucher.idvoucher %}"><button class="btn btn-outline-warning mr-3">Download</button></a>
                         </div>
                     </div>
 

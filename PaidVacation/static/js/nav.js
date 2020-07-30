@@ -1,6 +1,6 @@
 function w3_open() {
 
-    if(window.innerWidth <= 400){ //in case of the screen phone the sidebar is wider
+    if(window.innerWidth <= 500){ //in case of the screen phone the sidebar is wider
         document.getElementById("mySidebar").style.width = "70%";
     }
     else{

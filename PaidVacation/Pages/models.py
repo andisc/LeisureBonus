@@ -99,7 +99,7 @@ class Winners(models.Model):
 class Vouchers(models.Model):
     idvoucher = models.AutoField(primary_key=True)
     idcodewinner = models.OneToOneField(Winners, to_field='idwinner', on_delete=models.CASCADE)
-    voucherlocation = models.FileField(upload_to='documents/')
+    voucherlocation = models.FileField(upload_to='protected/')
     mntvoucher = models.DecimalField(decimal_places=2, max_digits=9)
     currency = models.CharField(max_length=1)
     airlinecompany = models.CharField(max_length=100)

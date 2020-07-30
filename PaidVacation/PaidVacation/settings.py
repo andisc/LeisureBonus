@@ -130,8 +130,12 @@ STATICFILES_DIRS= [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+PROTECTED_MEDIA_ROOT = os.path.join(BASE_DIR, 'media/protected')
+PROTECTED_MEDIA_URL = "media/protected"
 
 
 # Name of cache backend to cache user agents. If it not specified default

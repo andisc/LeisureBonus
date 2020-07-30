@@ -15,10 +15,15 @@ from django.views.generic.base import TemplateView
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import check_password
+from django.contrib.auth.decorators import login_required
+#from sendfile import sendfile
 import random
 import urllib
 #import urllib2
 import json
+import os
+import pathlib
+import mimetypes
 
 
 def to_python(value):
@@ -73,7 +78,6 @@ def logout_view(request):
 
 
 def contactus_view(request):
-    print('passa aqui 1 - teste')
     user_agent = get_user_agent(request)
     is_mobile = user_agent.is_mobile or user_agent.is_tablet
     #comments_list = Comment.objects.order_by('-created_at')
@@ -83,8 +87,7 @@ def contactus_view(request):
     form = ContactUsForm(request.POST or None )
     sendresult = False
     if form.is_valid():
-        print("passa aqui 1")
-        ''' Begin reCAPTCHA validation '''
+        #''' Begin reCAPTCHA validation '''
         recaptcha_response = request.POST.get('g-recaptcha-response')
         url = 'https://www.google.com/recaptcha/api/siteverify'
         values = {
@@ -94,21 +97,16 @@ def contactus_view(request):
         data = urllib.parse.urlencode(values).encode()
         req =  urllib.request.Request(url, data=data)
         response = urllib.request.urlopen(req)
-        print('passa 1 ...')
-        print(response)
         result = json.loads(response.read().decode())
-        ''' End reCAPTCHA validation '''
+        #''' End reCAPTCHA validation '''
         if result['success']:
-            print("passa aqui 1 - sucesso")
             form.save()
             sendresult = True
             form = ContactUsForm()
+            messages.success(request, 'New comment added with success!')
         else:
-            print('erro.....')
-        #    messages.error(request, 'Invalid reCAPTCHA. Please try again.')
-        #return redirect('comments')
-    #else:
-    #    form = CommentForm()
+            messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+        return redirect('comments')
 
    # return render(request, 'core/comments.html', {'comments': comments_list, 'form': form})
     return render(request, "contactus.html", {"is_mobile": is_mobile, "form" : form, "sendresult": sendresult})
@@ -480,14 +478,27 @@ def uploadvoucher_view(request):
     return render(request, 'Accounts/vouchersconfiguration.html', {"is_mobile": is_mobile, 'formVoucher': formVoucher, 'saveresult' : saveresult, 'text_error' : text_error, })
 
 
-def downloadvoucher_view(request):
-    media_url = settings.MEDIA_URL
-    path_to_file = media_url + 'documents/Captura_de_ecrã_2018-06-08_às_23.39.27.png'
-    f = open(path_to_file, 'r')
-    myfile = File(f)
-    response = HttpResponse(myfile, content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=filename'
-    return response
+
+@login_required(login_url='/accounts/login/')
+def downloadvoucher_view(request, idvoucher):
+
+    voucher_idcodewinner = Vouchers.objects.filter(idvoucher = idvoucher).values_list('idcodewinner', flat=True)
+    winner_idemployee = Winners.objects.filter(idwinner = voucher_idcodewinner[0]).values_list('idemployee', flat=True)
+    if winner_idemployee.count() > 0:
+        if winner_idemployee[0] == str(request.user):
+
+            voucher_voucherlocation = Vouchers.objects.filter(idvoucher = idvoucher).values_list('voucherlocation', flat=True)
+            print(settings.MEDIA_ROOT)
+            print(str(voucher_voucherlocation[0]))
+            file_path = os.path.join(settings.MEDIA_ROOT, voucher_voucherlocation[0])
+            if os.path.exists(file_path):
+                with open(file_path, 'rb') as fh:
+                    response = HttpResponse(fh.read(), content_type="application/pdf")
+                    response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+                    return response
+        else:
+            return JsonResponse("This user cannot access the voucher.", safe=False)
+            raise Http404
 
 
 class HomePageView(TemplateView):
@@ -582,7 +593,7 @@ def changeprofile_view(request):
     user_profile.birthdayyear = str(birthdayyear_value)
     user_profile.sexgender = str(sexgender_value)
     user_profile.work = str(work_value)
-    print("____" + phone_value)
+
     if phone_value == "":
         user_profile.phone = None
     else:
@@ -592,17 +603,68 @@ def changeprofile_view(request):
 
     return JsonResponse("", safe=False)
 
-    #if request.method == 'POST':
-    #    form = UserLoginForm(request.POST)
-    #    if form.is_valid():
-    #        userObj = form.cleaned_data
-    #        username = userObj['username']
-    #        email =  userObj['email']
-    #        user = authenticate(username = username, password = password)
-    #        login(request, user)
-    #        return HttpResponseRedirect('/')
-    #    else:
-    #        raise forms.ValidationError('Looks like a username with that email or password already exists')
-    #else:
-    #    form = UserLoginForm()
-    #return render(request, '', {'form' : form})
+
+
+def refreshVoucher_view(request):
+    voucher_idvoucher = Vouchers.objects.all().values('idvoucher')
+
+    all_id_vouchers = list(voucher_idvoucher)
+    return JsonResponse(all_id_vouchers, safe=False)
+
+
+def getSelectedVoucher_view(request):
+    #voucher_idvoucher = Vouchers.objects.all().values('idvoucher')
+    id_selectedvoucher = request.GET.get('id_selectedvoucher', None)
+    voucher = Vouchers.objects.filter(idvoucher = id_selectedvoucher).values()
+    
+    data = {
+        "idcodewinner" : list(voucher.values_list('idcodewinner', flat=True)),
+        "voucherlocation" : list(voucher.values_list('voucherlocation', flat=True)),
+        "mntvoucher" : list(voucher.values_list('mntvoucher', flat=True)), 
+        "currency" : list(voucher.values_list('currency', flat=True)),  
+        "airlinecompany" : list(voucher.values_list('airlinecompany', flat=True)), 
+        "title" : list(voucher.values_list('title', flat=True)), 
+        "description" : list(voucher.values_list('description', flat=True)), 
+        "state" : list(voucher.values_list('state', flat=True)),
+        "active" : list(voucher.values_list('active', flat=True))
+    }
+    return JsonResponse(data, safe=False)
+
+
+def updateVoucher_view(request):
+    idvoucher_value = request.GET.get('idvoucher', None)
+    idwinner_value = request.GET.get('idwinner', None)
+    mntvoucher_value = request.GET.get('mntvoucher', None)
+    flagupdatefilelocation_value = request.GET.get('flagupdatefilelocation', None)
+    filelocation_value = request.GET.get('filelocation', None)
+    currency_value = request.GET.get('currency', None)
+    state_value = request.GET.get('state', None)
+    favoriteairline_value = request.GET.get('favoriteairline', None)
+    vouchertitle_value = request.GET.get('vouchertitle', None)
+    voucherdescription_value = request.GET.get('voucherdescription', None)
+    checkboxactive_value = request.GET.get('checkboxactive', None)
+    
+    print('..........')
+    myfile = request.FILES['filelocation']
+    print(myfile)
+    print (flagupdatefilelocation_value)
+    print (filelocation_value)
+    if(flagupdatefilelocation_value == 'true'):
+        print('entra')
+
+    checkboxactive = False
+    if(checkboxactive_value == 'true'):
+        checkboxactive = True
+
+    v = Vouchers.objects.get(idvoucher=idvoucher_value)
+    v.mntvoucher = mntvoucher_value  # change field
+    v.currency = currency_value
+    v.airlinecompany = favoriteairline_value
+    v.title = vouchertitle_value
+    v.description = voucherdescription_value
+    v.state = state_value
+    v.active = checkboxactive
+    v.save() # this will update only
+
+    print('chega aqui, apos guardar')
+    return JsonResponse('data', safe=False)
