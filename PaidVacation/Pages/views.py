@@ -19,7 +19,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 #from sendfile import sendfile
 import random
-import urllib
+import urllib.parse
 import urllib.request
 import json
 import os
