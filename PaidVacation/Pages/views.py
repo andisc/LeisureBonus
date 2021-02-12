@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import auth
@@ -16,10 +16,10 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 #from sendfile import sendfile
 import random
 import urllib
-#import urllib2
 import json
 import os
 import pathlib
@@ -106,9 +106,7 @@ def contactus_view(request):
             messages.success(request, 'New comment added with success!')
         else:
             messages.error(request, 'Invalid reCAPTCHA. Please try again.')
-        return redirect('comments')
 
-   # return render(request, 'core/comments.html', {'comments': comments_list, 'form': form})
     return render(request, "contactus.html", {"is_mobile": is_mobile, "form" : form, "sendresult": sendresult})
 
 
