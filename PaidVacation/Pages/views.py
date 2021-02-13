@@ -19,8 +19,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 #from sendfile import sendfile
 import random
-import urllib.parse
-import urllib.request
+from urllib import request, parse
 import json
 import os
 import pathlib
@@ -95,9 +94,9 @@ def contactus_view(request):
             'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
             'response': recaptcha_response
         }
-        data = urllib.parse.urlencode(values).encode()
-        req =  urllib.request.Request(url, data=data)
-        response = urllib.request.urlopen(req)
+        data = parse.urlencode(values).encode()
+        req =  request.Request(url, data=data)
+        response = request.urlopen(req)
         result = json.loads(response.read().decode())
         #''' End reCAPTCHA validation '''
         if result['success']:
