@@ -1052,6 +1052,17 @@ input.chooseairliner[type="radio"]:checked + label{
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
     border: 0;
     font-weight: 400;
+    position: relative;
+}
+
+.cardVoucher-footer {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+	display: inline;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
 }
 
 .view {
@@ -1066,11 +1077,10 @@ input.chooseairliner[type="radio"]:checked + label{
 }
 
 .cardVoucher-img-top {
-    width: 90%;
+    width: 100%;
     border-radius: 6px;
     box-shadow: 0 5px 15px -8px rgba(0,0,0,.24), 0 8px 10px -5px rgba(0,0,0,.2);
-    margin-left: 5%;
-    margin-bottom: 5%;
+
 }
 
 .cardVoucher-title {
@@ -1083,14 +1093,16 @@ input.chooseairliner[type="radio"]:checked + label{
 
 .price {
     font-size: 18px;
+    height: 40px;
+    width: 45%;
     color: #9a9a9a;
     display: inline-block;
 }
 
 .stats {
     font-size: 18px;
+    height: 40px;
     color: #9a9a9a;
-    text-align: right;
     float: right;
 }
 
@@ -1120,6 +1132,32 @@ input.chooseairliner[type="radio"]:checked + label{
 }
 
 .new-floating {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    border-radius: 10%;
+    padding:2%;
+    margin-left: 1%;
+    margin-top: 1%;
+    position: absolute;
+    z-index: 1;
+    background-color: rgb(20, 163, 255);
+    color: #fff;
+}
+
+.inprogress-floating {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    border-radius: 10%;
+    padding:2%;
+    margin-left: 1%;
+    margin-top: 1%;
+    position: absolute;
+    z-index: 1;
+    background-color: rgb(233, 187, 59);
+    color: #fff;
+}
+
+.completed-floating {
     -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
     box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
     border-radius: 10%;

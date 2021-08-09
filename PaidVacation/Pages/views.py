@@ -19,11 +19,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 #from sendfile import sendfile
 import random
-from urllib import request, parse
+from django.template.loader import render_to_string
+import urllib
 import json
 import os
 import pathlib
 import mimetypes
+from django.core import serializers
 
 
 def to_python(value):
@@ -94,9 +96,9 @@ def contactus_view(request):
             'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
             'response': recaptcha_response
         }
-        data = parse.urlencode(values).encode()
-        req =  request.Request(url, data=data)
-        response = request.urlopen(req)
+        data = urllib.parse.urlencode(values).encode()
+        req =  urllib.request.Request(url, data=data)
+        response = urllib.request.urlopen(req)
         result = json.loads(response.read().decode())
         #''' End reCAPTCHA validation '''
         if result['success']:
@@ -269,15 +271,22 @@ def generatewinners_view(request):
 
     user_agent = get_user_agent(request)
     is_mobile = user_agent.is_mobile or user_agent.is_tablet
+    
     formWinner = newWinnerForm(request.POST or None )
-    allwinners = Winners.objects.all()
+
+    allwinners = Winners.objects.select_related('idcodecompany')
 
     if request.method == 'POST':
         if formWinner.is_valid():
             formWinner.save()
 
-
     return render(request, "Accounts/generatewinners.html", {"is_mobile": is_mobile, "allwinners" : allwinners, "formWinner": formWinner})
+    #return render(request, "Accounts/generatewinners.html", {"is_mobile": is_mobile, "allwinners" : allwinners, "formWinner": formWinner})
+
+def load_users_of_the_company(request):
+    company_id = request.GET.get('company')
+    users = UserProfile.objects.filter(company=company_id).order_by('createddate')
+    return JsonResponse(list(users.values('user_id')), safe = False) 
 
 
 def random_func(allusers):
@@ -471,7 +480,7 @@ def uploadvoucher_view(request):
             formVoucher.save()
             saveresult = True
         else:
-            text_error = form.errors.as_data()
+            text_error = formVoucher.errors.as_data()
         return render(request, 'Accounts/vouchersconfiguration.html', {"is_mobile": is_mobile, 'formVoucher': formVoucher, 'saveresult' : saveresult, 'text_error' : text_error, })
     return render(request, 'Accounts/vouchersconfiguration.html', {"is_mobile": is_mobile, 'formVoucher': formVoucher, 'saveresult' : saveresult, 'text_error' : text_error, })
 
@@ -482,7 +491,10 @@ def downloadvoucher_view(request, idvoucher):
 
     voucher_idcodewinner = Vouchers.objects.filter(idvoucher = idvoucher).values_list('idcodewinner', flat=True)
     winner_idemployee = Winners.objects.filter(idwinner = voucher_idcodewinner[0]).values_list('idemployee', flat=True)
+    
+    #validate if user exists
     if winner_idemployee.count() > 0:
+        #validade if user is the user logged on
         if winner_idemployee[0] == str(request.user):
 
             voucher_voucherlocation = Vouchers.objects.filter(idvoucher = idvoucher).values_list('voucherlocation', flat=True)
@@ -610,6 +622,23 @@ def refreshVoucher_view(request):
     return JsonResponse(all_id_vouchers, safe=False)
 
 
+def getVoucher_view(request):
+    allVouchers = Vouchers.objects.select_related('idcodewinner')
+
+    #voucher_idvoucher = Vouchers.objects.all().values('idvoucher')
+
+    #allwinners = Winners.objects.select_related('idcodecompany')
+
+    #all_id_vouchers = list(allVouchers)
+    context = {
+        "allVouchers" : allVouchers
+    }
+    
+    ajax_testvalue = serializers.serialize("json", allVouchers)
+ 
+    return HttpResponse(ajax_testvalue)
+
+
 def getSelectedVoucher_view(request):
     #voucher_idvoucher = Vouchers.objects.all().values('idvoucher')
     id_selectedvoucher = request.GET.get('id_selectedvoucher', None)
@@ -626,43 +655,53 @@ def getSelectedVoucher_view(request):
         "state" : list(voucher.values_list('state', flat=True)),
         "active" : list(voucher.values_list('active', flat=True))
     }
+
     return JsonResponse(data, safe=False)
 
-
+@csrf_exempt
 def updateVoucher_view(request):
-    idvoucher_value = request.GET.get('idvoucher', None)
-    idwinner_value = request.GET.get('idwinner', None)
-    mntvoucher_value = request.GET.get('mntvoucher', None)
-    flagupdatefilelocation_value = request.GET.get('flagupdatefilelocation', None)
-    filelocation_value = request.GET.get('filelocation', None)
-    currency_value = request.GET.get('currency', None)
-    state_value = request.GET.get('state', None)
-    favoriteairline_value = request.GET.get('favoriteairline', None)
-    vouchertitle_value = request.GET.get('vouchertitle', None)
-    voucherdescription_value = request.GET.get('voucherdescription', None)
-    checkboxactive_value = request.GET.get('checkboxactive', None)
     
-    print('..........')
-    myfile = request.FILES['filelocation']
-    print(myfile)
-    print (flagupdatefilelocation_value)
-    print (filelocation_value)
-    if(flagupdatefilelocation_value == 'true'):
-        print('entra')
+    #deny anonymouse user to enter the  detail page
+    if not request.user.is_authenticated:
+            return redirect("login")
+    else:
+        if request.method =="POST":
 
-    checkboxactive = False
-    if(checkboxactive_value == 'true'):
-        checkboxactive = True
+            
+            idvoucher_value = request.POST.get('idvoucher', None)
+            #idwinner_value = request.POST.get('idwinner', None)
+            mntvoucher_value = request.POST.get('mntvoucher', None)
+            flagupdatefilelocation_value = request.POST.get('flagupdatefilelocation', None)
+            currency_value = request.POST.get('currency', None)
+            state_value = request.POST.get('state', None)
+            favoriteairline_value = request.POST.get('favoriteairline', None)
+            vouchertitle_value = request.POST.get('vouchertitle', None)
+            voucherdescription_value = request.POST.get('voucherdescription', None)
+            checkboxactive_value = request.POST.get('checkboxactive', None)
+    
 
-    v = Vouchers.objects.get(idvoucher=idvoucher_value)
-    v.mntvoucher = mntvoucher_value  # change field
-    v.currency = currency_value
-    v.airlinecompany = favoriteairline_value
-    v.title = vouchertitle_value
-    v.description = voucherdescription_value
-    v.state = state_value
-    v.active = checkboxactive
-    v.save() # this will update only
+            v = Vouchers.objects.get(idvoucher=idvoucher_value)
+            v.mntvoucher = mntvoucher_value  # change field
+            v.currency = currency_value
+            v.airlinecompany = favoriteairline_value
+            v.title = vouchertitle_value
+            v.description = voucherdescription_value
+            v.state = state_value
+            
+    
+            # if there are a file to upload
+            if(flagupdatefilelocation_value == 'true'):
+                file_obj = request.FILES.get('file')                # Get the file data from
+                v.voucherlocation = file_obj
 
-    print('chega aqui, apos guardar')
+            # if checkbox active is true
+            checkboxactive = False
+            if(checkboxactive_value == 'true'):
+                checkboxactive = True
+                
+
+            v.active = checkboxactive
+            v.save() # this will update only
+
     return JsonResponse('data', safe=False)
+

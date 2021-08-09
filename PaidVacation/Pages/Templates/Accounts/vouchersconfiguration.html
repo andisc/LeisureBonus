@@ -17,16 +17,16 @@
 		{% endif %}
 
 		<br>
-		<div class="row">
+		<div class="row" style="width: 100%;">
 			<div class="col-12">
 			  <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
 				<a class="list-group-item list-group-item-action active" id="list-new-voucher" data-toggle="list" href="#list-newvoucher" role="tab" aria-controls="home">New Voucher</a>
-				<a class="list-group-item list-group-item-action" id="list-update-voucher" data-toggle="list" href="#list-updatevoucher" role="tab" aria-controls="profile">Update voucher</a>
+				<a class="list-group-item list-group-item-action" id="list-update-voucher" data-toggle="list" onclick="refresh_f()" href="#list-updatevoucher" role="tab" aria-controls="profile">Update voucher</a>
 			  </div>
 			</div>
-			<div class="row"> 
+			<div class="row" style="width: 100%;"> 
 				<div class="col-12">
-				<div class="tab-content" id="nav-tabContent">
+				<div class="tab-content" id="nav-tabContent" style="width: 100%;">
 					<div class="tab-pane fade show active" id="list-newvoucher" role="tabpanel" aria-labelledby="list-new-voucher">
 						
 						<!-- Start Configurate a new voucher -->
@@ -36,6 +36,7 @@
 							{% csrf_token %}
 							<div class="form-row">
 								<div class="form-group col-md-6">
+									<label >ID Code Winner:</label>
 								{{ formVoucher.idcodewinner }}
 									<div class="errorField">{{ formVoucher.idcodewinner.errors.as_text }}</div>
 								</div>
@@ -102,10 +103,14 @@
 						</form>
 						<!-- End Configurate a new voucher -->
 					</div>
-					<div class="tab-pane fade" id="list-updatevoucher" role="tabpanel" aria-labelledby="list-update-voucher">
-						
-						<!-- Start update existing voucher -->
-						<button  onclick="refresh_f()" class="buttonBecomePartner" >Refresh ID Vouchers</button>
+					<div class="tab-pane fade"  id="list-updatevoucher" role="tabpanel" aria-labelledby="list-update-voucher" style="width: 100%;">
+						<br>
+						<div style="width: 100%;">
+						<table id="tableVouchers"  class="table table-striped table-bordered table-sm" cellspacing="0" style="overflow-x: auto; overflow-y: auto; display: block; height: 300px; width: 100%;" >
+							
+						</table>
+						</div>
+
 						<br>
 						<div class="form-group col-md-6">
 							ID Voucher:
@@ -121,7 +126,7 @@
 								<div class="form-group col-md-6">
 									<label >File Location:</label>
 									<label id="labelfilelocation"></label>
-									<input type="file" id="locationfilevoucher">
+									<input id="Upfile" type="file"  multiple="multiple" >
 								</div>
 								<div class="form-group col-md-6">
 									<label >Voucher amount:</label>
@@ -154,9 +159,14 @@
 							</div>
 						</div>
 
-						<button  onclick="updatevoucher_f()" class="buttonBecomePartner" >Update voucher</button>
+						<button  id="FileSub" class="buttonBecomePartner" >Update voucher</button>
 						<!-- End update existingvoucher -->
-					
+						<!--   Include necessary parameters for uploading files enctyoe -->
+						<!--   Include necessary parameters for uploading files enctyoe 
+						{% csrf_token %}
+						<input id="Upfile" type="file"  multiple="multiple" >
+						<a id="FileSub">Submission</a>-->
+
 					</div>
 				</div>
 				</div>
@@ -167,7 +177,52 @@
 	{% endif %}
 	
 	<script>
+
+		$("#FileSub").click(function() {
+			// get selected option with id voucher
+			var e = document.getElementById("voucher");
+			var id_selectedvoucher = e.options[e.selectedIndex].text;
+
+			var f_obj = false;
+			var flagupdatefilelocation = false
+			
+			// If the user is uploading a file
+			if ($("#Upfile").get(0).files.length > 0){
+				flagupdatefilelocation = true;
+				f_obj = $("#Upfile").get(0).files[0]; // get the upload file information
+			}
+
+			var fd = new FormData();          //Create formdata objects to facilitate file transfer to the back end
+			fd.append("file",f_obj)           //To add (encapsulate) a file object to a formdata object
+			fd.append("idvoucher", id_selectedvoucher)
+			fd.append("mntvoucher", document.getElementById("mntvoucher").value)
+			fd.append("flagupdatefilelocation", flagupdatefilelocation)
+			fd.append("currency", document.getElementById("currency").value)
+			fd.append("state", document.getElementById("state").value)
+			fd.append("favoriteairline", document.getElementById("favoriteairline").value)
+			fd.append("vouchertitle", document.getElementById("vouchertitle").value)
+			fd.append("voucherdescription", document.getElementById("voucherdescription").value)
+			fd.append("checkboxactive", document.getElementById("checkboxactive").checked)
+			
+
+			$.ajax({
+				url:'/ajax/UpdateVoucher/',
+				type:'POST',
+				data: fd,
+				cache: false,                //Upload files without caching
+				processData:false,           //Do not serialize data
+				contentType:false,           //No special connection type defined
+				success:function (arg) {
+					alert("The file has been uploaded successfully. Click OK to refresh the page");
+					location.reload();
+										}
+				})
+			});
+
+		
+
 		function refresh_f() {
+
 			$.ajax({
 				url: '/ajax/refreshVoucher/',
 				
@@ -190,6 +245,54 @@
 					
 				}
 			});
+
+
+			$.ajax({
+				url: '/ajax/getVoucher/',
+				dataType: 'json',
+				success: function (data) {
+					//alert("chega aqui " + JSON.stringify(data[0].fields.idcodewinner));
+
+					function addHeaders(table, keys) {
+						var row = table.insertRow();
+						for( var i = -1; i < keys.length; i++ ) {
+							if(i == -1){
+								//create parent
+								var cell = row.insertCell();
+								var textnode = document.createTextNode("ID Voucher");         // Create a text node
+								cell.appendChild(textnode); 
+								
+							}
+							else{
+								var cell = row.insertCell();
+								cell.appendChild(document.createTextNode(keys[i]));
+							}
+						}
+					}
+
+					var table = document.getElementById('tableVouchers');
+					for( var i = 0; i < data.length; i++ ) {
+
+						var parent = data[i].pk;
+						var child = data[i].fields;
+						
+						if(i === 0 ) {
+							$("#tableVouchers tr").remove(); 
+							addHeaders(table, Object.keys(child));
+						}
+						var row = table.insertRow();
+						//Insert fisrt column
+						var cell = row.insertCell();
+						cell.appendChild(document.createTextNode(parent));
+						Object.keys(child).forEach(function(k) {
+							console.log(k);
+							var cell = row.insertCell();
+							cell.appendChild(document.createTextNode(child[k]));
+						})
+					}
+
+				}
+			});
 		}
 
 		function changeVoucher(selectObject) {
@@ -208,50 +311,12 @@
 					document.getElementById("vouchertitle").value = data.title;
 					document.getElementById("voucherdescription").value = data.description;
 					document.getElementById("checkboxactive").checked = data.active;
+
 				}
 			});
 		}
 
 
-		function updatevoucher_f() {
-			// get selected option with id voucher
-			var e = document.getElementById("voucher");
-			var id_selectedvoucher = e.options[e.selectedIndex].text;
-			
-			var flagupdatefilelocation = false
-			var filelocation;
-			alert(document.getElementById("labelfilelocation").innerHTML);
-			if (document.getElementById("locationfilevoucher").files.length > 0){
-				alert(document.getElementById("locationfilevoucher").files.item(0).name);
-				flagupdatefilelocation = true;
-				//filelocation = document.getElementById("locationfilevoucher").files.item(0).name;
-				filelocation = document.getElementById("locationfilevoucher").files[0];
-			}
-
-			alert(filelocation);
-
-			$.ajax({
-				url: '/ajax/UpdateVoucher/',
-				data : { 
-					'idvoucher': id_selectedvoucher,
-					'idwinner': document.getElementById("idwinner").value,
-					'mntvoucher': document.getElementById("mntvoucher").value,
-					'flagupdatefilelocation' : flagupdatefilelocation,
-					'filelocation': filelocation,
-					'currency': document.getElementById("currency").value,
-					'state': document.getElementById("state").value,
-					'favoriteairline': document.getElementById("favoriteairline").value,
-					'vouchertitle': document.getElementById("vouchertitle").value,
-					'voucherdescription': document.getElementById("voucherdescription").value,
-					'checkboxactive': document.getElementById("checkboxactive").checked,
-			 	},
-				success: function (data) {
-					alert('success');
-
-				}
-			});
-
-		}
 	</script>
 
 {% endblock %}

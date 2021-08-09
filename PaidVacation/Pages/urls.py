@@ -40,8 +40,10 @@ urlpatterns = [
     path('ajax/changepassword/', views.changepassword_view, name='changepassword'),
     path('ajax/ResetPassword/', views.ResetPassword_view, name='ResetPassword_view'),
     path('ajax/refreshVoucher/', views.refreshVoucher_view, name='refreshVoucher_view'),
+    path('ajax/getVoucher/', views.getVoucher_view, name='getVoucher_view'),
     path('ajax/getSelectedVoucher/', views.getSelectedVoucher_view, name='getSelectedVoucher_view'),
     path('ajax/UpdateVoucher/', views.updateVoucher_view, name='updateVoucher_view'),
+    path('ajax/load-users-company/', views.load_users_of_the_company, name='ajax_load_users_of_the_company'),
 ]
 
 

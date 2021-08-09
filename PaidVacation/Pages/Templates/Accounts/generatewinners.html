@@ -15,6 +15,7 @@
 	  		        <th>idwinner</th>
 	  		        <th>idemployee</th>
 	  		        <th>idcodecompany</th>
+					<th>Company Name</th>
 	  		        <th>source</th>
 	  		        <th>State</th>
 	  		        <th>Active</th>
@@ -25,6 +26,7 @@
 	  		        <td>{{ winner.idwinner }}</td>
 	  		        <td>{{ winner.idemployee }}</td>
 	  		        <td>{{ winner.idcodecompany }}</td>
+					<td>{{ winner.idcodecompany.name }}</td>
 	  		        <td>{{ winner.source }}</td>
 	  		        <td>{{ winner.state }}</td>
 	  		        <td>{{ winner.active }}</td>
@@ -43,12 +45,18 @@
 	  	<br>
 	  	<hr class="style-two">
 	  	<br>
-	  	<h3>Generate winners automatically</h3>
+	  	<h3>Generate winners manually</h3>
 
+		<!--
 	  	<form method="POST" action="{% url 'generatewinners_view' %}"> 
+
+
+
+		
+		
                         
           {% csrf_token %}
-            
+           
             <div class="form-row">
             	<div class="form-group col-md-6">
                 {{ formWinner.idcodecompany }}
@@ -72,6 +80,61 @@
 
             <button class="buttonBecomePartner" href="a" >Add a new winner manually</button>
         </form>
+-->
+
+
+		<h2>Person Form</h2>
+
+		<form method="post" id="winnerForm" data-users-url="{% url 'ajax_load_users_of_the_company' %}" novalidate>
+		  {% csrf_token %}
+		  <div class="form-row">
+			<div class="form-group col-md-6">
+			{{ formWinner.idcodecompany }}
+			  <div class="errorField">{{ formWinner.idcodecompany.errors.as_text }}</div>
+		  </div>
+		  <div class="form-group col-md-6">
+			{{ formWinner.idemployee }}
+			  <div class="errorField">{{ formWinner.idemployee.errors.as_text }}</div>
+		  </div>
+
+		  
+		</div>
+		<div class="form-row">
+		  <div class="form-group col-md-6">
+			{{ formWinner.source }}
+			  <div class="errorField">{{ formWinner.source.errors.as_text }}</div>
+		  </div>
+		</div>
+		  <button type="submit">Save</button>
+		  <a href="{% url 'generatewinners_view' %}">Nevermind</a>
+		</form>
+	  
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script>
+
+		  $("select#id_idcodecompany").change(function () {			
+			var url = $("#winnerForm").attr("data-users-url");  // get the url of the `load_cities` view
+			var companyId = $(this).val();  // get the selected country ID from the HTML input
+			
+			$.ajax({                       // initialize an AJAX request
+			  url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+			  data: {
+				'company': companyId       // add the country id to the GET parameters
+			  },
+			  success: function (data) {   // `data` is the return of the `load_cities` view function
+				
+				let html_data = '<option value="">---------</option>';
+                data.forEach(function (data) {
+                    html_data += `<option value="${data.user_id}">${data.user_id}</option>`
+                });
+
+				$("#id_idemployee").html(html_data);  // replace the contents of the city input with the data that came from the server
+			  }
+			});
+	  
+		  });
+		</script>
+
 
 	 </div>
     {% endif %}
