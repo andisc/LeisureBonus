@@ -85,7 +85,7 @@
 
 		<h2>Person Form</h2>
 
-		<form method="post" id="winnerForm" data-users-url="{% url 'ajax_load_users_of_the_company' %}" novalidate>
+		<form method="post" id="winnerForm" data-users-url="{% url 'load_users_of_the_company_view' %}" novalidate>
 		  {% csrf_token %}
 		  <div class="form-row">
 			<div class="form-group col-md-6">
@@ -106,7 +106,6 @@
 		  </div>
 		</div>
 		  <button type="submit">Save</button>
-		  <a href="{% url 'generatewinners_view' %}">Nevermind</a>
 		</form>
 	  
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
