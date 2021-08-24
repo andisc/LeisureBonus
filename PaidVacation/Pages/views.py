@@ -283,7 +283,7 @@ def generatewinners_view(request):
     return render(request, "Accounts/generatewinners.html", {"is_mobile": is_mobile, "allwinners" : allwinners, "formWinner": formWinner})
     #return render(request, "Accounts/generatewinners.html", {"is_mobile": is_mobile, "allwinners" : allwinners, "formWinner": formWinner})
 
-def load_users_of_the_company(request):
+def loadUsersCompany_view(request):
     company_id = request.GET.get('company')
     users = UserProfile.objects.filter(company=company_id).order_by('createddate')
     return JsonResponse(list(users.values('user_id')), safe = False) 

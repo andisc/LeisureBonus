@@ -43,7 +43,7 @@ urlpatterns = [
     path('ajax/getVoucher/', views.getVoucher_view, name='getVoucher_view'),
     path('ajax/getSelectedVoucher/', views.getSelectedVoucher_view, name='getSelectedVoucher_view'),
     path('ajax/UpdateVoucher/', views.updateVoucher_view, name='updateVoucher_view'),
-    path('ajax/loadUsersCompany/', views.load_users_of_the_company, name='load_users_of_the_company_view'),
+    path('ajax/loadUsersCompany/', views.loadUsersCompany_view, name='loadUsersCompany_view'),
 ]
 
 
