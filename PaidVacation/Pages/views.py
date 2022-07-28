@@ -386,12 +386,12 @@ def register(request):
                     new_user.save()
                     login(request, user)
 
-                    return HttpResponseRedirect('/')
+                    return HttpResponseRedirect('/MyAccount/')
                 else:
                     error_message = 'Looks like a username with that email or password already exists'
                     #raise forms.ValidationError('Looks like a username with that email or password already exists')
             else:
-                error_message = "This company don't exists or it is not active. Please contact your company to provide you the right code."
+                error_message = "The code provided doesn't exist or it is not active. Please contact your company to provide you the right code."
                 #raise forms.ValidationError("This company don't exists or it is not active.")
         print(form.errors)
     else:
